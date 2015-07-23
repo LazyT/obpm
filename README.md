@@ -51,4 +51,14 @@ If the binaries doesn't work for your operating system build it yourself:
 
 GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source), open the "obpm.pro" project file and click on the build button.
 
+## Dependencies
+
+OBPM is based on
+
+* [Qt](http://www.qt.io)
+* [QCustomPlot](http://www.qcustomplot.com)
+* [hidapi](http://www.signal11.us/oss/hidapi)
+
+Thanks for this great software!
+
 Have a nice day and always a healthy blood pressure...

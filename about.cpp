@@ -49,7 +49,7 @@ void aboutDialog::mouseReleaseEvent(QMouseEvent *me)
 		}
 		else if(name == "label_Language")
 		{
-			QDesktopServices::openUrl(QUrl(QByteArray::fromBase64("aHR0cHM6Ly9naXRodWIuY29tL0xhenlUL29icG0vbG5n")));
+			QDesktopServices::openUrl(QUrl(QByteArray::fromBase64("aHR0cHM6Ly9naXRodWIuY29tL0xhenlUL29icG0vdHJlZS9tYXN0ZXIvbG5n")));
 		}
 	}
 }

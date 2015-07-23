@@ -9,7 +9,7 @@ The current version supports the following features:
 * import your blood pressure and heart rate via usb directly from your device and keep it private on your pc
 * export this data to csv or pdf documents
 * analyse your records, zoom in/out, set time range, change diagram type, see minimum/average/maximum values
-* support for 2 users
+* multi language (english and german at the moment, translators welcome)
 
 The main window...
 

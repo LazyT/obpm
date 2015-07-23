@@ -1,0 +1,58 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>ico/app.ico</file>
+    </qresource>
+    <qresource prefix="/png">
+        <file>png/sys.png</file>
+        <file>png/dia.png</file>
+        <file>png/bpm.png</file>
+        <file>png/legend.png</file>
+        <file>png/zoom.png</file>
+        <file>png/exit.png</file>
+        <file>png/help.png</file>
+        <file>png/info.png</file>
+        <file>png/export.png</file>
+        <file>png/import.png</file>
+        <file>png/import_run.png</file>
+        <file>png/import_esc.png</file>
+        <file>png/usb.png</file>
+        <file>png/pdf.png</file>
+        <file>png/xls.png</file>
+        <file>png/file.png</file>
+        <file>png/print.png</file>
+        <file>png/chart-point.png</file>
+        <file>png/chart-line.png</file>
+        <file>png/chart-step.png</file>
+        <file>png/chart-impulse.png</file>
+        <file>png/email_48.png</file>
+        <file>png/email_64.png</file>
+        <file>png/donate_48.png</file>
+        <file>png/donate_64.png</file>
+        <file>png/update_win_48.png</file>
+        <file>png/update_win_64.png</file>
+        <file>png/update_lin_48.png</file>
+        <file>png/update_lin_64.png</file>
+        <file>png/update_mac_48.png</file>
+        <file>png/update_mac_64.png</file>
+        <file>png/language_48.png</file>
+        <file>png/language_64.png</file>
+        <file>png/forum_48.png</file>
+        <file>png/forum_64.png</file>
+        <file>png/donation.png</file>
+        <file>png/banking.png</file>
+        <file>png/bitcoin.png</file>
+        <file>png/paypal.png</file>
+        <file>png/qr_pp.png</file>
+        <file>png/qr_bc.png</file>
+        <file>png/qr_bt.png</file>
+        <file>png/smiley-lo.png</file>
+        <file>png/smiley-hi.png</file>
+        <file>png/work.png</file>
+        <file>png/user1.png</file>
+        <file>png/user2.png</file>
+        <file>png/debug.png</file>
+    </qresource>
+    <qresource prefix="/ttf">
+        <file>ttf/larabie.ttf</file>
+    </qresource>
+</RCC>

@@ -35,6 +35,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	setupUi(this);
 
+	QMenu *menu = new QMenu(this);
+	menu->addAction(action_PrintPreview);
+	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setMenu(menu);
+	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setPopupMode(QToolButton::MenuButtonPopup);
+
 	QActionGroup *groupUser = new QActionGroup(this);
 	groupUser->addAction(action_User1);
 	groupUser->addAction(action_User2);
@@ -152,14 +157,14 @@ void MainWindow::getHealthStats(bool user)
 	healthstat[user].bpm_max = cpy.last().bpm;
 }
 
-void MainWindow::createDocTablePage(int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm)
+void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm)
 {
-	QTextTable *table, *tables[TABLES];
+	QTextTable *table, *tables[tablecount];
 	QTextTableFormat tfmt;
 	QTextCharFormat cfmt_table, cfmt_red, cfmt_blk;
 	QTextBlockFormat bfmt_table;
 	QVector<QTextLength> constraints;
-	int page = index / (TABLES * TABLE_ROWS);
+	int page = index / (tablecount * tablerows);
 
 	tfmt.setHeaderRowCount(0);
 	tfmt.setAlignment(Qt::AlignHCenter);
@@ -177,108 +182,90 @@ void MainWindow::createDocTablePage(int index, QTextCursor cursor, QTextBlockFor
 	bfmt_cntr.setBackground(QColor("lightGray"));
 	cursor.insertBlock(bfmt_cntr);
 	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Overview - %1/%2").arg(page + 1).arg(ceil((double)exportdata.count() / TABLES / TABLE_ROWS)) + "\n");
+	cursor.insertText(tr("Overview - %1/%2").arg(page + 1).arg(ceil((double)exportdata.count() / tablecount / tablerows)) + "\n");
 	cursor.setCharFormat(cfmt_norm);
 	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 	bfmt_cntr.setBackground(QColor("transparent"));
 
-	table = cursor.insertTable(1, TABLES, tfmt);
+	table = cursor.insertTable(1, tablecount, tfmt);
 
 	tfmt.setHeaderRowCount(1);
 	tfmt.setAlignment(Qt::AlignHCenter);
 	tfmt.setCellPadding(5 - TABLE_CORR);
 	tfmt.setBorderStyle(QTextFrameFormat::BorderStyle_Solid);
 
-	constraints.append(QTextLength(QTextLength::FixedLength, 125 - 15*TABLE_CORR));		// fixme: detect real sizes @ runtime
+	constraints.append(QTextLength(QTextLength::FixedLength, 125 - 15*TABLE_CORR));								// fixme: calculate real width
 	constraints.append(QTextLength(QTextLength::FixedLength, 60 - 7*TABLE_CORR));
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	tfmt.setColumnWidthConstraints(constraints);
 
-	tables[0] = table->cellAt(0, 0).firstCursorPosition().insertTable(TABLE_HEAD + TABLE_ROWS, TABLE_COLS, tfmt);
-	tables[1] = table->cellAt(0, 1).firstCursorPosition().insertTable(TABLE_HEAD + TABLE_ROWS, TABLE_COLS, tfmt);
-	tables[2] = table->cellAt(0, 2).firstCursorPosition().insertTable(TABLE_HEAD + TABLE_ROWS, TABLE_COLS, tfmt);
-	tables[0]->cellAt(0, 0).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[0]->cellAt(0, 0).firstCursorPosition().insertText(tr("Date"), cfmt_table);
-	tables[0]->cellAt(0, 1).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[0]->cellAt(0, 1).firstCursorPosition().insertText(tr("Time"), cfmt_table);
-	tables[0]->cellAt(0, 2).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[0]->cellAt(0, 2).firstCursorPosition().insertText("SYS", cfmt_table);
-	tables[0]->cellAt(0, 3).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[0]->cellAt(0, 3).firstCursorPosition().insertText("DIA", cfmt_table);
-	tables[0]->cellAt(0, 4).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[0]->cellAt(0, 4).firstCursorPosition().insertText("BPM", cfmt_table);
-	tables[1]->cellAt(0, 0).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[1]->cellAt(0, 0).firstCursorPosition().insertText(tr("Date"), cfmt_table);
-	tables[1]->cellAt(0, 1).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[1]->cellAt(0, 1).firstCursorPosition().insertText(tr("Time"), cfmt_table);
-	tables[1]->cellAt(0, 2).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[1]->cellAt(0, 2).firstCursorPosition().insertText("SYS", cfmt_table);
-	tables[1]->cellAt(0, 3).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[1]->cellAt(0, 3).firstCursorPosition().insertText("DIA", cfmt_table);
-	tables[1]->cellAt(0, 4).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[1]->cellAt(0, 4).firstCursorPosition().insertText("BPM", cfmt_table);
-	tables[2]->cellAt(0, 0).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[2]->cellAt(0, 0).firstCursorPosition().insertText(tr("Date"), cfmt_table);
-	tables[2]->cellAt(0, 1).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[2]->cellAt(0, 1).firstCursorPosition().insertText(tr("Time"), cfmt_table);
-	tables[2]->cellAt(0, 2).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[2]->cellAt(0, 2).firstCursorPosition().insertText("SYS", cfmt_table);
-	tables[2]->cellAt(0, 3).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[2]->cellAt(0, 3).firstCursorPosition().insertText("DIA", cfmt_table);
-	tables[2]->cellAt(0, 4).firstCursorPosition().setBlockFormat(bfmt_table);
-	tables[2]->cellAt(0, 4).firstCursorPosition().insertText("BPM", cfmt_table);
+	for(int i = 0; i < tablecount; i++)
+	{
+		tables[i] = table->cellAt(0, i).firstCursorPosition().insertTable(TABLE_HEAD + tablerows, TABLE_COLS, tfmt);
 
-	for(int i = 0; i < TABLES * TABLE_ROWS; i++)
+		tables[i]->cellAt(0, 0).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 0).firstCursorPosition().insertText(tr("Date"), cfmt_table);
+		tables[i]->cellAt(0, 1).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 1).firstCursorPosition().insertText(tr("Time"), cfmt_table);
+		tables[i]->cellAt(0, 2).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 2).firstCursorPosition().insertText("SYS", cfmt_table);
+		tables[i]->cellAt(0, 3).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 3).firstCursorPosition().insertText("DIA", cfmt_table);
+		tables[i]->cellAt(0, 4).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 4).firstCursorPosition().insertText("BPM", cfmt_table);
+	}
+
+	for(int i = 0; i < tablecount * tablerows; i++)
 	{
 		if(pdlg->wasCanceled())
 		{
 			break;
 		}
 
-		if(i + page * TABLES * TABLE_ROWS >= exportdata.count())
+		if(i + page * tablecount * tablerows >= exportdata.count())
 		{
-			pdlg->setMaximum(TABLES * TABLE_ROWS - 1);
-			pdlg->setLabelText(tr("Adjustment %1/%2").arg(1 + i).arg(TABLES * TABLE_ROWS));
+			pdlg->setMaximum(tablecount * tablerows - 1);
+			pdlg->setLabelText(tr("Adjustment %1/%2").arg(1 + i).arg(tablecount * tablerows));
 			pdlg->setValue(i);
 
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 0).firstCursorPosition().insertText(" ", cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 1).firstCursorPosition().insertText(" ", cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 2).firstCursorPosition().insertText(" ", cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 3).firstCursorPosition().insertText(" ", cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 4).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 0).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(" ", cfmt_blk);
 		}
 		else
 		{
-			pdlg->setLabelText(tr("Record %1 of %2").arg(1 + i + page * TABLES * TABLE_ROWS).arg(exportdata.count()));
-			pdlg->setValue(i + page * TABLES * TABLE_ROWS);
+			pdlg->setLabelText(tr("Record %1 of %2").arg(1 + i + page * tablecount * tablerows).arg(exportdata.count()));
+			pdlg->setValue(i + page * tablecount * tablerows);
 
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 0).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 0).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * TABLES * TABLE_ROWS).time).toString("ddd dd.MM.yy"), cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 1).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 1).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * TABLES * TABLE_ROWS).time).toString("hh:mm"), cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 2).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 2).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * TABLES * TABLE_ROWS).sys, 3, 10, QChar('0')), exportdata.at(i + page * TABLES * TABLE_ROWS).sys > SYS_NORM ? cfmt_red : cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 3).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 3).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * TABLES * TABLE_ROWS).dia, 3, 10, QChar('0')), exportdata.at(i + page * TABLES * TABLE_ROWS).dia > DIA_NORM ? cfmt_red : cfmt_blk);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 4).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / TABLE_ROWS]->cellAt(TABLE_HEAD + i % TABLE_ROWS, 4).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * TABLES * TABLE_ROWS).bpm, 3, 10, QChar('0')), exportdata.at(i + page * TABLES * TABLE_ROWS).bpm > BPM_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 0).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 0).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("ddd dd.MM.yy"), cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("hh:mm"), cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).sys, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).sys > SYS_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).dia, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).dia > DIA_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).bpm, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).bpm > BPM_NORM ? cfmt_red : cfmt_blk);
 		}
 	}
 }
 
-void MainWindow::createDoc()
+void MainWindow::createDoc(QPrinter *printer)
 {
 	doc = new QTextDocument();
 	QTextCursor cursor(doc);
 	QTextBlockFormat bfmt_cntr, bfmt_pbrk;
 	QTextCharFormat cfmt_bold, cfmt_norm;
 	int fontid = QFontDatabase::addApplicationFont(":/ttf/ttf/larabie.ttf");
-	int dpi_x = QApplication::desktop()->logicalDpiX();
-	int dpi_y = QApplication::desktop()->logicalDpiY();
-	int width  = dpi_x * (29.7 / 2.54) - dpi_x;
-	int height = dpi_y * (21.0 / 2.54) - dpi_y*1.5;
+	int width = QApplication::desktop()->logicalDpiX() * printer->pageRect(QPrinter::Inch).width();
+	int height = QApplication::desktop()->logicalDpiY() * printer->pageRect(QPrinter::Inch).height() - 100;		// fixme: subtract real header height
+	int tablecount = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLES : TABLES - 1;		// fixme: calculate based on paper format
+	int tablerows = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLE_ROWS : TABLE_ROWS + 11;
 
 	pdlg = new QProgressDialog(tr("Diagram %1/2").arg(1), tr("Cancel"), 0, 2, this, Qt::Tool);
 	pdlg->setWindowTitle(tr("Creating Document"));
@@ -342,7 +329,7 @@ void MainWindow::createDoc()
 
 	pdlg->setMaximum(exportdata.count());
 
-	for(int i = 0; i < exportdata.count(); i += TABLES * TABLE_ROWS)
+	for(int i = 0; i < exportdata.count(); i += tablecount * tablerows)
 	{
 		if(pdlg->wasCanceled())
 		{
@@ -352,7 +339,7 @@ void MainWindow::createDoc()
 			break;
 		}
 
-		createDocTablePage(i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm);
+		createDocTablePage(tablecount, tablerows, i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm);
 	}
 
 	pdlg->close();
@@ -411,7 +398,7 @@ void MainWindow::importDataFromUSB()
 	}
 	else
 	{
-		QMessageBox::critical(this, APPNAME, tr("No supported device found!\n\nCheck usb connection and try again..."));
+		QMessageBox::critical(this, APPNAME, tr("No supported device (M500IT) found!\n\nCheck usb connection and try again..."));
 	}
 }
 
@@ -573,7 +560,7 @@ void MainWindow::exportDataToCSV(QString filename)
 
 void MainWindow::exportDataToPDF(QString filename)
 {
-	printer = new QPrinter;
+	QPrinter *printer = new QPrinter(QPrinter::ScreenResolution);
 
 	printer->setOutputFileName(filename);
 	printer->setOutputFormat(QPrinter::PdfFormat);
@@ -582,20 +569,12 @@ void MainWindow::exportDataToPDF(QString filename)
 	printer->setPageOrientation(QPageLayout::Landscape);
 //	printer->setFullPage(true);
 
-	createDoc();
+	createDoc(printer);
 
 	if(QMessageBox::question(this, APPNAME, tr("Successfully exported current view to PDF.\n\nOpen now with default app?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 	{
 		QDesktopServices::openUrl(QUrl("file:///" + filename));
 	}
-}
-
-void MainWindow::printDocument()
-{
-printer->setPaperSize(QPrinter::A4);
-printer->setPageOrientation(QPageLayout::Landscape);
-
-	createDoc();
 }
 
 void MainWindow::on_action_Exit_triggered()
@@ -652,18 +631,18 @@ void MainWindow::on_action_exportToPDF_triggered()
 	}
 }
 
-void MainWindow::on_action_Print_triggered()
+void MainWindow::on_action_PrintPreview_triggered()
 {
 	if(healthdata[user].count())
 	{
-		printer = new QPrinter;
+		QPrintPreviewDialog printPreviewDialog(this, Qt::Tool);
 
-		QPrintDialog printDialog(printer, this);
+		printPreviewDialog.printer()->setPaperSize(QPrinter::A4);
+		printPreviewDialog.printer()->setOrientation(QPrinter::Landscape);
 
-		if(printDialog.exec() == QDialog::Accepted)
-		{
-			printDocument();
-		}
+		connect(&printPreviewDialog, SIGNAL(paintRequested(QPrinter*)), this, SLOT(createDoc(QPrinter*)));
+
+		printPreviewDialog.exec();
 	}
 	else
 	{
@@ -671,6 +650,25 @@ void MainWindow::on_action_Print_triggered()
 	}
 }
 
+void MainWindow::on_action_Print_triggered()
+{
+	if(healthdata[user].count())
+	{
+		QPrintDialog printDialog(this);
+
+		printDialog.printer()->setPaperSize(QPrinter::A4);
+		printDialog.printer()->setOrientation(QPrinter::Landscape);
+
+		if(printDialog.exec() == QDialog::Accepted)
+		{
+			createDoc(printDialog.printer());
+		}
+	}
+	else
+	{
+		QMessageBox::warning(this, APPNAME, tr("No records to print!"));
+	}
+}
 
 void MainWindow::on_action_Help_triggered()
 {

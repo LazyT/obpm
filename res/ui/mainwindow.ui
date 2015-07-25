@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Omron M500IT DataManager</string>
+   <string>Omron Blood Pressure Manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../obpm.qrc">
@@ -113,6 +113,7 @@
     <addaction name="menuDaten_importieren"/>
     <addaction name="menuDaten_exportieren"/>
     <addaction name="separator"/>
+    <addaction name="action_PrintPreview"/>
     <addaction name="action_Print"/>
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
@@ -401,6 +402,21 @@
    </property>
    <property name="statusTip">
     <string>show user 2</string>
+   </property>
+  </action>
+  <action name="action_PrintPreview">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/printpreview.png</normaloff>:/png/png/printpreview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print Preview</string>
+   </property>
+   <property name="toolTip">
+    <string>print preview</string>
+   </property>
+   <property name="statusTip">
+    <string>print preview</string>
    </property>
   </action>
  </widget>

@@ -30,7 +30,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Omron M500IT DataManager</string>
+      <string>Omron Blood Pressure Manager</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

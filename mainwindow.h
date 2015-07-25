@@ -10,9 +10,9 @@
 #include "donation.h"
 #include "qcpdocumentobject.h"
 
-#define APPNAME QObject::tr("Omron M500IT DataManager")
-#define APPVERS "1.0.0"
-#define APPDATE "23.07.2015"
+#define APPNAME QObject::tr("Omron Blood Pressure Manager")
+#define APPVERS "1.0.1"
+#define APPDATE "25.07.2015"
 
 #define SYS_NORM 135
 #define DIA_NORM 85
@@ -66,19 +66,17 @@ private:
 	QVector <HEALTHDATA> exportdata;
 	HEALTHSTAT healthstat[2];
 	QTextDocument *doc;
-	QPrinter *printer;
 	QProgressDialog *pdlg;
 	uint user;
 
 private slots:
 
-	void createDoc();
-	void createDocTablePage(int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
+	void createDoc(QPrinter*);
+	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
 	void importDataFromUSB();
 	void importDataFromFile(QString);
 	void exportDataToCSV(QString);
 	void exportDataToPDF(QString);
-	void printDocument();
 
 	void buildGraph(bool user);
 	void dateChanged();
@@ -94,6 +92,7 @@ private slots:
 	void on_action_exportToPDF_triggered();
 	void on_action_User1_toggled(bool);
 	void on_action_User2_toggled(bool);
+	void on_action_PrintPreview_triggered();
 	void on_action_Print_triggered();
 	void on_action_Help_triggered();
 	void on_action_About_triggered();

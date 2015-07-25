@@ -1,4 +1,4 @@
-# **Omron Blood Pressure Manager (M500IT)**
+# **Omron Blood Pressure Manager for M500IT**
 
 ## Description
 
@@ -11,21 +11,27 @@ The current version supports the following features:
 * analyse your records, zoom in/out, set time range, change diagram type, see minimum/average/maximum values
 * multi language (english and german at the moment, translators welcome)
 
-The main window...
+## Screenshots
+
+The main window with some records...
 
 ![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot1.png)
 
-If you have more than 1 device connected select the right one...
+If you have more than 1 device connected select the right one based on the serial number...
 
 ![import dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot2.png)
 
-Some infos and actions...
+Some infos about the program and possible interactions...
 
 ![about dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot3.png)
 
-If you like it don't forget to donate some beers... ;-)
+If you like it don't forget to donate some beer! ;-)
 
-## Download Binaries
+The installer...
+
+![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
+
+## Download Installer
 
 Download and install the latest version for your operating system:
 
@@ -35,17 +41,17 @@ Download and install the latest version for your operating system:
 
 ## Build from Source
 
-If the binaries doesn't work for your operating system build it yourself:
+If the installer binaries doesn't work for you build it yourself:
 
-* checkout sourcecode
+1) checkout the sourcecode
 
 		git clone https://github.com/LazyT/obpm
 
-* change into the new obpm directory and generate the Makefile
+2) change into the new obpm directory and generate the Makefile
 
 		cd obpm && qmake
-        
-* compile the source
+
+3) compile the sourcecode
 
 		make
 

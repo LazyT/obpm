@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	if(!QLocale::system().name().startsWith("en_"))
 	{
-		if(appTranslator.load("obpm-" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
+		if(appTranslator.load("obpm_" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
 		{
 			QApplication::installTranslator(&appTranslator);
 

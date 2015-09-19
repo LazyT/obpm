@@ -25,11 +25,22 @@ Some infos about the program and possible interactions...
 
 ![about dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot3.png)
 
-If you like it don't forget to donate some beer! ;-)
+If you like it don't forget to donate some beer! :smirk:
 
 The installer...
 
 ![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
+
+##### Hint for Linux users
+
+If you get permission denied errors you should create a udev rule:
+
+* disconnect device
+* create file (e.g. "/etc/udev/rules.d/99-obpm.rules") as root add the following line
+
+		KERNEL=="hidraw*", ATTRS{idVendor}=="0590", ATTRS{idProduct}=="0090", MODE="0666"
+
+* reconnect device
 
 ## Download Installer
 
@@ -54,6 +65,8 @@ If the installer binaries doesn't work for you build it yourself:
 3) compile the sourcecode
 
 		make
+
+**Hint:** Qt5.4 or greater required!
 
 GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source), open the "obpm.pro" project file and click on the build button.
 

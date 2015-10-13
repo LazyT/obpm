@@ -9,7 +9,7 @@ The current version supports the following features:
 * import your blood pressure and heart rate via usb directly from your device and keep it private on your pc
 * export this data to csv or pdf documents
 * analyse your records, zoom in/out, set time range, change diagram type, see minimum/average/maximum values
-* multi language (english and german at the moment, translators welcome)
+* multi language (English and German at the moment, translators welcome)
 
 ## Screenshots
 
@@ -36,7 +36,7 @@ The installer...
 If you get permission denied errors you should create a udev rule:
 
 * disconnect device
-* create file (e.g. "/etc/udev/rules.d/99-obpm.rules") as root add the following line
+* create file (e.g. "/etc/udev/rules.d/99-obpm.rules") as root and add the following line
 
 		KERNEL=="hidraw*", ATTRS{idVendor}=="0590", ATTRS{idProduct}=="0090", MODE="0666"
 

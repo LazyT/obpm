@@ -11,8 +11,8 @@
 #include "qcpdocumentobject.h"
 
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
-#define APPVERS "1.0.1"
-#define APPDATE "25.07.2015"
+#define APPVERS "1.0.2"
+#define APPDATE "13.10.2015"
 
 #define SYS_NORM 135
 #define DIA_NORM 85
@@ -62,6 +62,7 @@ public:
 private:
 
 	QTranslator sysTranslator, appTranslator;
+	QActionGroup *groupUser;
 	QDateTimeEdit *rangeStart, *rangeStop;
 	QVector <HEALTHDATA> exportdata;
 	HEALTHSTAT healthstat[2];
@@ -73,8 +74,8 @@ private slots:
 
 	void createDoc(QPrinter*);
 	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
-	void importDataFromUSB();
-	void importDataFromFile(QString);
+	void importDataFromUSB(bool);
+	void importDataFromFile(QString, bool);
 	void exportDataToCSV(QString);
 	void exportDataToPDF(QString);
 

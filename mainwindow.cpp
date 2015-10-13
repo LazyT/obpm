@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setMenu(menu);
 	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setPopupMode(QToolButton::MenuButtonPopup);
 
-	QActionGroup *groupUser = new QActionGroup(this);
+	groupUser = new QActionGroup(this);
 	groupUser->addAction(action_User1);
 	groupUser->addAction(action_User2);
 
@@ -352,19 +352,29 @@ void MainWindow::createDoc(QPrinter *printer)
 	QFontDatabase::removeApplicationFont(fontid);
 }
 
-void MainWindow::importDataFromUSB()
+void MainWindow::importDataFromUSB(bool append)
 {
+	QString msg(tr("Successfully imported %1 records from USB:\n\n     User 1 = %2\n     User 2 = %3"));
 	usbDialog *dlg = new usbDialog(this);
+	QAction *active = NULL;
+	int duplicate = 0;
 
 	if(dlg->hids_found)
 	{
+		if(append)
+		{
+			active = groupUser->checkedAction();
+		}
+		else
+		{
+			healthdata[0].clear();
+			healthdata[1].clear();
+
+			buildGraph(0);
+		}
+
 		action_User1->setChecked(false);
 		action_User2->setChecked(false);
-
-		healthdata[0].clear();
-		healthdata[1].clear();
-
-		buildGraph(0);
 
 		if(dlg->exec() == QDialog::Accepted)
 		{
@@ -372,24 +382,56 @@ void MainWindow::importDataFromUSB()
 			{
 				qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
 
-				getHealthStats(0);
+				for(int i = 0; i < healthdata[0].count() - 1; i++)
+				{
+					if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
+					{
+						duplicate++;
+						healthdata[0].remove(i--);
+					}
+				}
 
-				action_User1->setChecked(true);
+				getHealthStats(0);
 			}
 
 			if(healthdata[1].count())
 			{
 				qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
 
-				getHealthStats(1);
+				for(int i = 0; i < healthdata[1].count() - 1; i++)
+				{
+					if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
+					{
+						duplicate++;
+						healthdata[1].remove(i--);
+					}
+				}
 
-				if(!healthdata[0].count())
+				getHealthStats(1);
+			}
+
+			if(append)
+			{
+				active->setChecked(true);
+			}
+			else
+			{
+				if(healthdata[0].count())
+				{
+					action_User1->setChecked(true);
+				}
+				else if(healthdata[1].count())
 				{
 					action_User2->setChecked(true);
 				}
 			}
 
-			QMessageBox::information(this, APPNAME, tr("Successfully imported %1 records from USB:\n\n     User 1 = %2\n     User 2 = %3").arg(dlg->user1 + dlg->user2).arg(dlg->user1).arg(dlg->user2));
+			if(duplicate)
+			{
+				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
+			}
+
+			QMessageBox::information(this, APPNAME, msg.arg(dlg->user1 + dlg->user2).arg(dlg->user1).arg(dlg->user2));
 		}
 		else
 		{
@@ -402,21 +444,29 @@ void MainWindow::importDataFromUSB()
 	}
 }
 
-void MainWindow::importDataFromFile(QString filename)
+void MainWindow::importDataFromFile(QString filename, bool append)
 {
 	QString msg(tr("Successfully imported %1 records from CSV:\n\n     User 1 = %2\n     User 2 = %3"));
 	QFile file(filename);
 	QTextStream in(&file);
 	HEALTHDATA set;
 	int invalid = 0, duplicate = 0;
+	QAction *active = NULL;
+
+	if(append)
+	{
+		active = groupUser->checkedAction();
+	}
+	else
+	{
+		healthdata[0].clear();
+		healthdata[1].clear();
+
+		buildGraph(0);
+	}
 
 	action_User1->setChecked(false);
 	action_User2->setChecked(false);
-
-	healthdata[0].clear();
-	healthdata[1].clear();
-
-	buildGraph(0);
 
 	if(file.open(QIODevice::ReadOnly))
 	{
@@ -473,8 +523,6 @@ void MainWindow::importDataFromFile(QString filename)
 			}
 
 			getHealthStats(0);
-
-			action_User1->setChecked(true);
 		}
 
 		if(healthdata[1].count())
@@ -491,8 +539,19 @@ void MainWindow::importDataFromFile(QString filename)
 			}
 
 			getHealthStats(1);
+		}
 
-			if(!healthdata[0].count())
+		if(append)
+		{
+			active->setChecked(true);
+		}
+		else
+		{
+			if(healthdata[0].count())
+			{
+				action_User1->setChecked(true);
+			}
+			else if(healthdata[1].count())
 			{
 				action_User2->setChecked(true);
 			}
@@ -584,7 +643,14 @@ void MainWindow::on_action_Exit_triggered()
 
 void MainWindow::on_action_importFromUSB_triggered()
 {
-	importDataFromUSB();
+	if((healthdata[0].count() || healthdata[1].count()) && QMessageBox::question(this, APPNAME, tr("Append new data to existing records?")) == QMessageBox::Yes)
+	{
+		importDataFromUSB(true);
+	}
+	else
+	{
+		importDataFromUSB(false);
+	}
 }
 
 void MainWindow::on_action_importFromFile_triggered()
@@ -593,7 +659,14 @@ void MainWindow::on_action_importFromFile_triggered()
 
 	if(!filename.isEmpty())
 	{
-		importDataFromFile(filename);
+		if((healthdata[0].count() || healthdata[1].count()) && QMessageBox::question(this, APPNAME, tr("Append new data to existing records?")) == QMessageBox::Yes)
+		{
+			importDataFromFile(filename, true);
+		}
+		else
+		{
+			importDataFromFile(filename, false);
+		}
 	}
 }
 

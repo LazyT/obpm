@@ -29,7 +29,13 @@ Some infos about the program and possible interactions...
 
 ![about dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot3.png)
 
-If you like it don't forget to donate some beer! :smirk:
+If you like it don't forget to donate some beer and support further development...
+
+![donate dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot6.png)
+
+Keep informed about updates automatically at program start...
+
+![update dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot7.png)
 
 The installer...
 
@@ -74,7 +80,7 @@ If the installer binaries doesn't work for you build it yourself:
 
 GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source), open the "obpm.pro" project file and click on the build button.
 
-## Dependencies
+## Credits
 
 OBPM is based on
 
@@ -84,4 +90,4 @@ OBPM is based on
 
 Thanks for this great software!
 
-Have a nice day and always a healthy blood pressure...
+Have a nice day and always a healthy blood pressure... :smirk:

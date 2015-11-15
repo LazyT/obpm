@@ -8,11 +8,13 @@
 #include "usb.h"
 #include "about.h"
 #include "donation.h"
+#include "update.h"
 #include "qcpdocumentobject.h"
 
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
 #define APPVERS "1.0.2"
 #define APPDATE "13.10.2015"
+#define APPRELS "3"
 
 #define SYS_NORM 135
 #define DIA_NORM 85
@@ -72,8 +74,11 @@ private:
 
 private slots:
 
+	void checkUpdate();
+
 	void createDoc(QPrinter*);
 	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
+
 	void importDataFromUSB(bool);
 	void importDataFromFile(QString, bool);
 	void exportDataToCSV(QString);
@@ -87,6 +92,7 @@ private slots:
 	void keyPressEvent(QKeyEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void closeEvent(QCloseEvent*);
+
 	void on_action_importFromUSB_triggered();
 	void on_action_importFromFile_triggered();
 	void on_action_exportToCSV_triggered();

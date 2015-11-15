@@ -5,11 +5,11 @@
 #include "mainwindow.h"
 
 #ifdef Q_OS_LINUX
-#define ICO_UPDATE "QLabel{image:url(:/png/png/update_lin_48.png)} QLabel:hover{image:url(:/png/png/update_lin_64.png)}"
+#define ICO_ABOUT "QLabel{image:url(:/png/png/update_lin_48.png)} QLabel:hover{image:url(:/png/png/update_lin_64.png)}"
 #elif defined Q_OS_WIN
-#define ICO_UPDATE "QLabel{image:url(:/png/png/update_win_48.png)} QLabel:hover{image:url(:/png/png/update_win_64.png)}"
+#define ICO_ABOUT "QLabel{image:url(:/png/png/update_win_48.png)} QLabel:hover{image:url(:/png/png/update_win_64.png)}"
 #elif defined Q_OS_OSX
-#define ICO_UPDATE "QLabel{image:url(:/png/png/update_mac_48.png)} QLabel:hover{image:url(:/png/png/update_mac_64.png)}"
+#define ICO_ABOUT "QLabel{image:url(:/png/png/update_mac_48.png)} QLabel:hover{image:url(:/png/png/update_mac_64.png)}"
 #endif
 
 class aboutDialog : public QDialog, private Ui::Dialog_About

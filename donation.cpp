@@ -107,9 +107,9 @@ void donationDialog::on_pushButton_clicked()
 double donationDialog::EUR2BTC()
 {
 	QNetworkAccessManager *mgr = new QNetworkAccessManager();
-	QElapsedTimer timeout;
-
 	QNetworkReply *rep = mgr->get(QNetworkRequest(QUrl("https://blockchain.info/de/tobtc?currency=EUR&value=1")));
+	QElapsedTimer timeout;
+	QByteArray raw;
 
 	rep->ignoreSslErrors();
 
@@ -141,7 +141,7 @@ double donationDialog::EUR2BTC()
 		return 0.0;
 	}
 
-	QByteArray raw = rep->readAll();
+	raw = rep->readAll();
 
 	rep->deleteLater();
 

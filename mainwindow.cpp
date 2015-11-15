@@ -132,6 +132,81 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(widget_hr->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisHRChanged(QCPRange)));
 
 	dateChanged();
+
+	QTimer::singleShot(250, this, SLOT(checkUpdate()));
+}
+
+void MainWindow::checkUpdate()
+{
+	QNetworkAccessManager *mgr = new QNetworkAccessManager();
+	QNetworkReply *rep = mgr->get(QNetworkRequest(QUrl("https://lazyt.github.io/obpm/updater/update.xml")));
+	QElapsedTimer timeout;
+	QByteArray raw;
+	QXmlStreamReader xml;
+	QString release, version, date;
+
+	rep->ignoreSslErrors();
+
+	timeout.start();
+
+	while(rep->isRunning())
+	{
+		QCoreApplication::processEvents();
+
+		if(timeout.hasExpired(3000))
+		{
+			rep->abort();
+		}
+	}
+
+	if(rep->error())
+	{
+//		QMessageBox::warning(this, APPNAME, tr("Failed to contact online updater!\n\n%1").arg(rep->errorString()));
+
+		return;
+	}
+
+	raw = rep->readAll();
+
+	rep->deleteLater();
+
+	xml.addData(raw);
+
+	while(!xml.atEnd())
+	{
+		xml.readNext();
+
+		if(xml.isStartElement() && xml.name() == "online-updater")
+		{
+			while(xml.readNext() != QXmlStreamReader::Invalid && xml.name() != "online-updater")
+			{
+				if(xml.name() == "release")
+				{
+					release = xml.readElementText();
+				}
+				else if(xml.name() == "version")
+				{
+					version = xml.readElementText();
+				}
+				else if(xml.name() == "date")
+				{
+					date = xml.readElementText();
+				}
+			}
+		}
+	}
+
+	if(xml.hasError())
+	{
+//		QMessageBox::warning(this, APPNAME, tr("Failed to analyze online updater!\n\n%1").arg(xml.errorString()));
+
+		return;
+	}
+
+	if(APPRELS < release)
+	{
+		new updateDialog(this, version, date);
+	}
 }
 
 void MainWindow::getHealthStats(bool user)

@@ -8,7 +8,7 @@ aboutDialog::aboutDialog(QWidget *parent) : QDialog(parent)
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
 
 	label_Version->setText(tr("Version %1 - %2").arg(APPVERS, APPDATE));
-	label_Update->setStyleSheet(ICO_UPDATE);
+	label_Update->setStyleSheet(ICO_ABOUT);
 
 	textEdit->setAlignment(Qt::AlignCenter);
 	textEdit->textCursor().insertText(tr("This program is Freeware and may be installed and used free of charge for non-commercial use on as many computers as you like without limitations.\n\nA liability for any damages resulting from the use is excluded. Use at your own risk!"));

@@ -21,6 +21,10 @@ Print records for your archive or doctor...
 
 ![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot5.png)
 
+Configure your default settings...
+
+![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot8.png)
+
 If you have more than 1 device connected select the right one based on the serial number...
 
 ![import dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot2.png)

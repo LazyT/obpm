@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	getConfig();
 
+	user = 0;
+
 	QMenu *menu = new QMenu(this);
 	menu->addAction(action_PrintPreview);
 	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setMenu(menu);

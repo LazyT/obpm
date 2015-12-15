@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
-    <height>375</height>
+    <width>362</width>
+    <height>284</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -73,15 +73,6 @@
              <normaloff>:/png/png/bitcoin.png</normaloff>:/png/png/bitcoin.png</iconset>
            </property>
           </item>
-          <item>
-           <property name="text">
-            <string>Bank Transfer</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../obpm.qrc">
-             <normaloff>:/png/png/banking.png</normaloff>:/png/png/banking.png</iconset>
-           </property>
-          </item>
          </widget>
         </item>
         <item>
@@ -111,7 +102,7 @@
              <string>desired amount</string>
             </property>
             <property name="minimum">
-             <number>5</number>
+             <number>1</number>
             </property>
             <property name="maximum">
              <number>50</number>
@@ -122,8 +113,11 @@
             <property name="pageStep">
              <number>5</number>
             </property>
+            <property name="value">
+             <number>5</number>
+            </property>
             <property name="sliderPosition">
-             <number>10</number>
+             <number>5</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -234,50 +228,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_payment3">
-        <property name="minimumSize">
-         <size>
-          <width>320</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>BIC</string>
-        </property>
-        <property name="text">
-         <string notr="true">WELADE8LXXX</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_payment4">
-        <property name="minimumSize">
-         <size>
-          <width>320</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>bank</string>
-        </property>
-        <property name="text">
-         <string notr="true">Stadt- und Kreissparkasse Leipzig</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -287,7 +237,7 @@
       <string>make donation</string>
      </property>
      <property name="text">
-      <string>Donate 10€ via PayPal</string>
+      <string>Donate 5€ via PayPal</string>
      </property>
     </widget>
    </item>
@@ -295,8 +245,6 @@
  </widget>
  <tabstops>
   <tabstop>pushButton</tabstop>
-  <tabstop>lineEdit_payment4</tabstop>
-  <tabstop>lineEdit_payment3</tabstop>
   <tabstop>lineEdit_payment2</tabstop>
   <tabstop>lineEdit_payment1</tabstop>
  </tabstops>

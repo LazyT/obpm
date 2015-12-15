@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	setupUi(this);
 
+	getConfig();
+
 	QMenu *menu = new QMenu(this);
 	menu->addAction(action_PrintPreview);
 	((QToolButton*)mainToolBar->widgetForAction(action_Print))->setMenu(menu);
@@ -67,9 +69,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_bp->yAxis->setLabel("mmHg");
 	widget_hr->yAxis->setLabel("bpm");
 
-	QCPItemStraightLine *line_sys = new QCPItemStraightLine(widget_bp);
-	QCPItemStraightLine *line_dia = new QCPItemStraightLine(widget_bp);
-	QCPItemStraightLine *line_bpm = new QCPItemStraightLine(widget_hr);
+	line_sys = new QCPItemStraightLine(widget_bp);
+	line_dia = new QCPItemStraightLine(widget_bp);
+	line_bpm = new QCPItemStraightLine(widget_hr);
 	line_sys->setPen(QPen(Qt::green));
 	line_dia->setPen(QPen(Qt::green));
 	line_bpm->setPen(QPen(Qt::green));
@@ -79,12 +81,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	line_dia->point2->setTypeX(QCPItemPosition::ptAbsolute);
 	line_bpm->point1->setTypeX(QCPItemPosition::ptAbsolute);
 	line_bpm->point2->setTypeX(QCPItemPosition::ptAbsolute);
-	line_sys->point1->setCoords(0, SYS_NORM);
-	line_sys->point2->setCoords(1, SYS_NORM);
-	line_dia->point1->setCoords(0, DIA_NORM);
-	line_dia->point2->setCoords(1, DIA_NORM);
-	line_bpm->point1->setCoords(0, BPM_NORM);
-	line_bpm->point2->setCoords(1, BPM_NORM);
+	line_sys->point1->setCoords(0, cfg.sys);
+	line_sys->point2->setCoords(1, cfg.sys);
+	line_dia->point1->setCoords(0, cfg.dia);
+	line_dia->point2->setCoords(1, cfg.dia);
+	line_bpm->point1->setCoords(0, cfg.bpm);
+	line_bpm->point2->setCoords(1, cfg.bpm);
 	widget_bp->addItem(line_sys);
 	widget_bp->addItem(line_dia);
 	widget_hr->addItem(line_bpm);
@@ -95,16 +97,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_bp->graph(1)->setPen(QPen(Qt::blue));
 	widget_bp->graph(0)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/sys.png")));
 	widget_bp->graph(1)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/dia.png")));
-	widget_bp->graph(0)->setLineStyle(QCPGraph::lsLine);
-	widget_bp->graph(1)->setLineStyle(QCPGraph::lsLine);
+	widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+	widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_bp->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	widget_bp->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
-	widget_bp->yAxis->setRange(DIA_NORM - 15, SYS_NORM + 15);
+	widget_bp->yAxis->setRange(cfg.dia - 15, cfg.sys + 15);
 	widget_bp->yAxis->setAutoTickStep(false);
 	widget_bp->yAxis->setTickStep(10);
 	widget_bp->plottable(0)->setName("SYS");
 	widget_bp->plottable(1)->setName("DIA");
-	widget_bp->legend->setVisible(true);
+	widget_bp->legend->setVisible(cfg.legend);
 	widget_bp->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	widget_bp->axisRect(0)->setRangeDrag(Qt::Horizontal);
 	widget_bp->axisRect(0)->setRangeZoom(Qt::Horizontal);
@@ -112,14 +114,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_hr->addGraph();
 	widget_hr->graph(0)->setPen(QPen(Qt::red));
 	widget_hr->graph(0)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/bpm.png")));
-	widget_hr->graph(0)->setLineStyle(QCPGraph::lsLine);
+	widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_hr->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	widget_hr->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
-	widget_hr->yAxis->setRange(60, 80);
+	widget_hr->yAxis->setRange(cfg.bpm - 20, cfg.bpm);
 	widget_hr->yAxis->setAutoTickStep(false);
 	widget_hr->yAxis->setTickStep(5);
 	widget_hr->plottable(0)->setName(tr("Pulse"));
-	widget_hr->legend->setVisible(true);
+	widget_hr->legend->setVisible(cfg.legend);
 	widget_hr->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	widget_hr->axisRect(0)->setRangeDrag(Qt::Horizontal);
 	widget_hr->axisRect(0)->setRangeZoom(Qt::Horizontal);
@@ -133,7 +135,36 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	dateChanged();
 
-	QTimer::singleShot(250, this, SLOT(checkUpdate()));
+	if(cfg.update)
+	{
+		QTimer::singleShot(250, this, SLOT(checkUpdate()));
+	}
+}
+
+void MainWindow::getConfig()
+{
+	QSettings ini(CFG, QSettings::IniFormat);
+
+	cfg.update = ini.value("Update", true).toBool();
+	cfg.legend = ini.value("Legend", true).toBool();
+	cfg.style = ini.value("Style", QCPGraph::lsLine).toInt();
+	cfg.sys = ini.value("SYS", SYS_NORM).toInt();
+	cfg.dia = ini.value("DIA", DIA_NORM).toInt();
+	cfg.bpm = ini.value("BPM", BPM_NORM).toInt();
+}
+
+void MainWindow::setConfig()
+{
+	QSettings ini(CFG, QSettings::IniFormat);
+
+	ini.setValue("Update", cfg.update);
+	ini.setValue("Legend", cfg.legend);
+	ini.setValue("Style", cfg.style);
+	ini.setValue("SYS", cfg.sys);
+	ini.setValue("DIA", cfg.dia);
+	ini.setValue("BPM", cfg.bpm);
+
+	ini.sync();
 }
 
 void MainWindow::checkUpdate()
@@ -321,11 +352,11 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().setBlockFormat(bfmt_table);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("hh:mm"), cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).sys, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).sys > SYS_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).sys, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).sys > cfg.sys ? cfmt_red : cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).dia, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).dia > DIA_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).dia, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).dia > cfg.dia ? cfmt_red : cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).bpm, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).bpm > BPM_NORM ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).bpm, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).bpm > cfg.bpm ? cfmt_red : cfmt_blk);
 		}
 	}
 }
@@ -711,6 +742,31 @@ void MainWindow::exportDataToPDF(QString filename)
 	}
 }
 
+void MainWindow::on_action_Setup_triggered()
+{
+	setupDialog *dlg = new setupDialog(this, &cfg);
+
+	if(dlg->exec() == QDialog::Accepted)
+	{
+		line_sys->point1->setCoords(0, cfg.sys);
+		line_sys->point2->setCoords(1, cfg.sys);
+		line_dia->point1->setCoords(0, cfg.dia);
+		line_dia->point2->setCoords(1, cfg.dia);
+		line_bpm->point1->setCoords(0, cfg.bpm);
+		line_bpm->point2->setCoords(1, cfg.bpm);
+
+		widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+		widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+		widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+
+		widget_bp->legend->setVisible(cfg.legend);
+		widget_hr->legend->setVisible(cfg.legend);
+
+		widget_bp->replot();
+		widget_hr->replot();
+	}
+}
+
 void MainWindow::on_action_Exit_triggered()
 {
 	close();
@@ -830,6 +886,8 @@ void MainWindow::on_action_About_triggered()
 
 void MainWindow::on_action_showHideLegend_toggled(bool state)
 {
+	cfg.legend = state;
+
 	widget_bp->legend->setVisible(state);
 	widget_hr->legend->setVisible(state);
 
@@ -997,41 +1055,41 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 		menu.addSeparator();
 		menu.addAction(action_resetZoom);
 
-		group->addAction(action_stylePoint);
-		group->addAction(action_styleLine);
-		group->addAction(action_styleStep);
-		group->addAction(action_styleImpulse);
+		action_showHideLegend->setChecked(cfg.legend);
+
+		group->addAction(action_stylePoint)->setChecked(cfg.style == QCPGraph::lsNone ? true : false);
+		group->addAction(action_styleLine)->setChecked(cfg.style == QCPGraph::lsLine ? true : false);
+		group->addAction(action_styleStep)->setChecked(cfg.style == QCPGraph::lsStepCenter ? true : false);
+		group->addAction(action_styleImpulse)->setChecked(cfg.style == QCPGraph::lsImpulse ? true : false);
 
 		QAction* selectedItem = menu.exec(me->globalPos());
 
 		if(selectedItem)
 		{
-			enum QCPGraph::LineStyle lineStyle;
-
 			if(selectedItem->objectName() == "action_stylePoint")
 			{
-				lineStyle = QCPGraph::lsNone;
+				cfg.style = QCPGraph::lsNone;
 			}
 			else if(selectedItem->objectName() == "action_styleLine")
 			{
-				lineStyle = QCPGraph::lsLine;
+				cfg.style = QCPGraph::lsLine;
 			}
 			else if(selectedItem->objectName() == "action_styleStep")
 			{
-				lineStyle = QCPGraph::lsStepCenter;
+				cfg.style = QCPGraph::lsStepCenter;
 			}
 			else if(selectedItem->objectName() == "action_styleImpulse")
 			{
-				lineStyle = QCPGraph::lsImpulse;
+				cfg.style = QCPGraph::lsImpulse;
 			}
 			else
 			{
 				return;
 			}
 
-			widget_bp->graph(0)->setLineStyle(lineStyle);
-			widget_bp->graph(1)->setLineStyle(lineStyle);
-			widget_hr->graph(0)->setLineStyle(lineStyle);
+			widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+			widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+			widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 
 			widget_bp->replot();
 			widget_hr->replot();
@@ -1043,6 +1101,8 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 {
 	if(QMessageBox::question(this, APPNAME, tr("Really exit program?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 	{
+		setConfig();
+
 		ce->accept();
 	}
 	else

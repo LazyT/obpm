@@ -5,10 +5,10 @@ QT		+= core gui widgets printsupport network
 
 INCLUDEPATH     += ext/qcp ext/hid
 
-SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
-HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
+SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp setup.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
+HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
 
-FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui
+FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui
 RESOURCES	+= res/obpm.qrc
 
 TRANSLATIONS	+= lng/obpm_de.ts

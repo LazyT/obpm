@@ -5,10 +5,13 @@
 #include <QtNetwork>
 
 #include "ui_mainwindow.h"
+
 #include "usb.h"
 #include "about.h"
 #include "donation.h"
 #include "update.h"
+#include "setup.h"
+
 #include "qcpdocumentobject.h"
 
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
@@ -31,6 +34,18 @@
 #endif
 
 #define tdiff 3600
+
+#define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
+
+struct CONFIG
+{
+	bool update;
+	bool legend;
+	uint style;
+	uint sys;
+	uint dia;
+	uint bpm;
+};
 
 struct HEALTHDATA{
 	uint time;
@@ -61,11 +76,14 @@ public:
 	QVector <HEALTHDATA> healthdata[2];
 	void getHealthStats(bool);
 
+	CONFIG cfg;
+
 private:
 
 	QTranslator sysTranslator, appTranslator;
 	QActionGroup *groupUser;
 	QDateTimeEdit *rangeStart, *rangeStop;
+	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
 	HEALTHSTAT healthstat[2];
 	QTextDocument *doc;
@@ -73,6 +91,9 @@ private:
 	uint user;
 
 private slots:
+
+	void getConfig();
+	void setConfig();
 
 	void checkUpdate();
 
@@ -105,6 +126,7 @@ private slots:
 	void on_action_About_triggered();
 	void on_action_showHideLegend_toggled(bool);
 	void on_action_resetZoom_triggered();
+	void on_action_Setup_triggered();
 	void on_action_Exit_triggered();
 };
 

@@ -81,7 +81,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>29</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -116,6 +116,8 @@
     <addaction name="action_PrintPreview"/>
     <addaction name="action_Print"/>
     <addaction name="separator"/>
+    <addaction name="action_Setup"/>
+    <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
    <widget class="QMenu" name="menu_Hilfe">
@@ -141,6 +143,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_Setup"/>
+   <addaction name="separator"/>
    <addaction name="action_importFromUSB"/>
    <addaction name="action_importFromFile"/>
    <addaction name="separator"/>
@@ -417,6 +421,18 @@
    </property>
    <property name="statusTip">
     <string>print preview</string>
+   </property>
+  </action>
+  <action name="action_Setup">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/setup.png</normaloff>:/png/png/setup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup</string>
+   </property>
+   <property name="statusTip">
+    <string>configure program</string>
    </property>
   </action>
  </widget>

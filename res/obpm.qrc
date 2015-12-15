@@ -40,18 +40,19 @@
         <file>png/forum_48.png</file>
         <file>png/forum_64.png</file>
         <file>png/donation.png</file>
-        <file>png/banking.png</file>
         <file>png/bitcoin.png</file>
         <file>png/paypal.png</file>
         <file>png/qr_pp.png</file>
         <file>png/qr_bc.png</file>
-        <file>png/qr_bt.png</file>
         <file>png/smiley-lo.png</file>
         <file>png/smiley-hi.png</file>
         <file>png/work.png</file>
         <file>png/user1.png</file>
         <file>png/user2.png</file>
         <file>png/debug.png</file>
+        <file>png/reset.png</file>
+        <file>png/save.png</file>
+        <file>png/setup.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

@@ -21,7 +21,7 @@ Print records for your archive or doctor...
 
 ![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot5.png)
 
-Configure your default settings...
+Configure your preferred settings...
 
 ![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot8.png)
 
@@ -60,9 +60,9 @@ If you get permission denied errors you should create a udev rule:
 
 Download and install the latest version for your operating system:
 
-* [Windows](https://github.com/LazyT/obpm/releases/download/1.0.2/OBPM-1.0.2-win.exe)
-* [Linux](https://github.com/LazyT/obpm/releases/download/1.0.2/OBPM-1.0.2-lin.run)
-* [MacOS](https://github.com/LazyT/obpm/releases/download/1.0.2/OBPM-1.0.2-mac.dmg)
+* [Windows](https://github.com/LazyT/obpm/releases/download/1.0.3/OBPM-1.0.3-win.exe)
+* [Linux](https://github.com/LazyT/obpm/releases/download/1.0.3/OBPM-1.0.3-lin.run)
+* [MacOS](https://github.com/LazyT/obpm/releases/download/1.0.3/OBPM-1.0.3-mac.dmg)
 
 ## Build from Source
 

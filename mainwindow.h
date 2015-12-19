@@ -15,9 +15,9 @@
 #include "qcpdocumentobject.h"
 
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
-#define APPVERS "1.0.2"
-#define APPDATE "13.10.2015"
-#define APPRELS "3"
+#define APPVERS "1.0.3"
+#define APPDATE "19.12.2015"
+#define APPRELS "4"
 
 #define SYS_NORM 135
 #define DIA_NORM 85

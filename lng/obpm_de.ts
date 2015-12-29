@@ -178,47 +178,63 @@
         <translation>Gerät für Import wählen</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="42"/>
+        <location filename="../res/ui/usb.ui" line="48"/>
         <source>Manufacturer</source>
         <translation>Hersteller</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="52"/>
+        <location filename="../res/ui/usb.ui" line="58"/>
         <source>Product</source>
         <translation>Produkt</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="62"/>
+        <location filename="../res/ui/usb.ui" line="68"/>
         <source>Serial</source>
         <translation>Seriennummer</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="98"/>
+        <location filename="../res/ui/usb.ui" line="110"/>
+        <location filename="../res/ui/usb.ui" line="139"/>
+        <source>choose device model</source>
+        <translation>Gerätemodell auswählen</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/usb.ui" line="116"/>
+        <source>Model M400 IT</source>
+        <translation>Modell M400 IT</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/usb.ui" line="142"/>
+        <source>Model M500 IT</source>
+        <translation>Modell M500 IT</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/usb.ui" line="154"/>
         <source>current progress</source>
         <translation>aktueller Fortschritt</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="116"/>
+        <location filename="../res/ui/usb.ui" line="172"/>
         <source>start import</source>
         <translation>Import starten</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="119"/>
+        <location filename="../res/ui/usb.ui" line="175"/>
         <source>Import</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="136"/>
+        <location filename="../res/ui/usb.ui" line="192"/>
         <source>log communication</source>
         <translation>Kommunikation loggen</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="159"/>
+        <location filename="../res/ui/usb.ui" line="215"/>
         <source>abort import</source>
         <translation>Import abbrechen</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="162"/>
+        <location filename="../res/ui/usb.ui" line="218"/>
         <source>Cancel</source>
         <translation>Abbruch</translation>
     </message>
@@ -265,13 +281,13 @@
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="25"/>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>Blood Pressure</source>
         <translation>Blutdruck</translation>
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="52"/>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="421"/>
         <source>Heart Rate</source>
         <translation>Herzfrequenz</translation>
     </message>
@@ -486,12 +502,12 @@
         <translation>Programm konfigurieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="959"/>
+        <location filename="../mainwindow.cpp" line="961"/>
         <source>Pulse: %1 [%2] %3</source>
         <translation>Puls: %1 [%2] %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="741"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>Successfully exported current view to PDF.
 
 Open now with default app?</source>
@@ -513,69 +529,69 @@ Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="125"/>
-        <location filename="../mainwindow.cpp" line="972"/>
+        <location filename="../mainwindow.cpp" line="974"/>
         <source>Pulse</source>
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="338"/>
+        <location filename="../mainwindow.cpp" line="340"/>
         <source>Adjustment %1/%2</source>
         <translation>Korrektur %1/%2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="351"/>
         <source>Record %1 of %2</source>
         <translation>Datensatz %1 von %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>Cancel</source>
         <translation>Abbruch</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Diagram %1/2</source>
         <translation>Diagramm %1/2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="546"/>
+        <location filename="../mainwindow.cpp" line="548"/>
         <source>Import from usb device canceled!</source>
         <translation>Import von USB-Gerät abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="779"/>
-        <location filename="../mainwindow.cpp" line="795"/>
+        <location filename="../mainwindow.cpp" line="781"/>
+        <location filename="../mainwindow.cpp" line="797"/>
         <source>Append new data to existing records?</source>
         <translation>Sollen die neuen Daten an die vorhandenen Datensätze angehangen werden?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>Overview - %1/%2</source>
         <translation>Übersicht - %1/%2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
+        <location filename="../mainwindow.cpp" line="319"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="319"/>
+        <location filename="../mainwindow.cpp" line="321"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Creating Document</source>
         <translation>Erzeuge Dokument</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="455"/>
+        <location filename="../mainwindow.cpp" line="457"/>
         <source>OBPM data export (%1 - %2)</source>
         <translation>OBPM Datenexport (%1 - %2)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="465"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>Successfully imported %1 records from USB:
 
      User 1 = %2
@@ -586,7 +602,7 @@ Jetzt mit der Standardanwendung öffnen?</translation>
      Benutzer 2 = %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="670"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>No valid records in imported CSV found!
 
 Please check line format of file: %1</source>
@@ -595,7 +611,7 @@ Please check line format of file: %1</source>
 Bitte Zeilenformat der Datei überprüfen: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="559"/>
         <source>Successfully imported %1 records from CSV:
 
      User 1 = %2
@@ -606,27 +622,27 @@ Bitte Zeilenformat der Datei überprüfen: %1</translation>
      Benutzer 2 = %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
-        <source>No supported device (M500IT) found!
-
-Check usb connection and try again...</source>
-        <translation>Kein unterstütztes Gerät (M500IT) gefunden!
-
-Die USB-Verbindung überprüfen und erneut probieren...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="678"/>
+        <location filename="../mainwindow.cpp" line="680"/>
         <source>Skipped %1 invalid entries!</source>
         <translation>%1 ungültige Einträge übersprungen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="539"/>
-        <location filename="../mainwindow.cpp" line="684"/>
+        <location filename="../mainwindow.cpp" line="541"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>Skipped %1 duplicate entries!</source>
         <translation>%1 doppelte Einträge übersprungen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="692"/>
+        <location filename="../mainwindow.cpp" line="553"/>
+        <source>No supported device (M400/M500 IT) found!
+
+Check usb connection and try again...</source>
+        <translation>Kein unterstütztes Gerät (M400/M500 IT) gefunden!
+
+Die USB-Verbindung überprüfen und erneut probieren...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Could not open &quot;%1&quot;!
 
 Reason: %2</source>
@@ -635,7 +651,7 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="717"/>
+        <location filename="../mainwindow.cpp" line="719"/>
         <source>Successfully exported %1 records to CSV:
 
      User 1 = %2
@@ -650,7 +666,7 @@ Open now with default app?</source>
 Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="724"/>
+        <location filename="../mainwindow.cpp" line="726"/>
         <source>Could not create &quot;%1&quot;!
 
 Reason: %2</source>
@@ -659,51 +675,51 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="791"/>
+        <location filename="../mainwindow.cpp" line="793"/>
         <source>Import from CSV</source>
         <translation>Import von CSV</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="791"/>
-        <location filename="../mainwindow.cpp" line="810"/>
+        <location filename="../mainwindow.cpp" line="793"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>CSV Document (*.csv)</source>
         <translation>CSV-Dokument (*.csv)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="810"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>Export to CSV</source>
         <translation>Export als CSV</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="819"/>
-        <location filename="../mainwindow.cpp" line="836"/>
+        <location filename="../mainwindow.cpp" line="821"/>
+        <location filename="../mainwindow.cpp" line="838"/>
         <source>No records to export!</source>
         <translation>Keine Datensätze zum exportieren!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="827"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>Export to PDF</source>
         <translation>Export als PDF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="827"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>PDF Document (*.pdf)</source>
         <translation>PDF-Dokument (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="855"/>
-        <location filename="../mainwindow.cpp" line="875"/>
+        <location filename="../mainwindow.cpp" line="857"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>No records to print!</source>
         <translation>Keine Datensätze zum drucken!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="881"/>
-        <location filename="../mainwindow.cpp" line="1010"/>
+        <location filename="../mainwindow.cpp" line="883"/>
+        <location filename="../mainwindow.cpp" line="1012"/>
         <source>Help is not yet implemented...</source>
         <translation>Die Hilfe ist noch nicht implementiert...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1104"/>
+        <location filename="../mainwindow.cpp" line="1106"/>
         <source>Really exit program?</source>
         <translation>Das Programm wirklich beenden?</translation>
     </message>
@@ -845,22 +861,22 @@ Bitte den gewünschten Betrag manuell angeben...</translation>
 <context>
     <name>usbDialog</name>
     <message>
-        <location filename="../usb.cpp" line="78"/>
+        <location filename="../usb.cpp" line="80"/>
         <source>Could not open selected device!</source>
         <translation>Konnte gewähltes Gerät nicht öffnen!</translation>
     </message>
     <message>
-        <location filename="../usb.cpp" line="90"/>
+        <location filename="../usb.cpp" line="92"/>
         <source>Press START/STOP button on device and try again...</source>
         <translation>Den START/STOP Knopf am Gerät drücken und erneut probieren...</translation>
     </message>
     <message>
-        <location filename="../usb.cpp" line="252"/>
+        <location filename="../usb.cpp" line="258"/>
         <source>Help is not yet implemented...</source>
         <translation>Die Hilfe ist noch nicht implementiert...</translation>
     </message>
     <message>
-        <location filename="../usb.cpp" line="262"/>
+        <location filename="../usb.cpp" line="268"/>
         <source>Really abort import?</source>
         <translation>Den Import wirklich abbrechen?</translation>
     </message>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>245</height>
+    <width>316</width>
+    <height>270</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,6 +36,12 @@
       </item>
       <item>
        <layout class="QFormLayout" name="formLayout">
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>6</number>
+        </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_1">
           <property name="text">
@@ -84,6 +90,56 @@
          <widget class="QLabel" name="label_ser">
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QRadioButton" name="radioButton_m400">
+          <property name="toolTip">
+           <string>choose device model</string>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>Model M400 IT</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../obpm.qrc">:/png/png/flash.png</pixmap>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QRadioButton" name="radioButton_m500">
+          <property name="toolTip">
+           <string>choose device model</string>
+          </property>
+          <property name="text">
+           <string>Model M500 IT</string>
           </property>
          </widget>
         </item>

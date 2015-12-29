@@ -5,15 +5,17 @@ unsigned char cmd_data[] = { 0x02, 0x08, 0x01, 0x00, 0x02, 0xac, 0x28, 0x00, 0x8
 unsigned char cmd_done[] = { 0x02, 0x08, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07 };
 unsigned char cmd_fail[] = { 0x02, 0x08, 0x0f, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x08 };
 
-unsigned char rawdata[64];
-unsigned char payload[40*70];
+unsigned char rawdata[64];		// max bytes per usb transfer
+unsigned char payload[40*70];	// 40 bytes payload x 70 usb transfers (2 user x 14 bytes per record x 100 records)
 
-usbDialog::usbDialog(QWidget *parent) : QDialog(parent)
+usbDialog::usbDialog(QWidget *parent, bool m500it) : QDialog(parent)
 {
 	setupUi(this);
 
 	setWindowFlags(Qt::Tool);
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
+
+	radioButton_m500->setChecked(m500it);
 
 	connect(pushButton_cancel, SIGNAL(clicked()), this, SLOT(reject()));
 
@@ -44,7 +46,7 @@ void usbDialog::dumpRawData(bool out, int bytes, unsigned char* data)
 	{
 		if(dumpfile.open(QIODevice::Append))
 		{
-			dumpfile.write(QString("%1 %2:").arg(out ? "->":"<-").arg(bytes, 2, 16, QChar('0')).toUpper().toUtf8());
+			dumpfile.write(QString("%1 %2:").arg(out ? "->":"<-").arg(bytes, 2, 10, QChar('0')).toUpper().toUtf8());
 
 			if(bytes)
 			{
@@ -99,9 +101,9 @@ bool usbDialog::readRawData()
 	pushButton_import->setEnabled(false);
 	toolButton_dump->setEnabled(false);
 
-	progressBar->setMaximum(70);
+	progressBar->setMaximum(2*14*mem / 40);
 
-	for(int i = 0; i < 70; i++)
+	for(int i = 0; i < 2*14*mem / 40; i++)
 	{
 		if(abort)
 		{
@@ -176,7 +178,7 @@ void usbDialog::scanHID()
 
 			if(di.vid == VID && di.pid == PID)
 			{
-				comboBox->addItem(QIcon(":/png/png/usb.png"), QString("%1:%2 [ M500IT, %3 ]").arg(di.vid, 4, 16, QChar('0')).arg(di.pid, 4, 16, QChar('0')).arg(di.ser).toUpper(), data);
+				comboBox->addItem(QIcon(":/png/png/usb.png"), QString("%1:%2 [ M400/M500 IT, %3 ]").arg(di.vid, 4, 16, QChar('0')).arg(di.pid, 4, 16, QChar('0')).arg(di.ser).toUpper(), data);
 
 				hids_found++;
 			}
@@ -201,6 +203,10 @@ void usbDialog::on_pushButton_import_clicked()
 {
 	HEALTHDATA set;
 
+	((MainWindow*)parent())->cfg.m500it = radioButton_m500->isChecked();
+
+	mem = radioButton_m500->isChecked() ? 100 : 60;
+
 	if(!readRawData())
 	{
 		return;
@@ -209,14 +215,14 @@ void usbDialog::on_pushButton_import_clicked()
 	user1 = 0;
 	user2 = 0;
 
-	for(int i = 0; i < 14*100; i += 14)
+	for(int i = 0; i < 14*mem; i += 14)
 	{
 		if((payload[i] != 0xFF) & (payload[i + 1] != 0xFF) && (payload[i + 2] != 0xFF))
 		{
 			user1++;
 		}
 
-		if((payload[i + 14*100] != 0xFF) & (payload[i + 1 + 14*100] != 0xFF) && (payload[i + 2 + 14*100] != 0xFF))
+		if((payload[i + 14*mem] != 0xFF) & (payload[i + 1 + 14*mem] != 0xFF) && (payload[i + 2 + 14*mem] != 0xFF))
 		{
 			user2++;
 		}
@@ -234,10 +240,10 @@ void usbDialog::on_pushButton_import_clicked()
 
 	for(int i = 0; i < 14*user2; i += 14)
 	{
-		set.time = QDateTime(QDate(2000 + payload[i + 2 + 14*100], (payload[i + 4 + 14*100]>>2) & 0x0F, ((payload[i + 4 + 14*100]<<8 | payload[i + 5 + 14*100])>>5) & 0x1F), QTime(payload[i + 5 + 14*100] & 0x1F, ((payload[i + 6 + 14*100]<<8 | payload[i + 7 + 14*100])>>6) & 0x3F)).toTime_t();
-		set.sys = payload[i + 1] + 25;
-		set.dia = payload[i];
-		set.bpm = payload[i + 3];
+		set.time = QDateTime(QDate(2000 + payload[i + 2 + 14*mem], (payload[i + 4 + 14*mem]>>2) & 0x0F, ((payload[i + 4 + 14*mem]<<8 | payload[i + 5 + 14*mem])>>5) & 0x1F), QTime(payload[i + 5 + 14*mem] & 0x1F, ((payload[i + 6 + 14*mem]<<8 | payload[i + 7 + 14*mem])>>6) & 0x3F)).toTime_t();
+		set.sys = payload[i + 1 + 14*mem] + 25;
+		set.dia = payload[i + 14*mem];
+		set.bpm = payload[i + 3 + 14*mem];
 
 		((MainWindow*)parent())->healthdata[1].append(set);
 	}

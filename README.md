@@ -1,4 +1,4 @@
-# **Omron Blood Pressure Manager for M500IT**
+# **Omron Blood Pressure Manager for M400/M500 IT**
 
 ## Description
 

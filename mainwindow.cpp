@@ -147,6 +147,7 @@ void MainWindow::getConfig()
 {
 	QSettings ini(CFG, QSettings::IniFormat);
 
+	cfg.m500it = ini.value("M500IT", false).toBool();
 	cfg.update = ini.value("Update", true).toBool();
 	cfg.legend = ini.value("Legend", true).toBool();
 	cfg.style = ini.value("Style", QCPGraph::lsLine).toInt();
@@ -159,6 +160,7 @@ void MainWindow::setConfig()
 {
 	QSettings ini(CFG, QSettings::IniFormat);
 
+	ini.setValue("M500IT", cfg.m500it);
 	ini.setValue("Update", cfg.update);
 	ini.setValue("Legend", cfg.legend);
 	ini.setValue("Style", cfg.style);
@@ -463,7 +465,7 @@ void MainWindow::createDoc(QPrinter *printer)
 void MainWindow::importDataFromUSB(bool append)
 {
 	QString msg(tr("Successfully imported %1 records from USB:\n\n     User 1 = %2\n     User 2 = %3"));
-	usbDialog *dlg = new usbDialog(this);
+	usbDialog *dlg = new usbDialog(this, cfg.m500it);
 	QAction *active = NULL;
 	int duplicate = 0;
 
@@ -548,7 +550,7 @@ void MainWindow::importDataFromUSB(bool append)
 	}
 	else
 	{
-		QMessageBox::critical(this, APPNAME, tr("No supported device (M500IT) found!\n\nCheck usb connection and try again..."));
+		QMessageBox::critical(this, APPNAME, tr("No supported device (M400/M500 IT) found!\n\nCheck usb connection and try again..."));
 	}
 }
 

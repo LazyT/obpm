@@ -6,7 +6,7 @@
 #include "hidapi.h"
 
 #define VID 0x0590	// Omron
-#define PID 0x0090	// M500IT
+#define PID 0x0090	// M400IT & M500IT
 
 struct devinfo {
 	uint vid;
@@ -24,7 +24,7 @@ class usbDialog : public QDialog, private Ui::Dialog_USB
 
 public:
 
-	usbDialog(QWidget *parent);
+	usbDialog(QWidget *parent, bool);
 	int hids_found;
 	int user1, user2;
 
@@ -34,6 +34,7 @@ private:
 	hid_device *dev;
 	bool import, abort;
 	QFile dumpfile;
+	int mem;
 
 private slots:
 

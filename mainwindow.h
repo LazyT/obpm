@@ -39,6 +39,7 @@
 
 struct CONFIG
 {
+	bool m500it;
 	bool update;
 	bool legend;
 	uint style;

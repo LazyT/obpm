@@ -53,6 +53,7 @@
         <file>png/reset.png</file>
         <file>png/save.png</file>
         <file>png/setup.png</file>
+        <file>png/flash.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

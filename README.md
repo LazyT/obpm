@@ -84,6 +84,17 @@ If the installer binaries doesn't work for you build it yourself:
 
 GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source), open the "obpm.pro" project file and click on the build button.
 
+### Example: Fedora
+
+The following has been tested on Fedora 23:
+
+```
+sudo yum -y install qt5-qtbase-devel gcc-c++ redhat-rpm-config libudev-devel
+qmake-qt5
+make
+strip obpm
+```
+
 ## Credits
 
 OBPM is based on

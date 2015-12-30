@@ -19,8 +19,8 @@
 ****************************************************************************
 **           Author: Emanuel Eichhammer                                   **
 **  Website/Contact: http://www.qcustomplot.com/                          **
-**             Date: 25.04.15                                             **
-**          Version: 1.3.1                                                **
+**             Date: 22.12.15                                             **
+**          Version: 1.3.2                                                **
 ****************************************************************************/
 
 #ifndef QCPDOCUMENTOBJECT_H
@@ -37,11 +37,11 @@ class QCPDocumentObject : public QObject, public QTextObjectInterface
 {
   Q_OBJECT
   Q_INTERFACES(QTextObjectInterface)
-
+  
 public:
   enum { PlotTextFormat = QTextFormat::UserObject + 3902 }; // if your application already uses the id (QTextFormat::UserObject + 3902), just change the id here
   enum { PicturePropertyId = 1 };
-
+  
   explicit QCPDocumentObject(QObject *parent = 0);
   QSizeF intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format);
   void drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc, int posInDocument, const QTextFormat &format);

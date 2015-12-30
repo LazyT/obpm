@@ -19,8 +19,8 @@
 ****************************************************************************
 **           Author: Emanuel Eichhammer                                   **
 **  Website/Contact: http://www.qcustomplot.com/                          **
-**             Date: 25.04.15                                             **
-**          Version: 1.3.1                                                **
+**             Date: 22.12.15                                             **
+**          Version: 1.3.2                                                **
 ****************************************************************************/
 
 #include "qcpdocumentobject.h"

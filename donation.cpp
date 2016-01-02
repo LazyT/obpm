@@ -30,7 +30,7 @@ void donationDialog::on_comboBox_activated(const QString &text)
 
 	if(comboBox->currentIndex() == 0)
 	{
-		lineEdit_payment1->setText(QByteArray::fromBase64("TGF6eVRAZ214Lm5ldA=="));
+		lineEdit_payment1->setText(QByteArray::fromBase64("TGF6eVRAbWFpbGJveC5vcmc="));
 		lineEdit_payment1->setToolTip(tr("beneficiary email address"));
 		lineEdit_payment2->setText("https://www.paypal.com");
 		lineEdit_payment2->setToolTip(tr("transaction website"));
@@ -58,7 +58,7 @@ void donationDialog::on_pushButton_clicked()
 {
 	if(comboBox->currentIndex() == 0)
 	{
-		QDesktopServices::openUrl(QString(QByteArray::fromBase64("aHR0cHM6Ly93d3cucGF5cGFsLmNvbS9jZ2ktYmluL3dlYnNjcj9jbWQ9X3hjbGljayZidXNpbmVzcz1MYXp5VEBnbXgubmV0Jml0ZW1fbmFtZT0lMSZhbW91bnQ9JTImY3VycmVuY3lfY29kZT1FVVI=")).arg("OBPM").arg(horizontalSlider->value()));
+		QDesktopServices::openUrl(QString(QByteArray::fromBase64("aHR0cHM6Ly93d3cucGF5cGFsLmNvbS9jZ2ktYmluL3dlYnNjcj9jbWQ9X3hjbGljayZidXNpbmVzcz1MYXp5VEBtYWlsYm94Lm9yZyZpdGVtX25hbWU9JTEmYW1vdW50PSUyJmN1cnJlbmN5X2NvZGU9RVVS")).arg("OBPM").arg(horizontalSlider->value()));
 
 		QMessageBox::information(this, APPNAME, tr("The default web browser will be started now with the donation website.\n\nIf this fails please donate manually with the shown information."));
 	}

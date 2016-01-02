@@ -554,7 +554,7 @@ void MainWindow::importDataFromUSB(bool append)
 	}
 }
 
-void MainWindow::importDataFromFile(QString filename, bool append)
+void MainWindow::importDataFromCSV(QString filename, bool append)
 {
 	QString msg(tr("Successfully imported %1 records from CSV:\n\n     User 1 = %2\n     User 2 = %3"));
 	QFile file(filename);
@@ -695,6 +695,133 @@ void MainWindow::importDataFromFile(QString filename, bool append)
 	}
 }
 
+void MainWindow::importDataFromSQL(QString filename, bool append)
+{
+	QString msg(tr("Successfully imported %1 records from SQL:\n\n     User 1 = %2\n     User 2 = %3"));
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
+	HEALTHDATA set;
+	int duplicate = 0;
+	QAction *active = NULL;
+
+	if(append)
+	{
+		active = groupUser->checkedAction();
+	}
+	else
+	{
+		healthdata[0].clear();
+		healthdata[1].clear();
+
+		buildGraph(0);
+	}
+
+	action_User1->setChecked(false);
+	action_User2->setChecked(false);
+
+	db.setDatabaseName(filename);
+
+	if(db.open())
+	{
+		QSqlQuery query(db);
+
+		if(query.exec("SELECT * FROM U1") && query.record().count() == 4)
+		{
+			while(query.next())
+			{
+				set.time = query.value("uts").toInt();
+				set.sys = query.value("sys").toInt();
+				set.dia = query.value("dia").toInt();
+				set.bpm = query.value("bpm").toInt();
+
+				healthdata[0].append(set);
+			}
+		}
+
+		if(query.exec("SELECT * FROM U2") && query.record().count() == 4)
+		{
+			while(query.next())
+			{
+				set.time = query.value("uts").toInt();
+				set.sys = query.value("sys").toInt();
+				set.dia = query.value("dia").toInt();
+				set.bpm = query.value("bpm").toInt();
+
+				healthdata[1].append(set);
+			}
+		}
+
+		db.close();
+
+		if(healthdata[0].count())
+		{
+			qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
+
+			for(int i = 0; i < healthdata[0].count() - 1; i++)
+			{
+				if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
+				{
+					duplicate++;
+					healthdata[0].remove(i--);
+				}
+			}
+
+			getHealthStats(0);
+		}
+
+		if(healthdata[1].count())
+		{
+			qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
+
+			for(int i = 0; i < healthdata[1].count() - 1; i++)
+			{
+				if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
+				{
+					duplicate++;
+					healthdata[1].remove(i--);
+				}
+			}
+
+			getHealthStats(1);
+		}
+
+		if(append)
+		{
+			active->setChecked(true);
+		}
+		else
+		{
+			if(healthdata[0].count())
+			{
+				action_User1->setChecked(true);
+			}
+			else if(healthdata[1].count())
+			{
+				action_User2->setChecked(true);
+			}
+		}
+
+		if(!healthdata[0].count() && !healthdata[1].count())
+		{
+			QMessageBox::warning(this, APPNAME, tr("No valid records in imported SQL found!\n\nPlease check table format of file: %1").arg("\n\n'U1'|'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)"));
+
+			return;
+		}
+		else
+		{
+			if(duplicate)
+			{
+				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
+			}
+
+			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()));
+		}
+	}
+	else
+	{
+		QMessageBox::critical(this, APPNAME, tr("Could not open \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
+	}
+}
+
 void MainWindow::exportDataToCSV(QString filename)
 {
 	QFile file(filename);
@@ -724,6 +851,48 @@ void MainWindow::exportDataToCSV(QString filename)
 	else
 	{
 		QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(file.errorString()));
+	}
+}
+
+void MainWindow::exportDataToSQL(QString filename)
+{
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
+
+	db.setDatabaseName(filename);
+
+	if(db.open())
+	{
+		QSqlQuery query(db);
+
+		if(db.tables().count())
+		{
+			query.exec("DROP TABLE 'U1'");
+			query.exec("DROP TABLE 'U2'");
+		}
+
+		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
+		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
+
+		for(int i = 0; i < healthdata[0].count(); i++)
+		{
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1,%2,%3,%4)").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm));
+		}
+
+		for(int i = 0; i < healthdata[1].count(); i++)
+		{
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1,%2,%3,%4)").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm));
+		}
+
+		db.close();
+
+		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to SQL:\n\n     User 1 = %2\n     User 2 = %3\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+		{
+			QDesktopServices::openUrl(QUrl("file:///" + filename));
+		}
+	}
+	else
+	{
+		QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
 	}
 }
 
@@ -790,17 +959,17 @@ void MainWindow::on_action_importFromUSB_triggered()
 
 void MainWindow::on_action_importFromFile_triggered()
 {
-	QString filename = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "export.csv", tr("CSV Document (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
+	QString filename = QFileDialog::getOpenFileName(this, tr("Import from CSV or SQL File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator(), tr("CSV File (*.csv);;SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
 
 	if(!filename.isEmpty())
 	{
 		if((healthdata[0].count() || healthdata[1].count()) && QMessageBox::question(this, APPNAME, tr("Append new data to existing records?")) == QMessageBox::Yes)
 		{
-			importDataFromFile(filename, true);
+			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, true) : importDataFromSQL(filename, true);
 		}
 		else
 		{
-			importDataFromFile(filename, false);
+			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, false) : importDataFromSQL(filename, false);
 		}
 	}
 }
@@ -809,7 +978,7 @@ void MainWindow::on_action_exportToCSV_triggered()
 {
 	if(healthdata[0].count() || healthdata[1].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV Document (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV File (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
@@ -822,11 +991,28 @@ void MainWindow::on_action_exportToCSV_triggered()
 	}
 }
 
+void MainWindow::on_action_exportToSQL_triggered()
+{
+	if(healthdata[0].count() || healthdata[1].count())
+	{
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to SQL"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1.sql").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
+
+		if(!filename.isEmpty())
+		{
+			exportDataToSQL(filename);
+		}
+	}
+	else
+	{
+		QMessageBox::warning(this, APPNAME, tr("No records to export!"));
+	}
+}
+
 void MainWindow::on_action_exportToPDF_triggered()
 {
 	if(healthdata[user].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1-%2-%3.pdf").arg(1 + user).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF Document (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1-%2-%3.pdf").arg(1 + user).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF File (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{

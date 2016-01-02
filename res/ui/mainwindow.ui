@@ -108,6 +108,7 @@
        <normaloff>:/png/png/export.png</normaloff>:/png/png/export.png</iconset>
      </property>
      <addaction name="action_exportToCSV"/>
+     <addaction name="action_exportToSQL"/>
      <addaction name="action_exportToPDF"/>
     </widget>
     <addaction name="menuDaten_importieren"/>
@@ -149,6 +150,7 @@
    <addaction name="action_importFromFile"/>
    <addaction name="separator"/>
    <addaction name="action_exportToCSV"/>
+   <addaction name="action_exportToSQL"/>
    <addaction name="action_exportToPDF"/>
    <addaction name="separator"/>
    <addaction name="action_Print"/>
@@ -433,6 +435,21 @@
    </property>
    <property name="statusTip">
     <string>configure program</string>
+   </property>
+  </action>
+  <action name="action_exportToSQL">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/sql.png</normaloff>:/png/png/sql.png</iconset>
+   </property>
+   <property name="text">
+    <string>to SQL</string>
+   </property>
+   <property name="toolTip">
+    <string>export data to sql file</string>
+   </property>
+   <property name="statusTip">
+    <string>export data to sql file</string>
    </property>
   </action>
  </widget>

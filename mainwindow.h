@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QtNetwork>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlError>
 
 #include "ui_mainwindow.h"
 
@@ -102,8 +106,10 @@ private slots:
 	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
 
 	void importDataFromUSB(bool);
-	void importDataFromFile(QString, bool);
+	void importDataFromCSV(QString, bool);
+	void importDataFromSQL(QString, bool);
 	void exportDataToCSV(QString);
+	void exportDataToSQL(QString);
 	void exportDataToPDF(QString);
 
 	void buildGraph(bool user);
@@ -118,6 +124,7 @@ private slots:
 	void on_action_importFromUSB_triggered();
 	void on_action_importFromFile_triggered();
 	void on_action_exportToCSV_triggered();
+	void on_action_exportToSQL_triggered();
 	void on_action_exportToPDF_triggered();
 	void on_action_User1_toggled(bool);
 	void on_action_User2_toggled(bool);

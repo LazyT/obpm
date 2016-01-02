@@ -30,7 +30,7 @@ void aboutDialog::mouseReleaseEvent(QMouseEvent *me)
 
 		if(name == "label_Mail")
 		{
-			QDesktopServices::openUrl(QUrl(QByteArray::fromBase64("bWFpbHRvOkxhenlUQGdteC5uZXQ/c3ViamVjdD1PQlBNJmJvZHk9V3JpdGUgaW4gRW5nbGlzaCBvciBHZXJtYW4gcGxlYXNlLi4u")));
+			QDesktopServices::openUrl(QUrl(QByteArray::fromBase64("bWFpbHRvOkxhenlUQG1haWxib3gub3JnP3N1YmplY3Q9T0JQTSZib2R5PVdyaXRlIGluIEVuZ2xpc2ggb3IgR2VybWFuIHBsZWFzZS4uLg==")));
 		}
 		else if(name == "label_Forum")
 		{

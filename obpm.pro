@@ -1,7 +1,7 @@
 #QMAKE_CXX	= "ccache $$QMAKE_CXX"
 QMAKE_CXXFLAGS	+= -std=c++11
 
-QT		+= core gui widgets printsupport network
+QT		+= core gui widgets printsupport network sql
 
 INCLUDEPATH     += ext/qcp ext/hid
 

@@ -254,7 +254,7 @@ QLabel:hover{image:url(:/png/png/language_64.png)}</string>
    <item>
     <widget class="QLabel" name="label_Copyright">
      <property name="text">
-      <string notr="true">© 2015 Thomas &quot;LazyT&quot; Löwe</string>
+      <string notr="true">© 2015 - 2016 Thomas &quot;LazyT&quot; Löwe</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

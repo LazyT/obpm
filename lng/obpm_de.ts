@@ -307,207 +307,218 @@
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="125"/>
+        <location filename="../res/ui/mainwindow.ui" line="126"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="171"/>
+        <location filename="../res/ui/mainwindow.ui" line="173"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="174"/>
+        <location filename="../res/ui/mainwindow.ui" line="176"/>
         <source>exit program</source>
         <translation>Programm beenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="183"/>
+        <location filename="../res/ui/mainwindow.ui" line="185"/>
         <source>Index</source>
         <translation>Inhalt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="186"/>
+        <location filename="../res/ui/mainwindow.ui" line="188"/>
         <source>show help</source>
         <translation>Hilfe anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="195"/>
+        <location filename="../res/ui/mainwindow.ui" line="197"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="198"/>
+        <location filename="../res/ui/mainwindow.ui" line="200"/>
         <source>show info</source>
         <translation>Info anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="213"/>
+        <location filename="../res/ui/mainwindow.ui" line="215"/>
         <source>Legend</source>
         <translation>Legende</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="216"/>
-        <location filename="../res/ui/mainwindow.ui" line="219"/>
+        <location filename="../res/ui/mainwindow.ui" line="218"/>
+        <location filename="../res/ui/mainwindow.ui" line="221"/>
         <source>show/hide legend</source>
         <translation>Legende ein/ausblenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="228"/>
+        <location filename="../res/ui/mainwindow.ui" line="230"/>
         <source>Zoom</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="231"/>
-        <location filename="../res/ui/mainwindow.ui" line="234"/>
+        <location filename="../res/ui/mainwindow.ui" line="233"/>
+        <location filename="../res/ui/mainwindow.ui" line="236"/>
         <source>reset zoom</source>
         <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="243"/>
+        <location filename="../res/ui/mainwindow.ui" line="245"/>
         <source>to CSV</source>
         <translation>als CSV</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="246"/>
-        <location filename="../res/ui/mainwindow.ui" line="249"/>
+        <location filename="../res/ui/mainwindow.ui" line="248"/>
+        <location filename="../res/ui/mainwindow.ui" line="251"/>
         <source>export data to csv file</source>
-        <translation>Daten als CSV-Dokument exportieren</translation>
+        <translation>Daten als CSV-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="258"/>
+        <location filename="../res/ui/mainwindow.ui" line="260"/>
         <source>from Usb</source>
         <translation>von USB</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="261"/>
-        <location filename="../res/ui/mainwindow.ui" line="264"/>
+        <location filename="../res/ui/mainwindow.ui" line="263"/>
+        <location filename="../res/ui/mainwindow.ui" line="266"/>
         <source>import data from usb device</source>
         <translation>Daten von USB-Gerät importieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="273"/>
+        <location filename="../res/ui/mainwindow.ui" line="275"/>
         <source>from File</source>
         <translation>von Datei</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="276"/>
-        <location filename="../res/ui/mainwindow.ui" line="279"/>
+        <location filename="../res/ui/mainwindow.ui" line="278"/>
+        <location filename="../res/ui/mainwindow.ui" line="281"/>
         <source>import data from file</source>
         <translation>Daten von Datei importieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="288"/>
+        <location filename="../res/ui/mainwindow.ui" line="290"/>
         <source>to PDF</source>
         <translation>als PDF</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="291"/>
-        <location filename="../res/ui/mainwindow.ui" line="294"/>
+        <location filename="../res/ui/mainwindow.ui" line="293"/>
+        <location filename="../res/ui/mainwindow.ui" line="296"/>
         <source>export data to pdf file</source>
-        <translation>Daten als PDF-Dokument exportieren</translation>
+        <translation>Daten als PDF-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="303"/>
+        <location filename="../res/ui/mainwindow.ui" line="305"/>
         <source>Print</source>
         <translation>Drucken</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="306"/>
-        <location filename="../res/ui/mainwindow.ui" line="309"/>
+        <location filename="../res/ui/mainwindow.ui" line="308"/>
+        <location filename="../res/ui/mainwindow.ui" line="311"/>
         <source>print data</source>
         <translation>Daten drucken</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="321"/>
+        <location filename="../res/ui/mainwindow.ui" line="323"/>
         <source>Point</source>
         <translation>Punkt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="324"/>
+        <location filename="../res/ui/mainwindow.ui" line="326"/>
         <source>set diagram style to point</source>
         <translation>Diagrammstil Punkt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="339"/>
+        <location filename="../res/ui/mainwindow.ui" line="341"/>
         <source>Line</source>
         <translation>Linie</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="342"/>
+        <location filename="../res/ui/mainwindow.ui" line="344"/>
         <source>set diagram style to line</source>
         <translation>Diagrammstil Linie</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="354"/>
+        <location filename="../res/ui/mainwindow.ui" line="356"/>
         <source>Step</source>
         <translation>Stufe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="357"/>
+        <location filename="../res/ui/mainwindow.ui" line="359"/>
         <source>set diagram style to step</source>
         <translation>Diagrammstil Stufe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="369"/>
+        <location filename="../res/ui/mainwindow.ui" line="371"/>
         <source>Impulse</source>
         <translation>Impuls</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="372"/>
+        <location filename="../res/ui/mainwindow.ui" line="374"/>
         <source>set diagram style to impulse</source>
         <translation>Diagrammstil Impulse</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="384"/>
+        <location filename="../res/ui/mainwindow.ui" line="386"/>
         <source>User 1</source>
         <translation>Benutzer 1</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="387"/>
-        <location filename="../res/ui/mainwindow.ui" line="390"/>
+        <location filename="../res/ui/mainwindow.ui" line="389"/>
+        <location filename="../res/ui/mainwindow.ui" line="392"/>
         <source>show user 1</source>
         <translation>Benutzer 1 anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="402"/>
+        <location filename="../res/ui/mainwindow.ui" line="404"/>
         <source>User 2</source>
         <translation>Benutzer 2</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="405"/>
-        <location filename="../res/ui/mainwindow.ui" line="408"/>
+        <location filename="../res/ui/mainwindow.ui" line="407"/>
+        <location filename="../res/ui/mainwindow.ui" line="410"/>
         <source>show user 2</source>
         <translation>Benutzer 2 anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="417"/>
+        <location filename="../res/ui/mainwindow.ui" line="419"/>
         <source>Print Preview</source>
         <translation>Druckvorschau</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="420"/>
-        <location filename="../res/ui/mainwindow.ui" line="423"/>
+        <location filename="../res/ui/mainwindow.ui" line="422"/>
+        <location filename="../res/ui/mainwindow.ui" line="425"/>
         <source>print preview</source>
         <translation>Druckvorschau</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="432"/>
+        <location filename="../res/ui/mainwindow.ui" line="434"/>
         <source>Setup</source>
         <translation>Konfiguration</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="435"/>
+        <location filename="../res/ui/mainwindow.ui" line="437"/>
         <source>configure program</source>
         <translation>Programm konfigurieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="961"/>
+        <location filename="../res/ui/mainwindow.ui" line="446"/>
+        <source>to SQL</source>
+        <translation>als SQL</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/mainwindow.ui" line="449"/>
+        <location filename="../res/ui/mainwindow.ui" line="452"/>
+        <source>export data to sql file</source>
+        <translation>Daten als SQL-Datei exportieren</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1147"/>
         <source>Pulse: %1 [%2] %3</source>
         <translation>Puls: %1 [%2] %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="743"/>
+        <location filename="../mainwindow.cpp" line="912"/>
         <source>Successfully exported current view to PDF.
 
 Open now with default app?</source>
@@ -529,7 +540,7 @@ Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="125"/>
-        <location filename="../mainwindow.cpp" line="974"/>
+        <location filename="../mainwindow.cpp" line="1160"/>
         <source>Pulse</source>
         <translation>Puls</translation>
     </message>
@@ -560,10 +571,65 @@ Jetzt mit der Standardanwendung öffnen?</translation>
         <translation>Import von USB-Gerät abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="781"/>
-        <location filename="../mainwindow.cpp" line="797"/>
+        <location filename="../mainwindow.cpp" line="700"/>
+        <source>Successfully imported %1 records from SQL:
+
+     User 1 = %2
+     User 2 = %3</source>
+        <translation>%1 Datensätze erfolgreich von SQL importiert:
+
+     Benutzer 1 = %2
+     Benutzer 2 = %3</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="805"/>
+        <source>No valid records in imported SQL found!
+
+Please check table format of file: %1</source>
+        <translation>Keine gültigen Einträge in importierter SQL gefunden!
+
+Bitte Tabellenformat der Datei überprüfen: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="888"/>
+        <source>Successfully exported %1 records to SQL:
+
+     User 1 = %2
+     User 2 = %3
+
+Open now with default app?</source>
+        <translation>%1 Datensätze erfolgreich als SQL exportiert:
+
+     Benutzer 1 = %2
+     Benutzer 2 = %3
+
+Jetzt mit der Standardanwendung öffnen?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="950"/>
+        <location filename="../mainwindow.cpp" line="966"/>
         <source>Append new data to existing records?</source>
         <translation>Sollen die neuen Daten an die vorhandenen Datensätze angehangen werden?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="962"/>
+        <source>Import from CSV or SQL File</source>
+        <translation>Import von CSV oder SQL Datei</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="962"/>
+        <source>CSV File (*.csv);;SQL File (*.sql)</source>
+        <translation>CSV-Datei (*.csv);;SQL Datei (*.sql)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="998"/>
+        <source>SQL File (*.sql)</source>
+        <translation>SQL-Datei (*.sql)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1015"/>
+        <source>PDF File (*.pdf)</source>
+        <translation>PDF-Datei (*.pdf)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="295"/>
@@ -629,6 +695,7 @@ Bitte Zeilenformat der Datei überprüfen: %1</translation>
     <message>
         <location filename="../mainwindow.cpp" line="541"/>
         <location filename="../mainwindow.cpp" line="686"/>
+        <location filename="../mainwindow.cpp" line="813"/>
         <source>Skipped %1 duplicate entries!</source>
         <translation>%1 doppelte Einträge übersprungen!</translation>
     </message>
@@ -643,6 +710,7 @@ Die USB-Verbindung überprüfen und erneut probieren...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="694"/>
+        <location filename="../mainwindow.cpp" line="821"/>
         <source>Could not open &quot;%1&quot;!
 
 Reason: %2</source>
@@ -651,7 +719,7 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="846"/>
         <source>Successfully exported %1 records to CSV:
 
      User 1 = %2
@@ -666,7 +734,8 @@ Open now with default app?</source>
 Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="726"/>
+        <location filename="../mainwindow.cpp" line="853"/>
+        <location filename="../mainwindow.cpp" line="895"/>
         <source>Could not create &quot;%1&quot;!
 
 Reason: %2</source>
@@ -675,51 +744,46 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="793"/>
-        <source>Import from CSV</source>
-        <translation>Import von CSV</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="793"/>
-        <location filename="../mainwindow.cpp" line="812"/>
-        <source>CSV Document (*.csv)</source>
-        <translation>CSV-Dokument (*.csv)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>Export to CSV</source>
         <translation>Export als CSV</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="821"/>
-        <location filename="../mainwindow.cpp" line="838"/>
+        <location filename="../mainwindow.cpp" line="981"/>
+        <source>CSV File (*.csv)</source>
+        <translation>CSV-Datei (*.csv)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="990"/>
+        <location filename="../mainwindow.cpp" line="1007"/>
+        <location filename="../mainwindow.cpp" line="1024"/>
         <source>No records to export!</source>
         <translation>Keine Datensätze zum exportieren!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="998"/>
+        <source>Export to SQL</source>
+        <translation>Export als SQL</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1015"/>
         <source>Export to PDF</source>
         <translation>Export als PDF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="829"/>
-        <source>PDF Document (*.pdf)</source>
-        <translation>PDF-Dokument (*.pdf)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="857"/>
-        <location filename="../mainwindow.cpp" line="877"/>
+        <location filename="../mainwindow.cpp" line="1043"/>
+        <location filename="../mainwindow.cpp" line="1063"/>
         <source>No records to print!</source>
         <translation>Keine Datensätze zum drucken!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="883"/>
-        <location filename="../mainwindow.cpp" line="1012"/>
+        <location filename="../mainwindow.cpp" line="1069"/>
+        <location filename="../mainwindow.cpp" line="1198"/>
         <source>Help is not yet implemented...</source>
         <translation>Die Hilfe ist noch nicht implementiert...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1106"/>
+        <location filename="../mainwindow.cpp" line="1292"/>
         <source>Really exit program?</source>
         <translation>Das Programm wirklich beenden?</translation>
     </message>
@@ -727,7 +791,7 @@ Ursache: %2</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../mainwindow.h" line="17"/>
+        <location filename="../mainwindow.h" line="21"/>
         <source>Omron Blood Pressure Manager</source>
         <translation>Omron Blutdruck Manager</translation>
     </message>

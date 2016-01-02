@@ -6,8 +6,8 @@ Tired of Omrons original software because it's only available for Windows and re
 
 The current version supports the following features:
 
-* import blood pressure and heart rate via usb from the device or csv file and keep it private on your pc
-* export to csv/pdf documents or print it
+* import blood pressure and heart rate via usb from device or csv/sql file and keep it private on your pc
+* export to csv/sql/pdf documents or print it
 * analyse, zoom, set time range, change diagram type, see minimum/average/maximum values
 * multi language (English and German at the moment, translators welcome)
 

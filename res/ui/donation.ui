@@ -196,7 +196,7 @@
          <string>beneficiary email address</string>
         </property>
         <property name="text">
-         <string notr="true">LazyT@gmx.net</string>
+         <string notr="true">LazyT@mailbox.org</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

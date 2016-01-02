@@ -16,9 +16,10 @@
         <file>png/import_run.png</file>
         <file>png/import_esc.png</file>
         <file>png/usb.png</file>
-        <file>png/pdf.png</file>
-        <file>png/xls.png</file>
         <file>png/file.png</file>
+        <file>png/xls.png</file>
+        <file>png/sql.png</file>
+        <file>png/pdf.png</file>
         <file>png/print.png</file>
         <file>png/printpreview.png</file>
         <file>png/chart-point.png</file>

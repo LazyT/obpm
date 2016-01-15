@@ -50,6 +50,7 @@ struct CONFIG
 	uint sys;
 	uint dia;
 	uint bpm;
+	QString alias1, alias2;
 };
 
 struct HEALTHDATA{

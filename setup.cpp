@@ -33,6 +33,9 @@ setupDialog::setupDialog(QWidget *parent, struct CONFIG *config) : QDialog(paren
 
 	checkBox_update->setChecked(cfg->update);
 
+	lineEdit_user1->setText(cfg->alias1);
+	lineEdit_user2->setText(cfg->alias2);
+
 	show();
 	activateWindow();
 	move(parent->mapToGlobal(parent->rect().center()) - rect().center());
@@ -48,6 +51,9 @@ void setupDialog::on_pushButton_reset_clicked()
 	radioButton_line->setChecked(true);
 
 	checkBox_update->setChecked(true);
+
+	lineEdit_user1->setText(tr("User 1"));
+	lineEdit_user2->setText(tr("User 2"));
 }
 
 void setupDialog::on_pushButton_save_clicked()
@@ -75,6 +81,9 @@ void setupDialog::on_pushButton_save_clicked()
 	}
 
 	cfg->update = checkBox_update->isChecked();
+
+	cfg->alias1 = lineEdit_user1->text();
+	cfg->alias2 = lineEdit_user2->text();
 
 	done(QDialog::Accepted);
 }

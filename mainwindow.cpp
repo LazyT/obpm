@@ -48,6 +48,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	groupUser->addAction(action_User1);
 	groupUser->addAction(action_User2);
 
+	action_User1->setToolTip(tr("show %1").arg(cfg.alias1));
+	action_User2->setToolTip(tr("show %1").arg(cfg.alias2));
+	action_User1->setStatusTip(tr("show %1").arg(cfg.alias1));
+	action_User2->setStatusTip(tr("show %1").arg(cfg.alias2));
+
 	rangeStart = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(0, 0, 0, 0)), this);
 	rangeStop = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(23, 59, 59, 999)), this);
 	rangeStart->setToolTip(tr("Start analysis"));
@@ -154,6 +159,8 @@ void MainWindow::getConfig()
 	cfg.sys = ini.value("SYS", SYS_NORM).toInt();
 	cfg.dia = ini.value("DIA", DIA_NORM).toInt();
 	cfg.bpm = ini.value("BPM", BPM_NORM).toInt();
+	cfg.alias1 = ini.value("Alias1", tr("User 1")).toString();
+	cfg.alias2 = ini.value("Alias2", tr("User 2")).toString();
 }
 
 void MainWindow::setConfig()
@@ -167,6 +174,8 @@ void MainWindow::setConfig()
 	ini.setValue("SYS", cfg.sys);
 	ini.setValue("DIA", cfg.dia);
 	ini.setValue("BPM", cfg.bpm);
+	ini.setValue("Alias1", cfg.alias1);
+	ini.setValue("Alias2", cfg.alias2);
 
 	ini.sync();
 }
@@ -292,7 +301,7 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 	bfmt_cntr.setBackground(QColor("lightGray"));
 	cursor.insertBlock(bfmt_cntr);
 	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Overview - %1/%2").arg(page + 1).arg(ceil((double)exportdata.count() / tablecount / tablerows)) + "\n");
+	cursor.insertText(tr("Overview - %1 %2/%3").arg(user ? cfg.alias2 : cfg.alias1).arg(page + 1).arg(ceil((double)exportdata.count() / tablecount / tablerows)) + "\n");
 	cursor.setCharFormat(cfmt_norm);
 	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 	bfmt_cntr.setBackground(QColor("transparent"));
@@ -401,7 +410,7 @@ void MainWindow::createDoc(QPrinter *printer)
 	bfmt_cntr.setBackground(QColor("lightGray"));
 	cursor.insertBlock(bfmt_cntr);
 	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Blood Pressure") + "\n");
+	cursor.insertText(tr("Blood Pressure - %1").arg(user ? cfg.alias2 : cfg.alias1) + "\n");
 	cursor.setCharFormat(cfmt_norm);
 	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 	bfmt_cntr.setBackground(QColor("transparent"));
@@ -418,7 +427,7 @@ void MainWindow::createDoc(QPrinter *printer)
 	bfmt_cntr.setBackground(QColor("lightGray"));
 	cursor.insertBlock(bfmt_cntr);
 	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Heart Rate") + "\n");
+	cursor.insertText(tr("Heart Rate - %1").arg(user ? cfg.alias2 : cfg.alias1)  + "\n");
 	cursor.setCharFormat(cfmt_norm);
 	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 	bfmt_cntr.setBackground(QColor("transparent"));
@@ -464,7 +473,7 @@ void MainWindow::createDoc(QPrinter *printer)
 
 void MainWindow::importDataFromUSB(bool append)
 {
-	QString msg(tr("Successfully imported %1 records from USB:\n\n     User 1 = %2\n     User 2 = %3"));
+	QString msg(tr("Successfully imported %1 records from USB:\n\n     %2 = %3\n     %4 = %5"));
 	usbDialog *dlg = new usbDialog(this, cfg.m500it);
 	QAction *active = NULL;
 	int duplicate = 0;
@@ -541,7 +550,7 @@ void MainWindow::importDataFromUSB(bool append)
 				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
 			}
 
-			QMessageBox::information(this, APPNAME, msg.arg(dlg->user1 + dlg->user2).arg(dlg->user1).arg(dlg->user2));
+			QMessageBox::information(this, APPNAME, msg.arg(dlg->user1 + dlg->user2).arg(cfg.alias1).arg(dlg->user1).arg(cfg.alias2).arg(dlg->user2));
 		}
 		else
 		{
@@ -556,7 +565,7 @@ void MainWindow::importDataFromUSB(bool append)
 
 void MainWindow::importDataFromCSV(QString filename, bool append)
 {
-	QString msg(tr("Successfully imported %1 records from CSV:\n\n     User 1 = %2\n     User 2 = %3"));
+	QString msg(tr("Successfully imported %1 records from CSV:\n\n     %2 = %3\n     %4 = %5"));
 	QFile file(filename);
 	QTextStream in(&file);
 	HEALTHDATA set;
@@ -686,7 +695,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
 			}
 
-			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()));
+			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()));
 		}
 	}
 	else
@@ -697,7 +706,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 
 void MainWindow::importDataFromSQL(QString filename, bool append)
 {
-	QString msg(tr("Successfully imported %1 records from SQL:\n\n     User 1 = %2\n     User 2 = %3"));
+	QString msg(tr("Successfully imported %1 records from SQL:\n\n     %2 = %3\n     %4 = %5"));
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
 	HEALTHDATA set;
 	int duplicate = 0;
@@ -813,7 +822,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append)
 				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
 			}
 
-			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()));
+			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()));
 		}
 	}
 	else
@@ -843,7 +852,7 @@ void MainWindow::exportDataToCSV(QString filename)
 
 		file.close();
 
-		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to CSV:\n\n     User 1 = %2\n     User 2 = %3\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to CSV:\n\n     %2 = %3\n     %4 = %5\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 		{
 			QDesktopServices::openUrl(QUrl("file:///" + filename));
 		}
@@ -864,6 +873,8 @@ void MainWindow::exportDataToSQL(QString filename)
 	{
 		QSqlQuery query(db);
 
+		db.transaction();
+
 		if(db.tables().count())
 		{
 			query.exec("DROP TABLE 'U1'");
@@ -875,17 +886,19 @@ void MainWindow::exportDataToSQL(QString filename)
 
 		for(int i = 0; i < healthdata[0].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U1' VALUES (%1,%2,%3,%4)").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4)").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm));
 		}
 
 		for(int i = 0; i < healthdata[1].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U2' VALUES (%1,%2,%3,%4)").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4)").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm));
 		}
+
+		db.commit();
 
 		db.close();
 
-		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to SQL:\n\n     User 1 = %2\n     User 2 = %3\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(healthdata[0].count()).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to SQL:\n\n     %2 = %3\n     %4 = %5\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 		{
 			QDesktopServices::openUrl(QUrl("file:///" + filename));
 		}
@@ -937,6 +950,11 @@ void MainWindow::on_action_Setup_triggered()
 
 		widget_bp->replot();
 		widget_hr->replot();
+
+		action_User1->setToolTip(tr("show %1").arg(cfg.alias1));
+		action_User2->setToolTip(tr("show %1").arg(cfg.alias2));
+		action_User1->setStatusTip(tr("show %1").arg(cfg.alias1));
+		action_User2->setStatusTip(tr("show %1").arg(cfg.alias2));
 	}
 }
 

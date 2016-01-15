@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>362</width>
-    <height>284</height>
+    <height>340</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -71,6 +71,24 @@
            <property name="icon">
             <iconset resource="../obpm.qrc">
              <normaloff>:/png/png/bitcoin.png</normaloff>:/png/png/bitcoin.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string notr="true">Amazon</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../obpm.qrc">
+             <normaloff>:/png/png/amazon.png</normaloff>:/png/png/amazon.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bank Transfer</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../obpm.qrc">
+             <normaloff>:/png/png/bank.png</normaloff>:/png/png/bank.png</iconset>
            </property>
           </item>
          </widget>
@@ -218,7 +236,39 @@
          <string>transaction website</string>
         </property>
         <property name="text">
-         <string notr="true">https://www.paypal.com</string>
+         <string notr="true">https://goo.gl/g1PdN6</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_payment3">
+        <property name="toolTip">
+         <string notr="true">BIC</string>
+        </property>
+        <property name="text">
+         <string notr="true">WIREDEMMXXX</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_payment4">
+        <property name="toolTip">
+         <string>Bank</string>
+        </property>
+        <property name="text">
+         <string notr="true">Wirecard Bank AG</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

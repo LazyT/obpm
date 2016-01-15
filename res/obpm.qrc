@@ -43,8 +43,12 @@
         <file>png/donation.png</file>
         <file>png/bitcoin.png</file>
         <file>png/paypal.png</file>
+        <file>png/amazon.png</file>
+        <file>png/bank.png</file>
         <file>png/qr_pp.png</file>
         <file>png/qr_bc.png</file>
+        <file>png/qr_az.png</file>
+        <file>png/qr_bt.png</file>
         <file>png/smiley-lo.png</file>
         <file>png/smiley-hi.png</file>
         <file>png/work.png</file>

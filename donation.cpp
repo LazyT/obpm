@@ -7,6 +7,9 @@ donationDialog::donationDialog(QWidget *parent) : QDialog(parent)
 	setWindowFlags(Qt::Tool);
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
 
+	lineEdit_payment3->hide();
+	lineEdit_payment4->hide();
+
 	BTCexchangeRate = -1;
 
 	show();
@@ -28,16 +31,19 @@ void donationDialog::on_comboBox_activated(const QString &text)
 {
 	pushButton->setText(QString(tr("donate %1€ via %2")).arg(horizontalSlider->value()).arg(text));
 
-	if(comboBox->currentIndex() == 0)
+	lineEdit_payment3->hide();
+	lineEdit_payment4->hide();
+
+	if(comboBox->currentText() == "PayPal")
 	{
 		lineEdit_payment1->setText(QByteArray::fromBase64("TGF6eVRAbWFpbGJveC5vcmc="));
 		lineEdit_payment1->setToolTip(tr("beneficiary email address"));
-		lineEdit_payment2->setText("https://www.paypal.com");
+		lineEdit_payment2->setText("https://goo.gl/g1PdN6");
 		lineEdit_payment2->setToolTip(tr("transaction website"));
 
 		label_qrcode->setPixmap(QPixmap(":/png/png/qr_pp.png"));
 	}
-	else
+	else if(comboBox->currentText() == "BitCoin")
 	{
 		if(BTCexchangeRate == -1)
 		{
@@ -50,23 +56,55 @@ void donationDialog::on_comboBox_activated(const QString &text)
 		lineEdit_payment2->setToolTip(tr("current exchange rate"));
 
 		label_qrcode->setPixmap(QPixmap(":/png/png/qr_bc.png"));
+	}
+	else if(comboBox->currentText() == "Amazon")
+	{
+		lineEdit_payment1->setText(QByteArray::fromBase64("TGF6eVRAbWFpbGJveC5vcmc="));
+		lineEdit_payment1->setToolTip(tr("beneficiary email address"));
+		lineEdit_payment2->setText("https://goo.gl/75Tlac");
+		lineEdit_payment2->setToolTip(tr("transaction website"));
 
+		label_qrcode->setPixmap(QPixmap(":/png/png/qr_az.png"));
+	}
+	else if(comboBox->currentText() == tr("Bank Transfer"))
+	{
+		lineEdit_payment1->setText(QByteArray::fromBase64("VGhvbWFzIEzDtndl"));
+		lineEdit_payment1->setToolTip(tr("beneficiary name"));
+		lineEdit_payment2->setText(QByteArray::fromBase64("REUxMDUxMjMwODAwNDYxMDYzNjc0MQ=="));
+		lineEdit_payment2->setToolTip("IBAN");
+
+		label_qrcode->setPixmap(QPixmap(":/png/png/qr_bt.png"));
+
+		lineEdit_payment3->show();
+		lineEdit_payment4->show();
 	}
 }
 
 void donationDialog::on_pushButton_clicked()
 {
-	if(comboBox->currentIndex() == 0)
+	if(comboBox->currentText() == "PayPal")
 	{
 		QDesktopServices::openUrl(QString(QByteArray::fromBase64("aHR0cHM6Ly93d3cucGF5cGFsLmNvbS9jZ2ktYmluL3dlYnNjcj9jbWQ9X3hjbGljayZidXNpbmVzcz1MYXp5VEBtYWlsYm94Lm9yZyZpdGVtX25hbWU9JTEmYW1vdW50PSUyJmN1cnJlbmN5X2NvZGU9RVVS")).arg("OBPM").arg(horizontalSlider->value()));
 
 		QMessageBox::information(this, APPNAME, tr("The default web browser will be started now with the donation website.\n\nIf this fails please donate manually with the shown information."));
 	}
-	else if(comboBox->currentIndex() == 1)
+	else if(comboBox->currentText() == "BitCoin")
 	{
 		QDesktopServices::openUrl(QString(QByteArray::fromBase64("Yml0Y29pbjolMT9hbW91bnQ9JTImbGFiZWw9TGF6eVQmbWVzc2FnZT0lMw==")).arg(lineEdit_payment1->text()).arg(horizontalSlider->value() * BTCexchangeRate).arg(APPNAME));
 
 		QMessageBox::information(this, APPNAME, tr("The default Bitcoin client will be started now with the payment information.\n\nIf this fails please donate manually with the shown information."));
+	}
+	else if(comboBox->currentText() == "Amazon")
+	{
+		QDesktopServices::openUrl(QString(QByteArray::fromBase64("aHR0cHM6Ly93d3cuYW1hem9uLmRlL2dwL3Byb2R1Y3QvQlQwMERISTdXWQ==")));
+
+		QMessageBox::information(this, APPNAME, tr("The default web browser will be started now with the donation website.\n\nIf this fails please donate manually with the shown information."));
+	}
+	else if(comboBox->currentText() == tr("Bank Transfer"))
+	{
+		QApplication::clipboard()->setText(tr("Beneficiary\t: %1\nIBAN\t\t: %2\nBIC\t\t: %3\nBank\t\t: %4").arg(lineEdit_payment1->text()).arg(lineEdit_payment2->text()).arg(lineEdit_payment3->text()).arg(lineEdit_payment4->text()));
+
+		QMessageBox::information(this, APPNAME, tr("The payment information will be copied to the clipboard.\n\nPlease perform the transfer using this data."));
 	}
 
 	close();

@@ -62,37 +62,47 @@
         <translation>bevorzugte Zahlungsmethode</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="102"/>
+        <location filename="../res/ui/donation.ui" line="87"/>
+        <source>Bank Transfer</source>
+        <translation>Banküberweisung</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/donation.ui" line="120"/>
         <source>desired amount</source>
         <translation>gewünschte Summe</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="196"/>
+        <location filename="../res/ui/donation.ui" line="214"/>
         <source>beneficiary email address</source>
         <translation>Empfänger E-Mail Adresse</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="218"/>
+        <location filename="../res/ui/donation.ui" line="236"/>
         <source>transaction website</source>
         <translation>Transaktions-Webseite</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="240"/>
+        <location filename="../res/ui/donation.ui" line="268"/>
+        <source>Bank</source>
+        <translation>Bank</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/donation.ui" line="290"/>
         <source>Donate 5€ via PayPal</source>
         <translation>5€ per PayPal spenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="237"/>
+        <location filename="../res/ui/donation.ui" line="287"/>
         <source>make donation</source>
         <translation>Spende ausführen</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="162"/>
+        <location filename="../res/ui/donation.ui" line="180"/>
         <source>mobile payment</source>
         <translation>mobile Bezahlung</translation>
     </message>
     <message>
-        <location filename="../res/ui/donation.ui" line="184"/>
+        <location filename="../res/ui/donation.ui" line="202"/>
         <source>Payment Details</source>
         <translation>Zahlungsdetails</translation>
     </message>
@@ -838,33 +848,47 @@ Möchten Sie trotzdem die weitere Entwicklung des Projektes unterstützen?</tran
 <context>
     <name>donationDialog</name>
     <message>
-        <location filename="../donation.cpp" line="19"/>
-        <location filename="../donation.cpp" line="29"/>
+        <location filename="../donation.cpp" line="22"/>
+        <location filename="../donation.cpp" line="32"/>
         <source>donate %1€ via %2</source>
         <translation>%1€ per %2 spenden</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="34"/>
+        <location filename="../donation.cpp" line="40"/>
+        <location filename="../donation.cpp" line="63"/>
         <source>beneficiary email address</source>
         <translation>Empfänger E-Mail Adresse</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="36"/>
+        <location filename="../donation.cpp" line="42"/>
+        <location filename="../donation.cpp" line="65"/>
         <source>transaction website</source>
         <translation>Transaktions-Webseite</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="48"/>
+        <location filename="../donation.cpp" line="54"/>
         <source>beneficiary BitCoin address</source>
         <translation>Empfänger BitCoin-Adresse</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="50"/>
+        <location filename="../donation.cpp" line="56"/>
         <source>current exchange rate</source>
         <translation>aktueller Wechselkurs</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="63"/>
+        <location filename="../donation.cpp" line="69"/>
+        <location filename="../donation.cpp" line="103"/>
+        <source>Bank Transfer</source>
+        <translation>Banküberweisung</translation>
+    </message>
+    <message>
+        <location filename="../donation.cpp" line="72"/>
+        <source>beneficiary name</source>
+        <translation>Empfänger Name</translation>
+    </message>
+    <message>
+        <location filename="../donation.cpp" line="89"/>
+        <location filename="../donation.cpp" line="101"/>
         <source>The default web browser will be started now with the donation website.
 
 If this fails please donate manually with the shown information.</source>
@@ -873,7 +897,7 @@ If this fails please donate manually with the shown information.</source>
 Falls dies fehlschlägt bitte die Spende manuell mit den angezeigten Informationen durchführen.</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="69"/>
+        <location filename="../donation.cpp" line="95"/>
         <source>The default Bitcoin client will be started now with the payment information.
 
 If this fails please donate manually with the shown information.</source>
@@ -882,12 +906,32 @@ If this fails please donate manually with the shown information.</source>
 Falls dies fehlschlägt bitte die Spende manuell mit den angezeigten Informationen durchführen.</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="84"/>
+        <location filename="../donation.cpp" line="105"/>
+        <source>Beneficiary	: %1
+IBAN		: %2
+BIC		: %3
+Bank		: %4</source>
+        <translation>Empfänger	: %1
+IBAN		: %2
+BIC		: %3
+Kreditinstitut	: %4</translation>
+    </message>
+    <message>
+        <location filename="../donation.cpp" line="107"/>
+        <source>The payment information will be copied to the clipboard.
+
+Please perform the transfer using this data.</source>
+        <translation>Die Zahlungsinformationen werden nun in die Zwischenablage kopiert.
+
+Bitte die Überweisung mit diesen Daten durchführen.</translation>
+    </message>
+    <message>
+        <location filename="../donation.cpp" line="122"/>
         <source>getting current exchange rate...</source>
         <translation>ermittele aktuellen Wechselkurs...</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="107"/>
+        <location filename="../donation.cpp" line="145"/>
         <source>Current exchange rate could not be determined!
 
 Please specify the desired amount manually...</source>
@@ -896,7 +940,7 @@ Please specify the desired amount manually...</source>
 Bitte den gewünschten Betrag manuell angeben...</translation>
     </message>
     <message>
-        <location filename="../donation.cpp" line="123"/>
+        <location filename="../donation.cpp" line="161"/>
         <source>Help is not yet implemented...</source>
         <translation>Die Hilfe ist noch nicht implementiert...</translation>
     </message>

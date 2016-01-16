@@ -142,6 +142,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	dateChanged();
 
+	if(QFile::exists(BAK))
+	{
+		importDataFromSQL(BAK, false, false);
+	}
+
 	if(cfg.update)
 	{
 		QTimer::singleShot(250, this, SLOT(checkUpdate()));
@@ -704,10 +709,9 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 	}
 }
 
-void MainWindow::importDataFromSQL(QString filename, bool append)
+void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 {
 	QString msg(tr("Successfully imported %1 records from SQL:\n\n     %2 = %3\n     %4 = %5"));
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
 	HEALTHDATA set;
 	int duplicate = 0;
 	QAction *active = NULL;
@@ -726,6 +730,11 @@ void MainWindow::importDataFromSQL(QString filename, bool append)
 
 	action_User1->setChecked(false);
 	action_User2->setChecked(false);
+
+	if(!db.isValid())
+	{
+		db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
+	}
 
 	db.setDatabaseName(filename);
 
@@ -811,7 +820,10 @@ void MainWindow::importDataFromSQL(QString filename, bool append)
 
 		if(!healthdata[0].count() && !healthdata[1].count())
 		{
-			QMessageBox::warning(this, APPNAME, tr("No valid records in imported SQL found!\n\nPlease check table format of file: %1").arg("\n\n'U1'|'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)"));
+			if(showmsg)
+			{
+				QMessageBox::warning(this, APPNAME, tr("No valid records in imported SQL found!\n\nPlease check table format of file: %1").arg("\n\n'U1'|'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)"));
+			}
 
 			return;
 		}
@@ -822,12 +834,18 @@ void MainWindow::importDataFromSQL(QString filename, bool append)
 				msg.append("\n\n" + tr("Skipped %1 duplicate entries!").arg(duplicate));
 			}
 
-			QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()));
+			if(showmsg)
+			{
+				QMessageBox::information(this, APPNAME, msg.arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()));
+			}
 		}
 	}
 	else
 	{
-		QMessageBox::critical(this, APPNAME, tr("Could not open \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
+		if(showmsg)
+		{
+			QMessageBox::critical(this, APPNAME, tr("Could not open \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
+		}
 	}
 }
 
@@ -863,9 +881,12 @@ void MainWindow::exportDataToCSV(QString filename)
 	}
 }
 
-void MainWindow::exportDataToSQL(QString filename)
+void MainWindow::exportDataToSQL(QString filename, bool showmsg)
 {
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
+	if(!db.isValid())
+	{
+		db = QSqlDatabase::addDatabase("QSQLITE", "OBPM");
+	}
 
 	db.setDatabaseName(filename);
 
@@ -898,14 +919,20 @@ void MainWindow::exportDataToSQL(QString filename)
 
 		db.close();
 
-		if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to SQL:\n\n     %2 = %3\n     %4 = %5\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+		if(showmsg)
 		{
-			QDesktopServices::openUrl(QUrl("file:///" + filename));
+			if(QMessageBox::question(this, APPNAME, tr("Successfully exported %1 records to SQL:\n\n     %2 = %3\n     %4 = %5\n\nOpen now with default app?").arg(healthdata[0].count() + healthdata[1].count()).arg(cfg.alias1).arg(healthdata[0].count()).arg(cfg.alias2).arg(healthdata[1].count()), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+			{
+				QDesktopServices::openUrl(QUrl("file:///" + filename));
+			}
 		}
 	}
 	else
 	{
-		QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
+		if(showmsg)
+		{
+			QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
+		}
 	}
 }
 
@@ -983,11 +1010,11 @@ void MainWindow::on_action_importFromFile_triggered()
 	{
 		if((healthdata[0].count() || healthdata[1].count()) && QMessageBox::question(this, APPNAME, tr("Append new data to existing records?")) == QMessageBox::Yes)
 		{
-			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, true) : importDataFromSQL(filename, true);
+			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, true) : importDataFromSQL(filename, true, true);
 		}
 		else
 		{
-			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, false) : importDataFromSQL(filename, false);
+			filename.endsWith(".csv", Qt::CaseInsensitive) ? importDataFromCSV(filename, false) : importDataFromSQL(filename, false, true);
 		}
 	}
 }
@@ -1017,7 +1044,7 @@ void MainWindow::on_action_exportToSQL_triggered()
 
 		if(!filename.isEmpty())
 		{
-			exportDataToSQL(filename);
+			exportDataToSQL(filename, true);
 		}
 	}
 	else
@@ -1310,6 +1337,11 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 	if(QMessageBox::question(this, APPNAME, tr("Really exit program?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 	{
 		setConfig();
+
+		if(healthdata[0].count() || healthdata[1].count())
+		{
+			exportDataToSQL(BAK, false);
+		}
 
 		ce->accept();
 	}

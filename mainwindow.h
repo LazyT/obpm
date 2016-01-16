@@ -40,6 +40,7 @@
 #define tdiff 3600
 
 #define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
+#define BAK QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm-db.sql"
 
 struct CONFIG
 {
@@ -94,6 +95,7 @@ private:
 	HEALTHSTAT healthstat[2];
 	QTextDocument *doc;
 	QProgressDialog *pdlg;
+	QSqlDatabase db;
 	uint user;
 
 private slots:
@@ -108,9 +110,9 @@ private slots:
 
 	void importDataFromUSB(bool);
 	void importDataFromCSV(QString, bool);
-	void importDataFromSQL(QString, bool);
+	void importDataFromSQL(QString, bool, bool);
 	void exportDataToCSV(QString);
-	void exportDataToSQL(QString);
+	void exportDataToSQL(QString, bool);
 	void exportDataToPDF(QString);
 
 	void buildGraph(bool user);

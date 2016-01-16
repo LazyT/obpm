@@ -96,6 +96,9 @@
         </item>
         <item row="0" column="2">
          <widget class="QSlider" name="horizontalSlider_sys">
+          <property name="toolTip">
+           <string>modify medical specifications</string>
+          </property>
           <property name="minimum">
            <number>115</number>
           </property>
@@ -115,6 +118,9 @@
         </item>
         <item row="2" column="2">
          <widget class="QSlider" name="horizontalSlider_bpm">
+          <property name="toolTip">
+           <string>modify medical specifications</string>
+          </property>
           <property name="minimum">
            <number>60</number>
           </property>
@@ -144,6 +150,9 @@
         </item>
         <item row="1" column="2">
          <widget class="QSlider" name="horizontalSlider_dia">
+          <property name="toolTip">
+           <string>modify medical specifications</string>
+          </property>
           <property name="minimum">
            <number>65</number>
           </property>
@@ -224,6 +233,9 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QCheckBox" name="checkBox_legend">
+        <property name="toolTip">
+         <string>diagram legend on/off</string>
+        </property>
         <property name="text">
          <string>show Legend with min/Ø/max Values</string>
         </property>
@@ -250,6 +262,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QRadioButton" name="radioButton_point">
+          <property name="toolTip">
+           <string>choose diagram style</string>
+          </property>
           <property name="text">
            <string>Point</string>
           </property>
@@ -261,6 +276,9 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton_line">
+          <property name="toolTip">
+           <string>choose diagram style</string>
+          </property>
           <property name="text">
            <string>Line</string>
           </property>
@@ -275,6 +293,9 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton_step">
+          <property name="toolTip">
+           <string>choose diagram style</string>
+          </property>
           <property name="text">
            <string>Step</string>
           </property>
@@ -286,6 +307,9 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton_impulse">
+          <property name="toolTip">
+           <string>choose diagram style</string>
+          </property>
           <property name="text">
            <string>Impulse</string>
           </property>
@@ -308,6 +332,9 @@
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QCheckBox" name="checkBox_update">
+        <property name="toolTip">
+         <string>online update on/off</string>
+        </property>
         <property name="text">
          <string>check for Online Updates when Program starts</string>
         </property>
@@ -330,6 +357,9 @@
      </property>
      <item>
       <widget class="QPushButton" name="pushButton_reset">
+       <property name="toolTip">
+        <string>reset settings to defaults</string>
+       </property>
        <property name="text">
         <string>Reset</string>
        </property>
@@ -341,6 +371,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_save">
+       <property name="toolTip">
+        <string>save settings</string>
+       </property>
        <property name="text">
         <string>Save</string>
        </property>

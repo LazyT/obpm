@@ -22,6 +22,7 @@ private slots:
 	void on_horizontalSlider_dia_valueChanged(int);
 	void on_horizontalSlider_bpm_valueChanged(int);
 
+	void on_toolButton_db_clicked();
 	void on_pushButton_reset_clicked();
 	void on_pushButton_save_clicked();
 

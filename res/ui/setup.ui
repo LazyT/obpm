@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
-    <height>405</height>
+    <width>402</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,332 +22,390 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Alias</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLineEdit" name="lineEdit_user1">
-        <property name="toolTip">
-         <string>enter name for user 1</string>
-        </property>
-        <property name="text">
-         <string>User 1</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_user2">
-        <property name="toolTip">
-         <string>enter name for user 2</string>
-        </property>
-        <property name="text">
-         <string>User 2</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_1">
-     <property name="title">
-      <string>Defaults</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="3">
-         <widget class="QLabel" name="label_sys">
-          <property name="text">
-           <string notr="true">135</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLabel" name="label_bpm">
-          <property name="text">
-           <string notr="true">80</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../obpm.qrc">:/png/png/bpm.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QSlider" name="horizontalSlider_sys">
-          <property name="toolTip">
-           <string>modify medical specifications</string>
-          </property>
-          <property name="minimum">
-           <number>115</number>
-          </property>
-          <property name="maximum">
-           <number>155</number>
-          </property>
-          <property name="pageStep">
-           <number>5</number>
-          </property>
-          <property name="value">
-           <number>135</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QSlider" name="horizontalSlider_bpm">
-          <property name="toolTip">
-           <string>modify medical specifications</string>
-          </property>
-          <property name="minimum">
-           <number>60</number>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="pageStep">
-           <number>5</number>
-          </property>
-          <property name="value">
-           <number>80</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../obpm.qrc">:/png/png/dia.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QSlider" name="horizontalSlider_dia">
-          <property name="toolTip">
-           <string>modify medical specifications</string>
-          </property>
-          <property name="minimum">
-           <number>65</number>
-          </property>
-          <property name="maximum">
-           <number>105</number>
-          </property>
-          <property name="pageStep">
-           <number>5</number>
-          </property>
-          <property name="value">
-           <number>85</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLabel" name="label_dia">
-          <property name="text">
-           <string notr="true">85</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_1">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../obpm.qrc">:/png/png/sys.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string notr="true">SYS</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string notr="true">DIA</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string notr="true">BPM</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Diagram</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QCheckBox" name="checkBox_legend">
-        <property name="toolTip">
-         <string>diagram legend on/off</string>
-        </property>
-        <property name="text">
-         <string>show Legend with min/Ø/max Values</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../obpm.qrc">
-          <normaloff>:/png/png/legend.png</normaloff>:/png/png/legend.png</iconset>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QRadioButton" name="radioButton_point">
-          <property name="toolTip">
-           <string>choose diagram style</string>
-          </property>
-          <property name="text">
-           <string>Point</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../obpm.qrc">
-            <normaloff>:/png/png/chart-point.png</normaloff>:/png/png/chart-point.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_line">
-          <property name="toolTip">
-           <string>choose diagram style</string>
-          </property>
-          <property name="text">
-           <string>Line</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../obpm.qrc">
-            <normaloff>:/png/png/chart-line.png</normaloff>:/png/png/chart-line.png</iconset>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_step">
-          <property name="toolTip">
-           <string>choose diagram style</string>
-          </property>
-          <property name="text">
-           <string>Step</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../obpm.qrc">
-            <normaloff>:/png/png/chart-step.png</normaloff>:/png/png/chart-step.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_impulse">
-          <property name="toolTip">
-           <string>choose diagram style</string>
-          </property>
-          <property name="text">
-           <string>Impulse</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../obpm.qrc">
-            <normaloff>:/png/png/chart-impulse.png</normaloff>:/png/png/chart-impulse.png</iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Update</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QCheckBox" name="checkBox_update">
-        <property name="toolTip">
-         <string>online update on/off</string>
-        </property>
-        <property name="text">
-         <string>check for Online Updates when Program starts</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../obpm.qrc">
-          <normaloff>:/png/png/work.png</normaloff>:/png/png/work.png</iconset>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <widget class="QTabWidget" name="tabWidget">
+     <widget class="QWidget" name="tab_1">
+      <attribute name="icon">
+       <iconset resource="../obpm.qrc">
+        <normaloff>:/png/png/general.png</normaloff>:/png/png/general.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>General</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Alias</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_user1">
+            <property name="toolTip">
+             <string>enter name for user 1</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_user2">
+            <property name="toolTip">
+             <string>enter name for user 2</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Database</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_db">
+            <property name="toolTip">
+             <string>current database location</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_db">
+            <property name="toolTip">
+             <string>choose database location</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../obpm.qrc">
+              <normaloff>:/png/png/folder.png</normaloff>:/png/png/folder.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Update</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="checkBox_update">
+            <property name="toolTip">
+             <string>online update on/off</string>
+            </property>
+            <property name="text">
+             <string>check for Online Updates when Program starts</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../obpm.qrc">
+              <normaloff>:/png/png/work.png</normaloff>:/png/png/work.png</iconset>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="icon">
+       <iconset resource="../obpm.qrc">
+        <normaloff>:/png/png/appearance.png</normaloff>:/png/png/appearance.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Appearance</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="groupBox_1">
+         <property name="title">
+          <string>Defaults</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_sys">
+              <property name="text">
+               <string notr="true">135</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLabel" name="label_bpm">
+              <property name="text">
+               <string notr="true">80</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../obpm.qrc">:/png/png/bpm.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QSlider" name="horizontalSlider_sys">
+              <property name="toolTip">
+               <string>modify medical specifications</string>
+              </property>
+              <property name="minimum">
+               <number>115</number>
+              </property>
+              <property name="maximum">
+               <number>155</number>
+              </property>
+              <property name="pageStep">
+               <number>5</number>
+              </property>
+              <property name="value">
+               <number>135</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QSlider" name="horizontalSlider_bpm">
+              <property name="toolTip">
+               <string>modify medical specifications</string>
+              </property>
+              <property name="minimum">
+               <number>60</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="pageStep">
+               <number>5</number>
+              </property>
+              <property name="value">
+               <number>80</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../obpm.qrc">:/png/png/dia.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QSlider" name="horizontalSlider_dia">
+              <property name="toolTip">
+               <string>modify medical specifications</string>
+              </property>
+              <property name="minimum">
+               <number>65</number>
+              </property>
+              <property name="maximum">
+               <number>105</number>
+              </property>
+              <property name="pageStep">
+               <number>5</number>
+              </property>
+              <property name="value">
+               <number>85</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="label_dia">
+              <property name="text">
+               <string notr="true">85</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_1">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../obpm.qrc">:/png/png/sys.png</pixmap>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string notr="true">SYS</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string notr="true">DIA</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string notr="true">BPM</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Diagram</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="checkBox_legend">
+            <property name="toolTip">
+             <string>diagram legend on/off</string>
+            </property>
+            <property name="text">
+             <string>show Legend with min/Ø/max Values</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../obpm.qrc">
+              <normaloff>:/png/png/legend.png</normaloff>:/png/png/legend.png</iconset>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="topMargin">
+             <number>9</number>
+            </property>
+            <item>
+             <widget class="QRadioButton" name="radioButton_point">
+              <property name="toolTip">
+               <string>choose diagram style</string>
+              </property>
+              <property name="text">
+               <string>Point</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../obpm.qrc">
+                <normaloff>:/png/png/chart-point.png</normaloff>:/png/png/chart-point.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_line">
+              <property name="toolTip">
+               <string>choose diagram style</string>
+              </property>
+              <property name="text">
+               <string>Line</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../obpm.qrc">
+                <normaloff>:/png/png/chart-line.png</normaloff>:/png/png/chart-line.png</iconset>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_step">
+              <property name="toolTip">
+               <string>choose diagram style</string>
+              </property>
+              <property name="text">
+               <string>Step</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../obpm.qrc">
+                <normaloff>:/png/png/chart-step.png</normaloff>:/png/png/chart-step.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_impulse">
+              <property name="toolTip">
+               <string>choose diagram style</string>
+              </property>
+              <property name="text">
+               <string>Impulse</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../obpm.qrc">
+                <normaloff>:/png/png/chart-impulse.png</normaloff>:/png/png/chart-impulse.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>

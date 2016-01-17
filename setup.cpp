@@ -36,9 +36,22 @@ setupDialog::setupDialog(QWidget *parent, struct CONFIG *config) : QDialog(paren
 	lineEdit_user1->setText(cfg->alias1);
 	lineEdit_user2->setText(cfg->alias2);
 
+	lineEdit_db->setText(cfg->database);
+
 	show();
 	activateWindow();
 	move(parent->mapToGlobal(parent->rect().center()) - rect().center());
+}
+
+
+void setupDialog::on_toolButton_db_clicked()
+{
+	QString dirname = QFileDialog::getExistingDirectory(this, tr("Select Directory for Database"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+
+	if(!dirname.isEmpty())
+	{
+		lineEdit_db->setText(dirname + QDir::separator() + "obpm.sql");
+	}
 }
 
 void setupDialog::on_pushButton_reset_clicked()
@@ -54,6 +67,8 @@ void setupDialog::on_pushButton_reset_clicked()
 
 	lineEdit_user1->setText(tr("User 1"));
 	lineEdit_user2->setText(tr("User 2"));
+
+	lineEdit_db->setText(DB);
 }
 
 void setupDialog::on_pushButton_save_clicked()
@@ -82,8 +97,10 @@ void setupDialog::on_pushButton_save_clicked()
 
 	cfg->update = checkBox_update->isChecked();
 
-	cfg->alias1 = lineEdit_user1->text();
-	cfg->alias2 = lineEdit_user2->text();
+	cfg->alias1 = lineEdit_user1->text().isEmpty() ? tr("User 1") : lineEdit_user1->text();
+	cfg->alias2 = lineEdit_user2->text().isEmpty() ? tr("User 2") : lineEdit_user2->text();
+
+	cfg->database = lineEdit_db->text();
 
 	done(QDialog::Accepted);
 }

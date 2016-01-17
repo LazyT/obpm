@@ -40,7 +40,7 @@
 #define tdiff 3600
 
 #define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
-#define BAK QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm-db.sql"
+#define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm.sql"
 
 struct CONFIG
 {
@@ -52,6 +52,7 @@ struct CONFIG
 	uint dia;
 	uint bpm;
 	QString alias1, alias2;
+	QString database;
 };
 
 struct HEALTHDATA{

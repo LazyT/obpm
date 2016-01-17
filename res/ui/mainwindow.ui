@@ -433,6 +433,9 @@
    <property name="text">
     <string>Setup</string>
    </property>
+   <property name="toolTip">
+    <string>configure program</string>
+   </property>
    <property name="statusTip">
     <string>configure program</string>
    </property>

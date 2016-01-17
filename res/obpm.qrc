@@ -59,6 +59,9 @@
         <file>png/save.png</file>
         <file>png/setup.png</file>
         <file>png/flash.png</file>
+        <file>png/folder.png</file>
+        <file>png/general.png</file>
+        <file>png/appearance.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

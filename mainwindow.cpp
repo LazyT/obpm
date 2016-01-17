@@ -55,10 +55,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	rangeStart = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(0, 0, 0, 0)), this);
 	rangeStop = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(23, 59, 59, 999)), this);
-	rangeStart->setToolTip(tr("Start analysis"));
-	rangeStop->setToolTip(tr("Stop analysis"));
-	rangeStart->setStatusTip(tr("Start analysis"));
-	rangeStop->setStatusTip(tr("Stop analysis"));
+	rangeStart->setToolTip(tr("start analysis"));
+	rangeStop->setToolTip(tr("stop analysis"));
+	rangeStart->setStatusTip(tr("start analysis"));
+	rangeStop->setStatusTip(tr("stop analysis"));
 	rangeStart->setCalendarPopup(true);
 	rangeStop->setCalendarPopup(true);
 	rangeStart->setDisplayFormat("ddd dd.MM.yyyy hh:mm");
@@ -142,9 +142,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	dateChanged();
 
-	if(QFile::exists(BAK))
+	if(QFile::exists(cfg.database))
 	{
-		importDataFromSQL(BAK, false, false);
+		importDataFromSQL(cfg.database, false, false);
 	}
 
 	if(cfg.update)
@@ -166,6 +166,7 @@ void MainWindow::getConfig()
 	cfg.bpm = ini.value("BPM", BPM_NORM).toInt();
 	cfg.alias1 = ini.value("Alias1", tr("User 1")).toString();
 	cfg.alias2 = ini.value("Alias2", tr("User 2")).toString();
+	cfg.database = ini.value("Database", DB).toString();
 }
 
 void MainWindow::setConfig()
@@ -181,6 +182,7 @@ void MainWindow::setConfig()
 	ini.setValue("BPM", cfg.bpm);
 	ini.setValue("Alias1", cfg.alias1);
 	ini.setValue("Alias2", cfg.alias2);
+	ini.setValue("Database", cfg.database);
 
 	ini.sync();
 }
@@ -1023,7 +1025,7 @@ void MainWindow::on_action_exportToCSV_triggered()
 {
 	if(healthdata[0].count() || healthdata[1].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV File (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV File (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
@@ -1040,7 +1042,7 @@ void MainWindow::on_action_exportToSQL_triggered()
 {
 	if(healthdata[0].count() || healthdata[1].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to SQL"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1.sql").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to SQL"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1.sql").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
@@ -1057,7 +1059,7 @@ void MainWindow::on_action_exportToPDF_triggered()
 {
 	if(healthdata[user].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("export-%1-%2-%3.pdf").arg(1 + user).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF File (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1-%2-%3.pdf").arg(user ? cfg.alias2 : cfg.alias1).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF File (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
@@ -1340,7 +1342,7 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 
 		if(healthdata[0].count() || healthdata[1].count())
 		{
-			exportDataToSQL(BAK, false);
+			exportDataToSQL(cfg.database, false);
 		}
 
 		ce->accept();

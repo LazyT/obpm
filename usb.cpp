@@ -5,7 +5,7 @@ unsigned char cmd_data[] = { 0x02, 0x08, 0x01, 0x00, 0x02, 0xac, 0x28, 0x00, 0x8
 unsigned char cmd_done[] = { 0x02, 0x08, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07 };
 unsigned char cmd_fail[] = { 0x02, 0x08, 0x0f, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x08 };
 
-unsigned char rawdata[64];		// max bytes per usb transfer
+unsigned char rawdata[64];	// max bytes per usb transfer
 unsigned char payload[40*70];	// 40 bytes payload x 70 usb transfers (2 user x 14 bytes per record x 100 records)
 
 usbDialog::usbDialog(QWidget *parent, bool m500it) : QDialog(parent)
@@ -255,7 +255,7 @@ void usbDialog::keyPressEvent(QKeyEvent *ke)
 {
 	if(ke->key() == Qt::Key_F1)
 	{
-		QMessageBox::information(this, APPNAME, tr("Help is not yet implemented..."));
+		((MainWindow*)parent())->showHelp("01.03");
 	}
 
 	QDialog::keyPressEvent(ke);

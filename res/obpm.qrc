@@ -62,6 +62,9 @@
         <file>png/folder.png</file>
         <file>png/general.png</file>
         <file>png/appearance.png</file>
+        <file>png/help-content.png</file>
+        <file>png/help-index.png</file>
+        <file>png/help-search.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

@@ -22,13 +22,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 		{
 			QApplication::installTranslator(&appTranslator);
 
-			if(sysTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+			if(baseTranslator.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
 			{
-				QApplication::installTranslator(&sysTranslator);
+				QApplication::installTranslator(&baseTranslator);
 			}
-			else if(sysTranslator.load("qt_" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
+			else if(baseTranslator.load("qtbase_" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
 			{
-				QApplication::installTranslator(&sysTranslator);
+				QApplication::installTranslator(&baseTranslator);
+			}
+
+			if(helpTranslator.load("qt_help_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+			{
+				QApplication::installTranslator(&helpTranslator);
+			}
+			else if(helpTranslator.load("qt_help_" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
+			{
+				QApplication::installTranslator(&helpTranslator);
 			}
 		}
 	}
@@ -37,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	getConfig();
 
+	help = NULL;
 	user = 0;
 
 	QMenu *menu = new QMenu(this);
@@ -1113,7 +1123,7 @@ void MainWindow::on_action_Print_triggered()
 
 void MainWindow::on_action_Help_triggered()
 {
-	QMessageBox::information(this, APPNAME, tr("Help is not yet implemented..."));
+	showHelp("00");
 }
 
 void MainWindow::on_action_About_triggered()
@@ -1238,11 +1248,23 @@ void MainWindow::xAxisHRChanged(QCPRange range)
 	widget_bp->replot();
 }
 
+void MainWindow::showHelp(QString page)
+{
+	if(help)
+	{
+		((helpDialog*)help)->setSourceFromPage(page);
+	}
+	else
+	{
+		help = new helpDialog(this, page);
+	}
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *ke)
 {
 	if(ke->key() == Qt::Key_F1)
 	{
-			QMessageBox::information(this, APPNAME, tr("Help is not yet implemented..."));
+		showHelp("01.01");
 	}
 	else if(ke->key() == Qt::Key_Escape)
 	{

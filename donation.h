@@ -20,11 +20,11 @@ private slots:
 
 	double EUR2BTC();
 
-	void on_horizontalSlider_valueChanged(int value);
+	void on_horizontalSlider_valueChanged(int);
 	void on_comboBox_activated(const QString &);
 	void on_pushButton_clicked();
 
-	void keyPressEvent(QKeyEvent *);
+	void keyPressEvent(QKeyEvent*);
 };
 
 #endif

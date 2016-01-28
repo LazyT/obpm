@@ -58,7 +58,7 @@ void aboutDialog::keyPressEvent(QKeyEvent *ke)
 {
 	if(ke->key() == Qt::Key_F1)
 	{
-		QMessageBox::information(this, APPNAME, tr("Help is not yet implemented..."));
+		((MainWindow*)parent())->showHelp("01.04");
 	}
 
 	QDialog::keyPressEvent(ke);

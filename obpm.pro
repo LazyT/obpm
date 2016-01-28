@@ -1,14 +1,14 @@
 #QMAKE_CXX	= "ccache $$QMAKE_CXX"
 QMAKE_CXXFLAGS	+= -std=c++11
 
-QT		+= core gui widgets printsupport network sql
+QT		+= core gui widgets printsupport network sql help
 
 INCLUDEPATH     += ext/qcp ext/hid
 
-SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp setup.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
-HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
+SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp setup.cpp help.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
+HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   help.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
 
-FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui
+FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui res/ui/help.ui
 RESOURCES	+= res/obpm.qrc
 
 TRANSLATIONS	+= lng/obpm_de.ts

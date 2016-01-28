@@ -38,10 +38,10 @@ private:
 
 private slots:
 
-	int buildCRC(unsigned char* data);
+	int buildCRC(unsigned char*);
 	bool readRawData();
-	void dumpRawData(bool out, int bytes, unsigned char* data);
-	int sendCMD(unsigned char *cmd);
+	void dumpRawData(bool, int, unsigned char*);
+	int sendCMD(unsigned char*);
 	void scanHID();
 	void on_comboBox_currentIndexChanged(int);
 	void on_pushButton_import_clicked();

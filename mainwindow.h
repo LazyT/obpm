@@ -7,6 +7,12 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
+#include <QHelpEngine>
+#include <QHelpContentWidget>
+#include <QHelpIndexWidget>
+#include <QHelpSearchQuery>
+#include <QHelpSearchQueryWidget>
+#include <QHelpSearchResultWidget>
 
 #include "ui_mainwindow.h"
 
@@ -15,6 +21,7 @@
 #include "donation.h"
 #include "update.h"
 #include "setup.h"
+#include "help.h"
 
 #include "qcpdocumentobject.h"
 
@@ -32,9 +39,9 @@
 #define TABLE_ROWS 20
 #define TABLE_COLS 5
 #if defined Q_OS_OSX
-#define TABLE_CORR 2
+	#define TABLE_CORR 2
 #else
-#define TABLE_CORR 0
+	#define TABLE_CORR 0
 #endif
 
 #define tdiff 3600
@@ -81,14 +88,15 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 public:
 
 	explicit MainWindow(QWidget *parent = 0);
+	QDialog *help;
 	QVector <HEALTHDATA> healthdata[2];
 	void getHealthStats(bool);
-
+	void showHelp(QString);
 	CONFIG cfg;
 
 private:
 
-	QTranslator sysTranslator, appTranslator;
+	QTranslator baseTranslator, helpTranslator, appTranslator;
 	QActionGroup *groupUser;
 	QDateTimeEdit *rangeStart, *rangeStop;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
@@ -116,7 +124,7 @@ private slots:
 	void exportDataToSQL(QString, bool);
 	void exportDataToPDF(QString);
 
-	void buildGraph(bool user);
+	void buildGraph(bool);
 	void dateChanged();
 	void xAxisBPChanged(QCPRange);
 	void xAxisHRChanged(QCPRange);

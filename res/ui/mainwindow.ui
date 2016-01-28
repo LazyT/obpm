@@ -419,10 +419,10 @@
     <string>Print Preview</string>
    </property>
    <property name="toolTip">
-    <string>print preview</string>
+    <string>show print preview</string>
    </property>
    <property name="statusTip">
-    <string>print preview</string>
+    <string>show print preview</string>
    </property>
   </action>
   <action name="action_Setup">

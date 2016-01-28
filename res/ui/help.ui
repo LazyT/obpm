@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_Help</class>
+ <widget class="QDialog" name="Dialog_Help">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Help</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../obpm.qrc">
+    <normaloff>:/png/png/help.png</normaloff>:/png/png/help.png</iconset>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_content">
+       <attribute name="icon">
+        <iconset resource="../obpm.qrc">
+         <normaloff>:/png/png/help-content.png</normaloff>:/png/png/help-content.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Content</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_content"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_index">
+       <attribute name="icon">
+        <iconset resource="../obpm.qrc">
+         <normaloff>:/png/png/help-index.png</normaloff>:/png/png/help-index.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Index</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_index"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_search">
+       <attribute name="icon">
+        <iconset resource="../obpm.qrc">
+         <normaloff>:/png/png/help-search.png</normaloff>:/png/png/help-search.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Search</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_search"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../obpm.qrc"/>
+ </resources>
+ <connections/>
+</ui>

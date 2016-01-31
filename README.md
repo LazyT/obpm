@@ -6,10 +6,13 @@ Tired of Omrons original software because it's only available for Windows and re
 
 The current version supports the following features:
 
-* import blood pressure and heart rate via usb from device or csv/sql file and keep it private on your pc
+* import blood pressure and heart rate via usb from device or csv/sql files and keep it private on your pc
 * export to csv/sql/pdf documents or print it
 * analyse, zoom, set time range, change diagram type, see minimum/average/maximum values
+* context sensitive help via F1 key
+* online update notification
 * multi language (English and German at the moment, translators welcome)
+* cross platform (same look & feel on Windows, Linux, MacOS)
 
 ## Screenshots
 
@@ -45,7 +48,7 @@ The installer...
 
 ![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
 
-##### Hint for Linux users
+***Hint for Linux user:***
 
 If you get permission denied errors you should create a udev rule:
 
@@ -82,9 +85,10 @@ If the installer binaries doesn't work for you build it yourself:
 
 GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source), open the "obpm.pro" project file and click on the build button.
 
-**Hints:**
+***Hints for compiling:***
+
  - Qt5.4 or greater required
- - on Linux libudev-dev required
+ - libudev-dev on Linux required
 
 ## Credits
 

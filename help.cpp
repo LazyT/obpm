@@ -25,6 +25,7 @@ helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
 	verticalLayout_search->addWidget(resultWidget);
 
 	helpBrowser = new HelpBrowser(helpEngine);
+	helpBrowser->setContextMenuPolicy(Qt::NoContextMenu);
 
 	splitter->addWidget(helpBrowser);
 	splitter->setStretchFactor(0, 0);
@@ -48,7 +49,6 @@ helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
 	setSourceFromPage(page);
 
 	contentWidget->expandAll();
-//	contentWidget->setStyleSheet("QTreeView::item::!has-children { color: #505050 }");
 
 	QMessageBox::information(this, APPNAME, tr("Help is unfortunately still under construction..."));
 }
@@ -57,8 +57,8 @@ void helpDialog::setSource(QUrl url)
 {
 	helpBrowser->setSource(url);
 
-	contentWidget->expand(contentWidget->indexOf(helpBrowser->source()));
-	contentWidget->setCurrentIndex(contentWidget->indexOf(helpBrowser->source()));
+	contentWidget->expand(contentWidget->indexOf(url));
+	contentWidget->setCurrentIndex(contentWidget->indexOf(url));
 }
 
 void helpDialog::setSourceFromPage(QString page)

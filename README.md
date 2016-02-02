@@ -1,4 +1,4 @@
-# **Omron Blood Pressure Manager for M400/M500 IT**
+# **Omron Blood Pressure Manager for M400/M500/M3/M6 IT**
 
 ## Description
 
@@ -13,6 +13,7 @@ The current version supports the following features:
 * online update notification
 * multi language (English and German at the moment, translators welcome)
 * cross platform (same look & feel on Windows, Linux, MacOS)
+* devices: HEM-7322U (M500 IT, M6 Comfort IT), HEM-7131U (M400 IT, M3 IT)
 
 ## Screenshots
 

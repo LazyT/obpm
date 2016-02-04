@@ -8,14 +8,14 @@ unsigned char cmd_fail[] = { 0x02, 0x08, 0x0f, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x0
 unsigned char rawdata[64];	// max bytes per usb transfer
 unsigned char payload[40*70];	// 40 bytes payload x 70 usb transfers (2 user x 14 bytes per record x 100 records)
 
-usbDialog::usbDialog(QWidget *parent, bool m500it) : QDialog(parent)
+usbDialog::usbDialog(QWidget *parent, bool hem7322u) : QDialog(parent)
 {
 	setupUi(this);
 
 	setWindowFlags(Qt::Tool);
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
 
-	radioButton_m500->setChecked(m500it);
+	radioButton_hem7322u->setChecked(hem7322u);
 
 	connect(pushButton_cancel, SIGNAL(clicked()), this, SLOT(reject()));
 
@@ -178,7 +178,7 @@ void usbDialog::scanHID()
 
 			if(di.vid == VID && di.pid == PID)
 			{
-				comboBox->addItem(QIcon(":/png/png/usb.png"), QString("%1:%2 [ M400/M500 IT, %3 ]").arg(di.vid, 4, 16, QChar('0')).arg(di.pid, 4, 16, QChar('0')).arg(di.ser).toUpper(), data);
+				comboBox->addItem(QIcon(":/png/png/usb.png"), QString("%1:%2 [ 7131U/7322U, %3 ]").arg(di.vid, 4, 16, QChar('0')).arg(di.pid, 4, 16, QChar('0')).arg(di.ser).toUpper(), data);
 
 				hids_found++;
 			}
@@ -203,9 +203,9 @@ void usbDialog::on_pushButton_import_clicked()
 {
 	HEALTHDATA set;
 
-	((MainWindow*)parent())->cfg.m500it = radioButton_m500->isChecked();
+	((MainWindow*)parent())->cfg.hem7322u = radioButton_hem7322u->isChecked();
 
-	mem = radioButton_m500->isChecked() ? 100 : 60;
+	mem = radioButton_hem7322u->isChecked() ? 100 : 60;
 
 	if(!readRawData())
 	{

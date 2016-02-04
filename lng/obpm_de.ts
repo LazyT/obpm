@@ -302,47 +302,51 @@
     </message>
     <message>
         <location filename="../res/ui/usb.ui" line="110"/>
-        <location filename="../res/ui/usb.ui" line="139"/>
+        <location filename="../res/ui/usb.ui" line="140"/>
         <source>choose device model</source>
         <translation>Gerätemodell auswählen</translation>
     </message>
     <message>
         <location filename="../res/ui/usb.ui" line="116"/>
-        <source>Model M400 IT</source>
-        <translation>Modell M400 IT</translation>
+        <source>Model HEM-7131U
+(M3 / M400 IT)</source>
+        <translation>Modell HEM-7131U
+(M3 / M400 IT)</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="142"/>
-        <source>Model M500 IT</source>
-        <translation>Modell M500 IT</translation>
+        <location filename="../res/ui/usb.ui" line="143"/>
+        <source>Model HEM-7322U
+(M6 / M500 IT)</source>
+        <translation>Modell HEM-7322U
+(M6 / M500 IT)</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="154"/>
+        <location filename="../res/ui/usb.ui" line="156"/>
         <source>current progress</source>
         <translation>aktueller Fortschritt</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="172"/>
+        <location filename="../res/ui/usb.ui" line="174"/>
         <source>start import</source>
         <translation>Import starten</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="175"/>
+        <location filename="../res/ui/usb.ui" line="177"/>
         <source>Import</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="192"/>
+        <location filename="../res/ui/usb.ui" line="194"/>
         <source>log communication</source>
         <translation>Kommunikation loggen</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="215"/>
+        <location filename="../res/ui/usb.ui" line="217"/>
         <source>abort import</source>
         <translation>Import abbrechen</translation>
     </message>
     <message>
-        <location filename="../res/ui/usb.ui" line="218"/>
+        <location filename="../res/ui/usb.ui" line="220"/>
         <source>Cancel</source>
         <translation>Abbruch</translation>
     </message>
@@ -706,6 +710,15 @@ Jetzt mit der Standardanwendung öffnen?</translation>
         <translation>Import von USB-Gerät abgebrochen!</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="579"/>
+        <source>No supported device found!
+
+Check usb connection and try again...</source>
+        <translation>Kein unterstütztes Gerät gefunden!
+
+Die USB-Verbindung überprüfen und erneut probieren...</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="726"/>
         <source>Successfully imported %1 records from SQL:
 
@@ -818,15 +831,6 @@ Bitte Zeilenformat der Datei überprüfen: %1</translation>
         <location filename="../mainwindow.cpp" line="71"/>
         <source>stop analysis</source>
         <translation>Ende der Analyse</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="579"/>
-        <source>No supported device (M400/M500 IT) found!
-
-Check usb connection and try again...</source>
-        <translation>Kein unterstütztes Gerät (M400/M500 IT) gefunden!
-
-Die USB-Verbindung überprüfen und erneut probieren...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="585"/>

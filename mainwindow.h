@@ -51,7 +51,7 @@
 
 struct CONFIG
 {
-	bool m500it;
+	bool hem7322u;
 	bool update;
 	bool legend;
 	uint style;

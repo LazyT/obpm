@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>316</width>
-    <height>270</height>
+    <width>364</width>
+    <height>272</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -105,7 +105,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item alignment="Qt::AlignLeft">
-         <widget class="QRadioButton" name="radioButton_m400">
+         <widget class="QRadioButton" name="radioButton_hem7131u">
           <property name="toolTip">
            <string>choose device model</string>
           </property>
@@ -113,7 +113,8 @@
            <enum>Qt::RightToLeft</enum>
           </property>
           <property name="text">
-           <string>Model M400 IT</string>
+           <string>Model HEM-7131U
+(M3 / M400 IT)</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -134,12 +135,13 @@
          </widget>
         </item>
         <item alignment="Qt::AlignLeft">
-         <widget class="QRadioButton" name="radioButton_m500">
+         <widget class="QRadioButton" name="radioButton_hem7322u">
           <property name="toolTip">
            <string>choose device model</string>
           </property>
           <property name="text">
-           <string>Model M500 IT</string>
+           <string>Model HEM-7322U
+(M6 / M500 IT)</string>
           </property>
          </widget>
         </item>

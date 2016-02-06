@@ -98,6 +98,7 @@ private:
 
 	QTranslator baseTranslator, helpTranslator, appTranslator;
 	QActionGroup *groupUser;
+	QLCDNumber *lcd;
 	QDateTimeEdit *rangeStart, *rangeStop;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;

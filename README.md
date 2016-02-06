@@ -1,4 +1,4 @@
-# **Omron Blood Pressure Manager for M400/M500/M3/M6 IT**
+# **Omron Blood Pressure Manager**
 
 ## Description
 
@@ -6,6 +6,7 @@ Tired of Omrons original software because it's only available for Windows and re
 
 The current version supports the following features:
 
+* Omron HEM-7322U (M500 IT, M6 Comfort IT) and HEM-7131U (M400 IT, M3 IT)
 * import blood pressure and heart rate via usb from device or csv/sql files and keep it private on your pc
 * export to csv/sql/pdf documents or print it
 * analyse, zoom, set time range, change diagram type, see minimum/average/maximum values
@@ -13,7 +14,6 @@ The current version supports the following features:
 * online update notification
 * multi language (English and German at the moment, translators welcome)
 * cross platform (same look & feel on Windows, Linux, MacOS)
-* devices: HEM-7322U (M500 IT, M6 Comfort IT), HEM-7131U (M400 IT, M3 IT)
 
 ## Screenshots
 

@@ -63,6 +63,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	action_User1->setStatusTip(tr("show %1").arg(cfg.alias1));
 	action_User2->setStatusTip(tr("show %1").arg(cfg.alias2));
 
+	lcd = new QLCDNumber(1);
+	lcd->setSegmentStyle(QLCDNumber::Flat);
+
 	rangeStart = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(0, 0, 0, 0)), this);
 	rangeStop = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(23, 59, 59, 999)), this);
 	rangeStart->setToolTip(tr("start analysis"));
@@ -80,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	rangeStart->calendarWidget()->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
 	rangeStop->calendarWidget()->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
 
+	mainToolBar->insertWidget(action_User2, lcd);
 	mainToolBar->addWidget(rangeStart);
 	mainToolBar->addWidget(rangeStop);
 
@@ -1168,6 +1172,9 @@ void MainWindow::on_action_User1_toggled(bool enabled)
 		user = 0;
 
 		buildGraph(user);
+
+		lcd->setDigitCount(QString::number(healthdata[user].count()).length());
+		lcd->display(healthdata[user].count());
 	}
 }
 
@@ -1178,6 +1185,9 @@ void MainWindow::on_action_User2_toggled(bool enabled)
 		user = 1;
 
 		buildGraph(user);
+
+		lcd->setDigitCount(QString::number(healthdata[user].count()).length());
+		lcd->display(healthdata[user].count());
 	}
 }
 

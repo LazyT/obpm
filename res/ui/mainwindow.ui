@@ -257,7 +257,7 @@
      <normaloff>:/png/png/usb.png</normaloff>:/png/png/usb.png</iconset>
    </property>
    <property name="text">
-    <string>from Usb</string>
+    <string>from Device</string>
    </property>
    <property name="toolTip">
     <string>import data from usb device</string>
@@ -416,7 +416,7 @@
      <normaloff>:/png/png/printpreview.png</normaloff>:/png/png/printpreview.png</iconset>
    </property>
    <property name="text">
-    <string>Print Preview</string>
+    <string>Preview</string>
    </property>
    <property name="toolTip">
     <string>show print preview</string>

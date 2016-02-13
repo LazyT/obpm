@@ -65,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	lcd = new QLCDNumber(1);
 	lcd->setSegmentStyle(QLCDNumber::Flat);
+	lcd->setToolTip(tr("record count"));
+	lcd->setStatusTip(tr("record count"));
 
 	rangeStart = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(0, 0, 0, 0)), this);
 	rangeStop = new QDateTimeEdit(QDateTime(QDate::currentDate(), QTime(23, 59, 59, 999)), this);

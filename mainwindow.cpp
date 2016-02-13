@@ -947,10 +947,7 @@ void MainWindow::exportDataToSQL(QString filename, bool showmsg)
 	}
 	else
 	{
-		if(showmsg)
-		{
-			QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().text()));
-		}
+		QMessageBox::critical(this, APPNAME, tr("Could not create \"%1\"!\n\nReason: %2").arg(filename).arg(db.lastError().driverText()));
 	}
 }
 

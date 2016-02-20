@@ -23,11 +23,11 @@ The main window with some records...
 
 Print records for your archive or doctor...
 
-![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot5.png)
+![printouts](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot5.png)
 
 Configure your preferred settings...
 
-![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot8.png)
+![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot8.png)
 
 If you have more than 1 device connected select the right one based on the serial number and choose your model...
 
@@ -45,9 +45,13 @@ Keep informed about updates automatically at program start...
 
 ![update dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot7.png)
 
+Press F1 to get help for the current context...
+
+![help window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot9.png)
+
 The installer...
 
-![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
+![installer dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
 
 ***Hint for Linux user:***
 

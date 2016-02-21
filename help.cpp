@@ -30,7 +30,7 @@ helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
 	splitter->addWidget(helpBrowser);
 	splitter->setStretchFactor(0, 0);
 	splitter->setStretchFactor(1, 1);
-	splitter->widget(0)->setMinimumWidth(250);
+	splitter->widget(0)->setMinimumWidth(260);
 
 	connect(contentWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(setSourceFromContent(QModelIndex)));
 	connect(contentWidget, SIGNAL(activated(QModelIndex)), this, SLOT(setSourceFromContent(QModelIndex)));
@@ -49,8 +49,6 @@ helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
 	setSourceFromPage(page);
 
 	contentWidget->expandAll();
-
-	QMessageBox::information(this, APPNAME, tr("Help is unfortunately still under construction..."));
 }
 
 void helpDialog::setSource(QUrl url)

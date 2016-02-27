@@ -3,4 +3,8 @@
 	<release>6</release>
 	<version>1.0.5</version>
 	<date>21.02.2016</date>
+	<changes>
+		<en>1:sqlite import/export;1:user alias;1:auto backup/restore records;1:help system;1:show record count in toolbar</en>
+		<de>1:SQLite Import/Export;1:Nutzer Alias;1:Datensätze automatisch sichern/wiederherstellen;1:Hilfe-System;1:Anzeige Datensatzanzahl in Werkzeugleiste</de>
+	</changes>
 </online-updater>

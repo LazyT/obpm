@@ -22,7 +22,6 @@ updateDialog::updateDialog(QWidget *parent, QString version, QString date, QStri
 
 	listWidget_changelog->setMinimumHeight(3 * listWidget_changelog->visualItemRect(listWidget_changelog->item(0)).height() + 2);
 
-	show();
 	activateWindow();
 	move(parent->mapToGlobal(parent->rect().center()) - rect().center());
 }
@@ -39,8 +38,6 @@ void updateDialog::keyPressEvent(QKeyEvent *ke)
 
 void updateDialog::on_pushButton_Update_clicked()
 {
-	QDesktopServices::openUrl(QUrl("https://github.com/LazyT/obpm/releases/latest"));
-
 	done(Accepted);
 }
 

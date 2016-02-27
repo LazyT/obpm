@@ -38,7 +38,7 @@
 #define TABLE_HEAD 1
 #define TABLE_ROWS 20
 #define TABLE_COLS 5
-#if defined Q_OS_OSX
+#ifdef Q_OS_OSX
 	#define TABLE_CORR 2
 #else
 	#define TABLE_CORR 0
@@ -48,6 +48,14 @@
 
 #define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
 #define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm.sql"
+
+#ifdef Q_OS_LINUX
+	#define UPD '"' + QCoreApplication::applicationDirPath() + "/maintenancetool" + '"'
+#elif defined Q_OS_WIN
+	#define UPD '"' + QCoreApplication::applicationDirPath() + "/maintenancetool.exe" + '"'
+#elif defined Q_OS_OSX
+	#define UPD '"' + QCoreApplication::applicationDirPath() + "/../../../maintenancetool.app/Contents/MacOS/maintenancetool" + '"'
+#endif
 
 struct CONFIG
 {
@@ -107,6 +115,7 @@ private:
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	uint user;
+	bool update;
 
 private slots:
 

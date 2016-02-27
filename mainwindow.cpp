@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	help = NULL;
 	user = 0;
+	update = false;
 
 	QMenu *menu = new QMenu(this);
 	menu->addAction(action_PrintPreview);
@@ -286,7 +287,25 @@ void MainWindow::checkUpdate()
 
 	if(APPRELS < release)
 	{
-		new updateDialog(this, version, date, changelog);
+		updateDialog dlg(this, version, date, changelog);
+
+		dlg.exec();
+
+		if(dlg.result() == QDialog::Accepted)
+		{
+			qputenv("OBPM_INSTALLER_MODE", "SILENT");
+
+			if(!QProcess::startDetached(UPD + " --updater"))
+			{
+				QMessageBox::warning(this, APPNAME, tr("Failed to start the installer!\n\nPlease update manually."));
+			}
+			else
+			{
+				update = true;
+
+				close();
+			}
+		}
 	}
 }
 
@@ -1381,7 +1400,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 
 void MainWindow::closeEvent(QCloseEvent *ce)
 {
-	if(QMessageBox::question(this, APPNAME, tr("Really exit program?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+	if(update || QMessageBox::question(this, APPNAME, tr("Really exit program?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 	{
 		setConfig();
 

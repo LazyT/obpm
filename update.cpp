@@ -1,17 +1,26 @@
 #include "update.h"
 
-updateDialog::updateDialog(QWidget *parent, QString version, QString date) : QDialog(parent)
+updateDialog::updateDialog(QWidget *parent, QString version, QString date, QString changelog) : QDialog(parent)
 {
+	QIcon icons[3] = { QIcon(":/png/png/chg-new.png"), QIcon(":/png/png/chg-fix.png"), QIcon(":/png/png/chg-del.png") };
+	QStringList changes = changelog.split(";");
+
 	setupUi(this);
 
 	setWindowFlags(Qt::Tool);
-	layout()->setSizeConstraint(QLayout::SetFixedSize);
 
 	label_icon->setPixmap(QPixmap(ICO_UPDATE));
 	label_installedVersion->setText(APPVERS);
 	label_installedDate->setText(QString("[ %1 ]").arg(APPDATE));
 	label_availableVersion->setText(version);
 	label_availableDate->setText(QString("[ %1 ]").arg(date));
+
+	for(int i = 0; i < changes.size(); i++)
+	{
+		listWidget_changelog->addItem(new QListWidgetItem(icons[changes.at(i).at(0).digitValue() - 1], changes.at(i).mid(2), 0, changes.at(i).at(0).digitValue()));
+	}
+
+	listWidget_changelog->setMinimumHeight(3 * listWidget_changelog->visualItemRect(listWidget_changelog->item(0)).height() + 2);
 
 	show();
 	activateWindow();

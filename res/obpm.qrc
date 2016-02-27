@@ -65,6 +65,9 @@
         <file>png/help-content.png</file>
         <file>png/help-index.png</file>
         <file>png/help-search.png</file>
+        <file>png/chg-new.png</file>
+        <file>png/chg-fix.png</file>
+        <file>png/chg-del.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

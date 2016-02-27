@@ -210,7 +210,7 @@ void MainWindow::checkUpdate()
 	QElapsedTimer timeout;
 	QByteArray raw;
 	QXmlStreamReader xml;
-	QString release, version, date;
+	QString release, version, date, changelog;
 
 	rep->ignoreSslErrors();
 
@@ -259,6 +259,20 @@ void MainWindow::checkUpdate()
 				{
 					date = xml.readElementText();
 				}
+				else if(xml.isStartElement() && xml.name() == "changes")
+				{
+					while(xml.readNext() != QXmlStreamReader::Invalid && xml.name() != "changes")
+					{
+						if(xml.name() == "en")
+						{
+							changelog = xml.readElementText();
+						}
+						else if(xml.name() == QLocale::system().name().mid(0, 2))
+						{
+							changelog = xml.readElementText();
+						}
+					}
+				}
 			}
 		}
 	}
@@ -272,7 +286,7 @@ void MainWindow::checkUpdate()
 
 	if(APPRELS < release)
 	{
-		new updateDialog(this, version, date);
+		new updateDialog(this, version, date, changelog);
 	}
 }
 

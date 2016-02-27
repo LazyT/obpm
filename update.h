@@ -18,7 +18,7 @@ class updateDialog : public QDialog, private Ui::Dialog_Update
 
 public:
 
-	updateDialog(QWidget *parent, QString version, QString date);
+	updateDialog(QWidget *parent, QString version, QString date, QString changelog);
 
 private slots:
 

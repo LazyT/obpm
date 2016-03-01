@@ -84,8 +84,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	rangeStart->calendarWidget()->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
 	rangeStop->calendarWidget()->setVerticalHeaderFormat(QCalendarWidget::ISOWeekNumbers);
 
+	filter = new QPushButton(this);
+	filter->setToolTip(tr("filter analysis"));
+	filter->setStatusTip(tr("filter analysis"));
+	filter->setCheckable(true);
+	filter->setIcon(QIcon(":/png/png/filter.png"));
+
 	mainToolBar->insertWidget(action_User2, lcd);
 	mainToolBar->addWidget(rangeStart);
+	mainToolBar->addWidget(filter);
 	mainToolBar->addWidget(rangeStop);
 
 	widget_bp->yAxis->setLabel("mmHg");
@@ -150,6 +157,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	connect(rangeStart, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
 	connect(rangeStop, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
+	connect(filter, SIGNAL(clicked(bool)), this, SLOT(filterChanged(bool)));
 	connect(widget_bp, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_hr, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_bp->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisBPChanged(QCPRange)));
@@ -337,27 +345,27 @@ void MainWindow::checkUpdate()
 	}
 }
 
-void MainWindow::getHealthStats(bool user)
+void MainWindow::getHealthStats(QVector <HEALTHDATA> data, HEALTHSTAT *stat)
 {
-	QVector <HEALTHDATA> cpy(healthdata[user]);
+	QVector <HEALTHDATA> cpy(data);
 
 	qSort(cpy.begin(), cpy.end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.sys < b.sys; });
 
-	healthstat[user].sys_min = cpy.first().sys;
-	healthstat[user].sys_mid = cpy.at(cpy.count() / 2).sys;
-	healthstat[user].sys_max = cpy.last().sys;
+	stat->sys_min = cpy.first().sys;
+	stat->sys_mid = cpy.at(cpy.count() / 2).sys;
+	stat->sys_max = cpy.last().sys;
 
 	qSort(cpy.begin(), cpy.end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.dia < b.dia; });
 
-	healthstat[user].dia_min = cpy.first().dia;
-	healthstat[user].dia_mid = cpy.at(cpy.count() / 2).dia;
-	healthstat[user].dia_max = cpy.last().dia;
+	stat->dia_min = cpy.first().dia;
+	stat->dia_mid = cpy.at(cpy.count() / 2).dia;
+	stat->dia_max = cpy.last().dia;
 
 	qSort(cpy.begin(), cpy.end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.bpm < b.bpm; });
 
-	healthstat[user].bpm_min = cpy.first().bpm;
-	healthstat[user].bpm_mid = cpy.at(cpy.count() / 2).bpm;
-	healthstat[user].bpm_max = cpy.last().bpm;
+	stat->bpm_min = cpy.first().bpm;
+	stat->bpm_mid = cpy.at(cpy.count() / 2).bpm;
+	stat->bpm_max = cpy.last().bpm;
 }
 
 void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm)
@@ -573,7 +581,7 @@ void MainWindow::importDataFromUSB(bool append)
 			healthdata[0].clear();
 			healthdata[1].clear();
 
-			buildGraph(0);
+			buildGraph(healthdata[user], healthstat[user]);
 		}
 
 		action_User1->setChecked(false);
@@ -594,7 +602,7 @@ void MainWindow::importDataFromUSB(bool append)
 					}
 				}
 
-				getHealthStats(0);
+				getHealthStats(healthdata[0], &healthstat[0]);
 			}
 
 			if(healthdata[1].count())
@@ -610,7 +618,7 @@ void MainWindow::importDataFromUSB(bool append)
 					}
 				}
 
-				getHealthStats(1);
+				getHealthStats(healthdata[1], &healthstat[1]);
 			}
 
 			if(append)
@@ -665,7 +673,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 		healthdata[0].clear();
 		healthdata[1].clear();
 
-		buildGraph(0);
+		buildGraph(healthdata[user], healthstat[user]);
 	}
 
 	action_User1->setChecked(false);
@@ -725,7 +733,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 				}
 			}
 
-			getHealthStats(0);
+			getHealthStats(healthdata[0], &healthstat[0]);
 		}
 
 		if(healthdata[1].count())
@@ -741,7 +749,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 				}
 			}
 
-			getHealthStats(1);
+			getHealthStats(healthdata[1], &healthstat[1]);
 		}
 
 		if(append)
@@ -804,7 +812,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 		healthdata[0].clear();
 		healthdata[1].clear();
 
-		buildGraph(0);
+		buildGraph(healthdata[user], healthstat[user]);
 	}
 
 	action_User1->setChecked(false);
@@ -862,7 +870,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				}
 			}
 
-			getHealthStats(0);
+			getHealthStats(healthdata[0], &healthstat[0]);
 		}
 
 		if(healthdata[1].count())
@@ -878,7 +886,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				}
 			}
 
-			getHealthStats(1);
+			getHealthStats(healthdata[1], &healthstat[1]);
 		}
 
 		if(append)
@@ -1208,20 +1216,31 @@ void MainWindow::on_action_showHideLegend_toggled(bool state)
 
 void MainWindow::on_action_resetZoom_triggered()
 {
-	if(healthdata[user].count())
+	if(filter->isChecked())
 	{
-		rangeStart->setDate(QDateTime::fromTime_t(healthdata[user].first().time - tdiff).date());
-		rangeStop->setDate(QDateTime::fromTime_t(healthdata[user].last().time + tdiff).date());
+		rangeStart->setDate(QDateTime::fromTime_t(filterdata.first().time - tdiff).date());
+		rangeStop->setDate(QDateTime::fromTime_t(filterdata.last().time + tdiff).date());
 
-		widget_bp->xAxis->setRange(healthdata[user].first().time - tdiff, healthdata[user].last().time + tdiff);
+		widget_bp->xAxis->setRange(filterdata.first().time - tdiff, filterdata.last().time + tdiff);
 		widget_bp->replot();
 	}
 	else
 	{
-		rangeStart->setDate(QDateTime::currentDateTime().date());
-		rangeStop->setDate(QDateTime::currentDateTime().date());
+		if(healthdata[user].count())
+		{
+			rangeStart->setDate(QDateTime::fromTime_t(healthdata[user].first().time - tdiff).date());
+			rangeStop->setDate(QDateTime::fromTime_t(healthdata[user].last().time + tdiff).date());
 
-		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+			widget_bp->xAxis->setRange(healthdata[user].first().time - tdiff, healthdata[user].last().time + tdiff);
+			widget_bp->replot();
+		}
+		else
+		{
+			rangeStart->setDate(QDateTime::currentDateTime().date());
+			rangeStop->setDate(QDateTime::currentDateTime().date());
+
+			widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+		}
 	}
 }
 
@@ -1231,10 +1250,9 @@ void MainWindow::on_action_User1_toggled(bool enabled)
 	{
 		user = 0;
 
-		buildGraph(user);
+		filter->setChecked(false);
 
-		lcd->setDigitCount(QString::number(healthdata[user].count()).length());
-		lcd->display(healthdata[user].count());
+		buildGraph(healthdata[user], healthstat[user]);
 	}
 }
 
@@ -1244,40 +1262,39 @@ void MainWindow::on_action_User2_toggled(bool enabled)
 	{
 		user = 1;
 
-		buildGraph(user);
+		filter->setChecked(false);
 
-		lcd->setDigitCount(QString::number(healthdata[user].count()).length());
-		lcd->display(healthdata[user].count());
+		buildGraph(healthdata[user], healthstat[user]);
 	}
 }
 
-void MainWindow::buildGraph(bool user)
+void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 {
 	widget_bp->graph(0)->clearData();
 	widget_bp->graph(1)->clearData();
 	widget_hr->graph(0)->clearData();
 
-	if(healthdata[user].count())
+	if(data.count())
 	{
-		rangeStart->setDateTimeRange(QDateTime(QDateTime::fromTime_t(healthdata[user].first().time).date(), QTime(0, 0, 0, 0)), QDateTime(QDateTime::fromTime_t(healthdata[user].last().time).date(), QTime(23, 59, 59, 999)));
-		rangeStop->setDateTimeRange(QDateTime(QDateTime::fromTime_t(healthdata[user].first().time).date(), QTime(0, 0, 0, 0)), QDateTime(QDateTime::fromTime_t(healthdata[user].last().time).date(), QTime(23, 59, 59, 999)));
-		rangeStart->setDateTime(QDateTime(QDateTime::fromTime_t(healthdata[user].first().time).date(), QTime(0, 0, 0, 0)));
-		rangeStop->setDateTime(QDateTime(QDateTime::fromTime_t(healthdata[user].last().time).date(), QTime(23, 59, 59, 999)));
+		rangeStart->setDateTimeRange(QDateTime(QDateTime::fromTime_t(data.first().time).date(), QTime(0, 0, 0, 0)), QDateTime(QDateTime::fromTime_t(data.last().time).date(), QTime(23, 59, 59, 999)));
+		rangeStop->setDateTimeRange(QDateTime(QDateTime::fromTime_t(data.first().time).date(), QTime(0, 0, 0, 0)), QDateTime(QDateTime::fromTime_t(data.last().time).date(), QTime(23, 59, 59, 999)));
+		rangeStart->setDateTime(QDateTime(QDateTime::fromTime_t(data.first().time).date(), QTime(0, 0, 0, 0)));
+		rangeStop->setDateTime(QDateTime(QDateTime::fromTime_t(data.last().time).date(), QTime(23, 59, 59, 999)));
 
-		widget_bp->xAxis->setRange(healthdata[user].first().time - tdiff, healthdata[user].last().time + tdiff);
-		widget_bp->yAxis->setRange(healthstat[user].dia_min - 10, healthstat[user].sys_max + 10);
-		widget_hr->xAxis->setRange(healthdata[user].first().time - tdiff, healthdata[user].last().time + tdiff);
-		widget_hr->yAxis->setRange(healthstat[user].bpm_min - 5, healthstat[user].bpm_max + 5);
+		widget_bp->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
+		widget_bp->yAxis->setRange(stat.dia_min - 10, stat.sys_max + 10);
+		widget_hr->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
+		widget_hr->yAxis->setRange(stat.bpm_min - 5, stat.bpm_max + 5);
 
-		widget_bp->plottable(0)->setName(QString("SYS: %1 [%2] %3").arg(healthstat[user].sys_min).arg(healthstat[user].sys_mid).arg(healthstat[user].sys_max));
-		widget_bp->plottable(1)->setName(QString("DIA: %1 [%2] %3").arg(healthstat[user].dia_min).arg(healthstat[user].dia_mid).arg(healthstat[user].dia_max));
-		widget_hr->plottable(0)->setName(QString(tr("Pulse: %1 [%2] %3")).arg(healthstat[user].bpm_min).arg(healthstat[user].bpm_mid).arg(healthstat[user].bpm_max));
+		widget_bp->plottable(0)->setName(QString("SYS: %1 [%2] %3").arg(stat.sys_min).arg(stat.sys_mid).arg(stat.sys_max));
+		widget_bp->plottable(1)->setName(QString("DIA: %1 [%2] %3").arg(stat.dia_min).arg(stat.dia_mid).arg(stat.dia_max));
+		widget_hr->plottable(0)->setName(QString(tr("Pulse: %1 [%2] %3")).arg(stat.bpm_min).arg(stat.bpm_mid).arg(stat.bpm_max));
 
-		for(int i = 0; i < healthdata[user].count(); i++)
+		for(int i = 0; i < data.count(); i++)
 		{
-			widget_bp->graph(0)->addData(healthdata[user].at(i).time, healthdata[user].at(i).sys);
-			widget_bp->graph(1)->addData(healthdata[user].at(i).time, healthdata[user].at(i).dia);
-			widget_hr->graph(0)->addData(healthdata[user].at(i).time, healthdata[user].at(i).bpm);
+			widget_bp->graph(0)->addData(data.at(i).time, data.at(i).sys);
+			widget_bp->graph(1)->addData(data.at(i).time, data.at(i).dia);
+			widget_hr->graph(0)->addData(data.at(i).time, data.at(i).bpm);
 		}
 	}
 	else
@@ -1298,12 +1315,57 @@ void MainWindow::buildGraph(bool user)
 
 	widget_bp->replot();
 	widget_hr->replot();
+
+	lcd->setDigitCount(QString::number(data.count()).length());
+	lcd->display(data.count());
 }
 
 void MainWindow::dateChanged()
 {
-	widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
-	widget_bp->replot();
+	if(filter->isChecked())
+	{
+		filterChanged(true);
+	}
+	else
+	{
+		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+		widget_bp->replot();
+	}
+}
+
+void MainWindow::filterChanged(bool checked)
+{
+	if(checked)
+	{
+		filterdata.clear();
+
+		for(int i = 0; i < healthdata[user].count(); i++)
+		{
+			if(healthdata[user].at(i).time >= rangeStart->dateTime().toTime_t() && healthdata[user].at(i).time <= rangeStop->dateTime().toTime_t())
+			{
+				filterdata.append(healthdata[user].at(i));
+			}
+		}
+
+		if(filterdata.count())
+		{
+				getHealthStats(filterdata, &filterstat);
+
+				buildGraph(filterdata, filterstat);
+		}
+		else
+		{
+			filter->setChecked(false);
+
+			QMessageBox::warning(this, APPNAME, tr("No records found for selected period!"));
+		}
+	}
+	else
+	{
+		getHealthStats(healthdata[user], &healthstat[user]);
+
+		buildGraph(healthdata[user], healthstat[user]);
+	}
 }
 
 void MainWindow::xAxisBPChanged(QCPRange range)

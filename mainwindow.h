@@ -99,8 +99,8 @@ public:
 
 	explicit MainWindow(QWidget *parent = 0);
 	QDialog *help;
-	QVector <HEALTHDATA> healthdata[2];
-	void getHealthStats(bool);
+	QVector <HEALTHDATA> healthdata[2], filterdata;
+	void getHealthStats(QVector<HEALTHDATA>, HEALTHSTAT*);
 	void showHelp(QString);
 	CONFIG cfg;
 
@@ -110,9 +110,10 @@ private:
 	QActionGroup *groupUser;
 	QLCDNumber *lcd;
 	QDateTimeEdit *rangeStart, *rangeStop;
+	QPushButton *filter;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
-	HEALTHSTAT healthstat[2];
+	HEALTHSTAT healthstat[2], filterstat;
 	QTextDocument *doc;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
@@ -136,8 +137,9 @@ private slots:
 	void exportDataToSQL(QString, bool);
 	void exportDataToPDF(QString);
 
-	void buildGraph(bool);
+	void buildGraph(QVector<HEALTHDATA>, HEALTHSTAT);
 	void dateChanged();
+	void filterChanged(bool);
 	void xAxisBPChanged(QCPRange);
 	void xAxisHRChanged(QCPRange);
 

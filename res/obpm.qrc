@@ -68,6 +68,7 @@
         <file>png/chg-new.png</file>
         <file>png/chg-fix.png</file>
         <file>png/chg-del.png</file>
+        <file>png/filter.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

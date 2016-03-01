@@ -68,6 +68,8 @@ struct CONFIG
 	uint bpm;
 	QString alias1, alias2;
 	QString database;
+	QPoint pmain, phelp;
+	QSize smain, shelp;
 };
 
 struct HEALTHDATA{

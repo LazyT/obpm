@@ -25,7 +25,7 @@ class helpDialog : public QDialog, private Ui::Dialog_Help
 
 public:
 
-	helpDialog(QWidget *parent, QString page);
+	helpDialog(QWidget *parent, QString, struct CONFIG*);
 	void setSourceFromPage(QString);
 
 private:
@@ -38,6 +38,7 @@ private:
 	QHelpSearchResultWidget *resultWidget;
 	HelpBrowser *helpBrowser;
 	QString lng;
+	CONFIG *cfg;
 
 private slots:
 

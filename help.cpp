@@ -1,10 +1,12 @@
 #include "help.h"
 
-helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
+helpDialog::helpDialog(QWidget *parent, QString page, struct CONFIG *config) : QDialog(parent)
 {
 	setupUi(this);
 
 	setWindowFlags(Qt::Window | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
+
+	cfg = config;
 
 	lng = QFile::exists(QString("%1/hlp/obpm_%2.qhc").arg(QApplication::applicationDirPath()).arg(QLocale::system().name().mid(0, 2))) ? QLocale::system().name().mid(0, 2) : "en";
 
@@ -42,7 +44,16 @@ helpDialog::helpDialog(QWidget *parent, QString page) : QDialog(parent)
 
 	show();
 	activateWindow();
-	move(parent->mapToGlobal(parent->rect().center()) - rect().center());
+
+	if(cfg->shelp.width() == -1 || cfg->shelp.height() == -1)
+	{
+		move(parent->mapToGlobal(parent->rect().center()) - rect().center());
+	}
+	else
+	{
+		move(cfg->phelp);
+		resize(cfg->shelp);
+	}
 
 	QApplication::processEvents();
 
@@ -86,6 +97,12 @@ void helpDialog::anchorClicked(const QUrl &link)
 
 void helpDialog::reject()
 {
+	if(!isMaximized())
+	{
+		cfg->phelp = pos();
+		cfg->shelp = size();
+	}
+
 	((MainWindow*)parent())->help = NULL;
 
 	accept();

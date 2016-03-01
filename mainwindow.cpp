@@ -5,8 +5,6 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	MainWindow mw;
 
-	mw.move(QApplication::desktop()->screen()->rect().center() - mw.rect().center());
-
 	mw.show();
 
 	return app.exec();
@@ -168,6 +166,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	{
 		QTimer::singleShot(250, this, SLOT(checkUpdate()));
 	}
+
+	if(cfg.smain.width() == -1 || cfg.smain.height() == -1)
+	{
+		move(QApplication::desktop()->screen()->rect().center() - rect().center());
+	}
+	else
+	{
+		move(cfg.pmain);
+		resize(cfg.smain);
+	}
 }
 
 void MainWindow::getConfig()
@@ -184,6 +192,16 @@ void MainWindow::getConfig()
 	cfg.alias1 = ini.value("Alias1", tr("User 1")).toString();
 	cfg.alias2 = ini.value("Alias2", tr("User 2")).toString();
 	cfg.database = ini.value("Database", DB).toString();
+
+	ini.beginGroup("MainWindow");
+	cfg.pmain = ini.value("Position", QPoint(0, 0)).toPoint();
+	cfg.smain = ini.value("Size", QSize(-1, -1)).toSize();
+	ini.endGroup();
+
+	ini.beginGroup("HelpWindow");
+	cfg.phelp = ini.value("Position", QPoint(0, 0)).toPoint();
+	cfg.shelp = ini.value("Size", QSize(-1, -1)).toSize();
+	ini.endGroup();
 }
 
 void MainWindow::setConfig()
@@ -200,6 +218,16 @@ void MainWindow::setConfig()
 	ini.setValue("Alias1", cfg.alias1);
 	ini.setValue("Alias2", cfg.alias2);
 	ini.setValue("Database", cfg.database);
+
+	ini.beginGroup("MainWindow");
+	ini.setValue("Position", cfg.pmain);
+	ini.setValue("Size", cfg.smain);
+	ini.endGroup();
+
+	ini.beginGroup("HelpWindow");
+	ini.setValue("Position", cfg.phelp);
+	ini.setValue("Size", cfg.shelp);
+	ini.endGroup();
 
 	ini.sync();
 }
@@ -1298,7 +1326,7 @@ void MainWindow::showHelp(QString page)
 	}
 	else
 	{
-		help = new helpDialog(this, page);
+		help = new helpDialog(this, page, &cfg);
 	}
 }
 
@@ -1402,6 +1430,12 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 {
 	if(update || QMessageBox::question(this, APPNAME, tr("Really exit program?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 	{
+		if(!isMaximized())
+		{
+			cfg.pmain = pos();
+			cfg.smain = size();
+		}
+
 		setConfig();
 
 		if(healthdata[0].count() || healthdata[1].count())

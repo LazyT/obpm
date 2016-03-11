@@ -19,39 +19,43 @@ The current version supports the following features:
 
 The main window with some records...
 
-![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot1.png)
+![main window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot01.png)
 
 Print records for your archive or doctor...
 
-![printouts](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot5.png)
+![printouts](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot05.png)
 
 Configure your preferred settings...
 
-![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot8.png)
+![setup dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot08.png)
 
 If you have more than 1 device connected select the right one based on the serial number and choose your model...
 
-![import dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot2.png)
+![import dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot02.png)
 
 Some infos about the program and possible interactions...
 
-![about dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot3.png)
+![about dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot03.png)
 
 If you like it don't forget to donate some beer and support further development...
 
-![donate dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot6.png)
+![donate dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot06.png)
 
 Keep informed about updates automatically at program start...
 
-![update dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot7.png)
+![update dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot07.png)
 
 Press F1 to get help for the current context...
 
-![help window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot9.png)
+![help window](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot09.png)
 
 The installer...
 
-![installer dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot4.png)
+![installer dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot04.png)
+
+The online updater...
+
+![updater dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot10.png)
 
 ***Hint for Linux user:***
 

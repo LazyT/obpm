@@ -193,6 +193,8 @@ void MainWindow::getConfig()
 	cfg.hem7322u = ini.value("HEM7322U", false).toBool();
 	cfg.update = ini.value("Update", true).toBool();
 	cfg.legend = ini.value("Legend", true).toBool();
+	cfg.psd = ini.value("PrintSingleDiagram", true).toBool();
+	cfg.pot = ini.value("PrintOverviewTable", false).toBool();
 	cfg.style = ini.value("Style", QCPGraph::lsLine).toInt();
 	cfg.sys = ini.value("SYS", SYS_NORM).toInt();
 	cfg.dia = ini.value("DIA", DIA_NORM).toInt();
@@ -219,6 +221,8 @@ void MainWindow::setConfig()
 	ini.setValue("HEM7322U", cfg.hem7322u);
 	ini.setValue("Update", cfg.update);
 	ini.setValue("Legend", cfg.legend);
+	ini.setValue("PrintSingleDiagram", cfg.psd);
+	ini.setValue("PrintOverviewTable", cfg.pot);
 	ini.setValue("Style", cfg.style);
 	ini.setValue("SYS", cfg.sys);
 	ini.setValue("DIA", cfg.dia);
@@ -468,7 +472,7 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 
 void MainWindow::createDoc(QPrinter *printer)
 {
-	doc = new QTextDocument();
+	QTextDocument *doc = new QTextDocument();
 	QTextCursor cursor(doc);
 	QTextBlockFormat bfmt_cntr, bfmt_pbrk;
 	QTextCharFormat cfmt_bold, cfmt_norm;
@@ -478,7 +482,7 @@ void MainWindow::createDoc(QPrinter *printer)
 	int tablecount = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLES : TABLES - 1;		// fixme: calculate based on paper format
 	int tablerows = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLE_ROWS : TABLE_ROWS + 11;
 
-	pdlg = new QProgressDialog(tr("Diagram %1/2").arg(1), tr("Cancel"), 0, 2, this, Qt::Tool);
+	pdlg = cfg.psd ? new QProgressDialog(tr("Diagram"), tr("Cancel"), 0, 1, this, Qt::Tool) : new QProgressDialog(tr("Diagram %1/2").arg(1), tr("Cancel"), 0, 2, this, Qt::Tool);
 	pdlg->setWindowTitle(tr("Creating Document"));
 	pdlg->setWindowModality(Qt::WindowModal);
 	pdlg->setAutoClose(false);
@@ -499,61 +503,83 @@ void MainWindow::createDoc(QPrinter *printer)
 
 	doc->documentLayout()->registerHandler(QCPDocumentObject::PlotTextFormat, new QCPDocumentObject(this));
 
-	bfmt_cntr.setBackground(QColor("lightGray"));
-	cursor.insertBlock(bfmt_cntr);
-	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Blood Pressure - %1").arg(user ? cfg.alias2 : cfg.alias1) + "\n");
-	cursor.setCharFormat(cfmt_norm);
-	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
-	bfmt_cntr.setBackground(QColor("transparent"));
-	cursor.insertBlock(bfmt_cntr);
-	cursor.insertText("\n");
-
-	cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_bp, width, height));
-
-	cursor.insertBlock(bfmt_pbrk);
-
-	pdlg->setLabelText(tr("Diagram %1/2").arg(2));
-	pdlg->setValue(2);
-
-	bfmt_cntr.setBackground(QColor("lightGray"));
-	cursor.insertBlock(bfmt_cntr);
-	cursor.setCharFormat(cfmt_bold);
-	cursor.insertText(tr("Heart Rate - %1").arg(user ? cfg.alias2 : cfg.alias1)  + "\n");
-	cursor.setCharFormat(cfmt_norm);
-	cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
-	bfmt_cntr.setBackground(QColor("transparent"));
-	cursor.insertBlock(bfmt_cntr);
-	cursor.insertText("\n");
-
-	cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_hr, width, height));
-
-	exportdata.clear();
-
-	for(int i = 0; i < healthdata[user].count(); i++)
+	if(cfg.psd)
 	{
-		if(healthdata[user].at(i).time >= rangeStart->dateTime().toTime_t() && healthdata[user].at(i).time <= rangeStop->dateTime().toTime_t())
-		{
-			exportdata.append(healthdata[user].at(i));
-		}
+		bfmt_cntr.setBackground(QColor("lightGray"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.setCharFormat(cfmt_bold);
+		cursor.insertText(tr("Blood Pressure & Heart Rate - %1").arg(user ? cfg.alias2 : cfg.alias1) + "\n");
+		cursor.setCharFormat(cfmt_norm);
+		cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
+		bfmt_cntr.setBackground(QColor("transparent"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.insertText("\n");
+
+		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_bp, width, height/2));
+		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_hr, width, height/2));
+	}
+	else
+	{
+		bfmt_cntr.setBackground(QColor("lightGray"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.setCharFormat(cfmt_bold);
+		cursor.insertText(tr("Blood Pressure - %1").arg(user ? cfg.alias2 : cfg.alias1) + "\n");
+		cursor.setCharFormat(cfmt_norm);
+		cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
+		bfmt_cntr.setBackground(QColor("transparent"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.insertText("\n");
+
+		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_bp, width, height));
+
+		cursor.insertBlock(bfmt_pbrk);
+
+		pdlg->setLabelText(tr("Diagram %1/2").arg(2));
+		pdlg->setValue(2);
+
+		bfmt_cntr.setBackground(QColor("lightGray"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.setCharFormat(cfmt_bold);
+		cursor.insertText(tr("Heart Rate - %1").arg(user ? cfg.alias2 : cfg.alias1)  + "\n");
+		cursor.setCharFormat(cfmt_norm);
+		cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
+		bfmt_cntr.setBackground(QColor("transparent"));
+		cursor.insertBlock(bfmt_cntr);
+		cursor.insertText("\n");
+
+		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_hr, width, height));
 	}
 
-	pdlg->setMaximum(exportdata.count());
-
-	for(int i = 0; i < exportdata.count(); i += tablecount * tablerows)
+	if(cfg.pot)
 	{
-		if(pdlg->wasCanceled())
-		{
-			printer->setPrintRange(QPrinter::PageRange);
-			printer->setFromTo(1, 2);
+		exportdata.clear();
 
-			break;
+		for(int i = 0; i < healthdata[user].count(); i++)
+		{
+			if(healthdata[user].at(i).time >= rangeStart->dateTime().toTime_t() && healthdata[user].at(i).time <= rangeStop->dateTime().toTime_t())
+			{
+				exportdata.append(healthdata[user].at(i));
+			}
 		}
 
-		createDocTablePage(tablecount, tablerows, i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm);
+		pdlg->setMaximum(exportdata.count());
+
+		for(int i = 0; i < exportdata.count(); i += tablecount * tablerows)
+		{
+			createDocTablePage(tablecount, tablerows, i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm);
+
+			if(pdlg->wasCanceled())
+			{
+				printer->setPrintRange(QPrinter::PageRange);
+				printer->setFromTo(1, cfg.psd ? 1 : 2);
+
+				break;
+			}
+		}
 	}
 
 	pdlg->close();
+	delete pdlg;
 
 	printer->setDocName(tr("OBPM data export (%1 - %2)").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 

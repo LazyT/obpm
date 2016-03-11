@@ -9,34 +9,19 @@ setupDialog::setupDialog(QWidget *parent, struct CONFIG *config) : QDialog(paren
 
 	cfg = config;
 
-	horizontalSlider_sys->setValue(cfg->sys);
-	horizontalSlider_dia->setValue(cfg->dia);
-	horizontalSlider_bpm->setValue(cfg->bpm);
-	checkBox_legend->setChecked(cfg->legend);
-
-	if(cfg->style == QCPGraph::lsLine)
-	{
-		radioButton_line->setChecked(true);
-	}
-	else if(cfg->style == QCPGraph::lsStepCenter)
-	{
-		radioButton_step->setChecked(true);
-	}
-	else if(cfg->style == QCPGraph::lsImpulse)
-	{
-		radioButton_impulse->setChecked(true);
-	}
-	else
-	{
-		radioButton_point->setChecked(true);
-	}
-
-	checkBox_update->setChecked(cfg->update);
-
 	lineEdit_user1->setText(cfg->alias1);
 	lineEdit_user2->setText(cfg->alias2);
 
 	lineEdit_db->setText(cfg->database);
+
+	checkBox_update->setChecked(cfg->update);
+
+	horizontalSlider_sys->setValue(cfg->sys);
+	horizontalSlider_dia->setValue(cfg->dia);
+	horizontalSlider_bpm->setValue(cfg->bpm);
+
+	checkBox_psd->setChecked(cfg->psd);
+	checkBox_pot->setChecked(cfg->pot);
 
 	show();
 	activateWindow();
@@ -56,51 +41,36 @@ void setupDialog::on_toolButton_db_clicked()
 
 void setupDialog::on_pushButton_reset_clicked()
 {
-	horizontalSlider_sys->setValue(SYS_NORM);
-	horizontalSlider_dia->setValue(DIA_NORM);
-	horizontalSlider_bpm->setValue(BPM_NORM);
-
-	checkBox_legend->setChecked(true);
-	radioButton_line->setChecked(true);
-
-	checkBox_update->setChecked(true);
-
 	lineEdit_user1->setText(tr("User 1"));
 	lineEdit_user2->setText(tr("User 2"));
 
 	lineEdit_db->setText(DB);
+
+	checkBox_update->setChecked(true);
+
+	horizontalSlider_sys->setValue(SYS_NORM);
+	horizontalSlider_dia->setValue(DIA_NORM);
+	horizontalSlider_bpm->setValue(BPM_NORM);
+
+	checkBox_psd->setChecked(true);
+	checkBox_pot->setChecked(false);
 }
 
 void setupDialog::on_pushButton_save_clicked()
 {
-	cfg->sys = horizontalSlider_sys->value();
-	cfg->dia = horizontalSlider_dia->value();
-	cfg->bpm = horizontalSlider_bpm->value();
-	cfg->legend = checkBox_legend->isChecked();
-
-	if(radioButton_line->isChecked())
-	{
-		cfg->style = QCPGraph::lsLine;
-	}
-	else if(radioButton_step->isChecked())
-	{
-		cfg->style = QCPGraph::lsStepCenter;
-	}
-	else if(radioButton_impulse->isChecked())
-	{
-		cfg->style = QCPGraph::lsImpulse;
-	}
-	else
-	{
-		cfg->style = QCPGraph::lsNone;
-	}
-
-	cfg->update = checkBox_update->isChecked();
-
 	cfg->alias1 = lineEdit_user1->text().isEmpty() ? tr("User 1") : lineEdit_user1->text();
 	cfg->alias2 = lineEdit_user2->text().isEmpty() ? tr("User 2") : lineEdit_user2->text();
 
 	cfg->database = lineEdit_db->text();
+
+	cfg->update = checkBox_update->isChecked();
+
+	cfg->sys = horizontalSlider_sys->value();
+	cfg->dia = horizontalSlider_dia->value();
+	cfg->bpm = horizontalSlider_bpm->value();
+
+	cfg->psd = checkBox_psd->isChecked();
+	cfg->pot = checkBox_pot->isChecked();
 
 	done(QDialog::Accepted);
 }

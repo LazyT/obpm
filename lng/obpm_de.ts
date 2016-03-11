@@ -138,132 +138,114 @@
         <translation>Konfiguration</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="146"/>
+        <location filename="../res/ui/setup.ui" line="149"/>
         <source>Defaults</source>
         <translation>Standardwerte</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="315"/>
-        <source>Diagram</source>
-        <translation>Diagramm</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="324"/>
-        <source>show Legend with min/Ø/max Values</source>
-        <translation>Legende mit min/Ø/max Werten anzeigen</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="394"/>
-        <source>Impulse</source>
-        <translation>Impuls</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="349"/>
-        <source>Point</source>
-        <translation>Punkt</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="38"/>
+        <location filename="../res/ui/setup.ui" line="41"/>
         <source>Alias</source>
         <translation>Alias</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="44"/>
+        <location filename="../res/ui/setup.ui" line="47"/>
         <source>enter name for user 1</source>
         <translation>Name für Benutzer 1 eingeben</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="57"/>
+        <location filename="../res/ui/setup.ui" line="60"/>
         <source>enter name for user 2</source>
         <translation>Name für Benutzer 2 eingeben</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="184"/>
-        <location filename="../res/ui/setup.ui" line="206"/>
-        <location filename="../res/ui/setup.ui" line="238"/>
+        <location filename="../res/ui/setup.ui" line="187"/>
+        <location filename="../res/ui/setup.ui" line="209"/>
+        <location filename="../res/ui/setup.ui" line="241"/>
         <source>modify medical specifications</source>
         <translation>medizinische Vorgaben ändern</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="321"/>
-        <source>diagram legend on/off</source>
-        <translation>Diagramm-Legende ein/aus</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="346"/>
-        <location filename="../res/ui/setup.ui" line="360"/>
-        <location filename="../res/ui/setup.ui" line="377"/>
-        <location filename="../res/ui/setup.ui" line="391"/>
-        <source>choose diagram style</source>
-        <translation>Diagramm-Stil wählen</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="363"/>
-        <source>Line</source>
-        <translation>Linie</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="380"/>
-        <source>Step</source>
-        <translation>Stufe</translation>
-    </message>
-    <message>
-        <location filename="../res/ui/setup.ui" line="109"/>
+        <location filename="../res/ui/setup.ui" line="112"/>
         <source>Update</source>
         <translation>Aktualisierung</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="32"/>
+        <location filename="../res/ui/setup.ui" line="35"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="73"/>
+        <location filename="../res/ui/setup.ui" line="76"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="79"/>
+        <location filename="../res/ui/setup.ui" line="82"/>
         <source>current database location</source>
         <translation>aktueller Pfad für Datenbank</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="92"/>
+        <location filename="../res/ui/setup.ui" line="95"/>
         <source>choose database location</source>
         <translation>Pfad für Datenbank wählen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="115"/>
+        <location filename="../res/ui/setup.ui" line="118"/>
         <source>online update on/off</source>
         <translation>Online-Aktualisierung ein/aus</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="118"/>
+        <location filename="../res/ui/setup.ui" line="121"/>
         <source>check for Online Updates when Program starts</source>
         <translation>beim Start auf Online-Aktualisierung prüfen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="140"/>
+        <location filename="../res/ui/setup.ui" line="143"/>
         <source>Appearance</source>
         <translation>Darstellung</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="419"/>
+        <location filename="../res/ui/setup.ui" line="318"/>
+        <source>Printout</source>
+        <translation>Ausdruck</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/setup.ui" line="344"/>
+        <source>include Table Overview with Measurements</source>
+        <translation>Tabellenübersicht mit Messwerten einbeziehen</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/setup.ui" line="324"/>
+        <source>single diagram on/off</source>
+        <translation>Einzelseiten-Diagramm ein/aus</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/setup.ui" line="327"/>
+        <source>Blood Pressure &amp;&amp; Heart Rate on single Page</source>
+        <translation>Blutdruck &amp;&amp; Herzfrequenz auf Einzelseite</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/setup.ui" line="341"/>
+        <source>table overview on/off</source>
+        <translation>Tabellenübersicht ein/aus</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/setup.ui" line="370"/>
         <source>reset settings to defaults</source>
         <translation>auf Standardeinstellungen zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="422"/>
+        <location filename="../res/ui/setup.ui" line="373"/>
         <source>Reset</source>
         <translation>Rücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="433"/>
+        <location filename="../res/ui/setup.ui" line="384"/>
         <source>save settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="436"/>
+        <location filename="../res/ui/setup.ui" line="387"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -580,7 +562,7 @@
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="386"/>
-        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>User 1</source>
         <translation>Benutzer 1</translation>
     </message>
@@ -592,7 +574,7 @@
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="404"/>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>User 2</source>
         <translation>Benutzer 2</translation>
     </message>
@@ -631,12 +613,12 @@
         <translation>Daten als SQL-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1291"/>
+        <location filename="../mainwindow.cpp" line="1317"/>
         <source>Pulse: %1 [%2] %3</source>
         <translation>Puls: %1 [%2] %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1036"/>
+        <location filename="../mainwindow.cpp" line="1062"/>
         <source>Successfully exported current view to PDF.
 
 Open now with default app?</source>
@@ -649,10 +631,10 @@ Jetzt mit der Standardanwendung öffnen?</translation>
         <location filename="../mainwindow.cpp" line="61"/>
         <location filename="../mainwindow.cpp" line="62"/>
         <location filename="../mainwindow.cpp" line="63"/>
-        <location filename="../mainwindow.cpp" line="1065"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
-        <location filename="../mainwindow.cpp" line="1067"/>
-        <location filename="../mainwindow.cpp" line="1068"/>
+        <location filename="../mainwindow.cpp" line="1091"/>
+        <location filename="../mainwindow.cpp" line="1092"/>
+        <location filename="../mainwindow.cpp" line="1093"/>
+        <location filename="../mainwindow.cpp" line="1094"/>
         <source>show %1</source>
         <translation>%1 anzeigen</translation>
     </message>
@@ -670,12 +652,12 @@ Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="152"/>
-        <location filename="../mainwindow.cpp" line="1304"/>
+        <location filename="../mainwindow.cpp" line="1330"/>
         <source>Pulse</source>
         <translation>Puls</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="340"/>
         <source>Failed to start the installer!
 
 Please update manually.</source>
@@ -684,43 +666,53 @@ Please update manually.</source>
 Bitte manuell aktualisieren.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="396"/>
+        <location filename="../mainwindow.cpp" line="400"/>
         <source>Overview - %1 %2/%3</source>
         <translation>Übersicht - %1 %2/%3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="445"/>
         <source>Adjustment %1/%2</source>
         <translation>Korrektur %1/%2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="452"/>
+        <location filename="../mainwindow.cpp" line="456"/>
         <source>Record %1 of %2</source>
         <translation>Datensatz %1 von %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="481"/>
+        <location filename="../mainwindow.cpp" line="485"/>
         <source>Cancel</source>
         <translation>Abbruch</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="481"/>
-        <location filename="../mainwindow.cpp" line="516"/>
+        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="537"/>
         <source>Diagram %1/2</source>
         <translation>Diagramm %1/2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="505"/>
+        <location filename="../mainwindow.cpp" line="485"/>
+        <source>Diagram</source>
+        <translation>Diagramm</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <source>Blood Pressure &amp; Heart Rate - %1</source>
+        <translation>Blutdruck &amp; Herzfrequenz - %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>Blood Pressure - %1</source>
         <translation>Blutdruck - %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="543"/>
         <source>Heart Rate - %1</source>
         <translation>Herzfrequenz - %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="568"/>
+        <location filename="../mainwindow.cpp" line="594"/>
         <source>Successfully imported %1 records from USB:
 
      %2 = %3
@@ -731,12 +723,12 @@ Bitte manuell aktualisieren.</translation>
      %4 = %5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="649"/>
+        <location filename="../mainwindow.cpp" line="675"/>
         <source>Import from usb device canceled!</source>
         <translation>Import von USB-Gerät abgebrochen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="654"/>
+        <location filename="../mainwindow.cpp" line="680"/>
         <source>No supported device found!
 
 Check usb connection and try again...</source>
@@ -745,7 +737,7 @@ Check usb connection and try again...</source>
 Die USB-Verbindung überprüfen und erneut probieren...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="827"/>
         <source>Successfully imported %1 records from SQL:
 
      %2 = %3
@@ -756,7 +748,7 @@ Die USB-Verbindung überprüfen und erneut probieren...</translation>
      %4 = %5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="960"/>
+        <location filename="../mainwindow.cpp" line="986"/>
         <source>Successfully exported %1 records to CSV:
 
      %2 = %3
@@ -771,7 +763,7 @@ Open now with default app?</source>
 Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="912"/>
+        <location filename="../mainwindow.cpp" line="938"/>
         <source>No valid records in imported SQL found!
 
 Please check table format of file: %1</source>
@@ -780,53 +772,53 @@ Please check table format of file: %1</source>
 Bitte Tabellenformat der Datei überprüfen: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1079"/>
-        <location filename="../mainwindow.cpp" line="1095"/>
+        <location filename="../mainwindow.cpp" line="1105"/>
+        <location filename="../mainwindow.cpp" line="1121"/>
         <source>Append new data to existing records?</source>
         <translation>Sollen die neuen Daten an die vorhandenen Datensätze angehangen werden?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1091"/>
+        <location filename="../mainwindow.cpp" line="1117"/>
         <source>Import from CSV or SQL File</source>
         <translation>Import von CSV oder SQL Datei</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1091"/>
+        <location filename="../mainwindow.cpp" line="1117"/>
         <source>CSV File (*.csv);;SQL File (*.sql)</source>
         <translation>CSV-Datei (*.csv);;SQL Datei (*.sql)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1127"/>
+        <location filename="../mainwindow.cpp" line="1153"/>
         <source>SQL File (*.sql)</source>
         <translation>SQL-Datei (*.sql)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1144"/>
+        <location filename="../mainwindow.cpp" line="1170"/>
         <source>PDF File (*.pdf)</source>
         <translation>PDF-Datei (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="424"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="422"/>
+        <location filename="../mainwindow.cpp" line="426"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="482"/>
+        <location filename="../mainwindow.cpp" line="486"/>
         <source>Creating Document</source>
         <translation>Erzeuge Dokument</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="584"/>
         <source>OBPM data export (%1 - %2)</source>
         <translation>OBPM Datenexport (%1 - %2)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="773"/>
+        <location filename="../mainwindow.cpp" line="799"/>
         <source>No valid records in imported CSV found!
 
 Please check line format of file: %1</source>
@@ -835,14 +827,14 @@ Please check line format of file: %1</source>
 Bitte Zeilenformat der Datei überprüfen: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="781"/>
+        <location filename="../mainwindow.cpp" line="807"/>
         <source>Skipped %1 invalid entries!</source>
         <translation>%1 ungültige Einträge übersprungen!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="642"/>
-        <location filename="../mainwindow.cpp" line="787"/>
-        <location filename="../mainwindow.cpp" line="921"/>
+        <location filename="../mainwindow.cpp" line="668"/>
+        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="947"/>
         <source>Skipped %1 duplicate entries!</source>
         <translation>%1 doppelte Einträge übersprungen!</translation>
     </message>
@@ -859,7 +851,7 @@ Bitte Zeilenformat der Datei überprüfen: %1</translation>
         <translation>Ende der Analyse</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="660"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>Successfully imported %1 records from CSV:
 
      %2 = %3
@@ -870,8 +862,8 @@ Bitte Zeilenformat der Datei überprüfen: %1</translation>
      %4 = %5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="795"/>
-        <location filename="../mainwindow.cpp" line="934"/>
+        <location filename="../mainwindow.cpp" line="821"/>
+        <location filename="../mainwindow.cpp" line="960"/>
         <source>Could not open &quot;%1&quot;!
 
 Reason: %2</source>
@@ -880,8 +872,8 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="967"/>
-        <location filename="../mainwindow.cpp" line="1019"/>
+        <location filename="../mainwindow.cpp" line="993"/>
+        <location filename="../mainwindow.cpp" line="1045"/>
         <source>Could not create &quot;%1&quot;!
 
 Reason: %2</source>
@@ -890,7 +882,7 @@ Reason: %2</source>
 Ursache: %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1011"/>
+        <location filename="../mainwindow.cpp" line="1037"/>
         <source>Successfully exported %1 records to SQL:
 
      %2 = %3
@@ -905,45 +897,45 @@ Open now with default app?</source>
 Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1110"/>
+        <location filename="../mainwindow.cpp" line="1136"/>
         <source>Export to CSV</source>
         <translation>Export als CSV</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1110"/>
+        <location filename="../mainwindow.cpp" line="1136"/>
         <source>CSV File (*.csv)</source>
         <translation>CSV-Datei (*.csv)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1119"/>
-        <location filename="../mainwindow.cpp" line="1136"/>
-        <location filename="../mainwindow.cpp" line="1153"/>
+        <location filename="../mainwindow.cpp" line="1145"/>
+        <location filename="../mainwindow.cpp" line="1162"/>
+        <location filename="../mainwindow.cpp" line="1179"/>
         <source>No records to export!</source>
         <translation>Keine Datensätze zum exportieren!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1127"/>
+        <location filename="../mainwindow.cpp" line="1153"/>
         <source>Export to SQL</source>
         <translation>Export als SQL</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1144"/>
+        <location filename="../mainwindow.cpp" line="1170"/>
         <source>Export to PDF</source>
         <translation>Export als PDF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1172"/>
-        <location filename="../mainwindow.cpp" line="1192"/>
+        <location filename="../mainwindow.cpp" line="1198"/>
+        <location filename="../mainwindow.cpp" line="1218"/>
         <source>No records to print!</source>
         <translation>Keine Datensätze zum drucken!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1360"/>
+        <location filename="../mainwindow.cpp" line="1386"/>
         <source>No records found for selected period!</source>
         <translation>Keine Messwerte im gewählten Zeitraum gefunden!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1493"/>
+        <location filename="../mainwindow.cpp" line="1519"/>
         <source>Really exit program?</source>
         <translation>Das Programm wirklich beenden?</translation>
     </message>
@@ -1088,24 +1080,24 @@ Bitte den gewünschten Betrag manuell angeben...</translation>
 <context>
     <name>setupDialog</name>
     <message>
-        <location filename="../setup.cpp" line="49"/>
+        <location filename="../setup.cpp" line="34"/>
         <source>Select Directory for Database</source>
         <translation>Verzeichnis für Datenbank wählen</translation>
     </message>
     <message>
-        <location filename="../setup.cpp" line="68"/>
-        <location filename="../setup.cpp" line="100"/>
+        <location filename="../setup.cpp" line="44"/>
+        <location filename="../setup.cpp" line="61"/>
         <source>User 1</source>
         <translation>Benutzer 1</translation>
     </message>
     <message>
-        <location filename="../setup.cpp" line="69"/>
-        <location filename="../setup.cpp" line="101"/>
+        <location filename="../setup.cpp" line="45"/>
+        <location filename="../setup.cpp" line="62"/>
         <source>User 2</source>
         <translation>Benutzer 2</translation>
     </message>
     <message>
-        <location filename="../setup.cpp" line="135"/>
+        <location filename="../setup.cpp" line="105"/>
         <source>Abort setup and discard all changes?</source>
         <translation>Die Konfiguration abbrechen und alle Änderungen verwerfen?</translation>
     </message>

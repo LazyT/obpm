@@ -62,6 +62,8 @@ struct CONFIG
 	bool hem7322u;
 	bool update;
 	bool legend;
+	bool psd;
+	bool pot;
 	uint style;
 	uint sys;
 	uint dia;
@@ -114,7 +116,6 @@ private:
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
 	HEALTHSTAT healthstat[2], filterstat;
-	QTextDocument *doc;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	uint user;

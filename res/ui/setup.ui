@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>315</height>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tab_1">
       <attribute name="icon">
        <iconset resource="../obpm.qrc">
@@ -312,23 +315,20 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>Diagram</string>
+          <string>Printout</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QCheckBox" name="checkBox_legend">
+           <widget class="QCheckBox" name="checkBox_psd">
             <property name="toolTip">
-             <string>diagram legend on/off</string>
+             <string>single diagram on/off</string>
             </property>
             <property name="text">
-             <string>show Legend with min/Ø/max Values</string>
+             <string>Blood Pressure &amp;&amp; Heart Rate on single Page</string>
             </property>
             <property name="icon">
              <iconset resource="../obpm.qrc">
-              <normaloff>:/png/png/legend.png</normaloff>:/png/png/legend.png</iconset>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
+              <normaloff>:/png/png/pages.png</normaloff>:/png/png/pages.png</iconset>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -336,70 +336,18 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="topMargin">
-             <number>9</number>
+           <widget class="QCheckBox" name="checkBox_pot">
+            <property name="toolTip">
+             <string>table overview on/off</string>
             </property>
-            <item>
-             <widget class="QRadioButton" name="radioButton_point">
-              <property name="toolTip">
-               <string>choose diagram style</string>
-              </property>
-              <property name="text">
-               <string>Point</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../obpm.qrc">
-                <normaloff>:/png/png/chart-point.png</normaloff>:/png/png/chart-point.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButton_line">
-              <property name="toolTip">
-               <string>choose diagram style</string>
-              </property>
-              <property name="text">
-               <string>Line</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../obpm.qrc">
-                <normaloff>:/png/png/chart-line.png</normaloff>:/png/png/chart-line.png</iconset>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButton_step">
-              <property name="toolTip">
-               <string>choose diagram style</string>
-              </property>
-              <property name="text">
-               <string>Step</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../obpm.qrc">
-                <normaloff>:/png/png/chart-step.png</normaloff>:/png/png/chart-step.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButton_impulse">
-              <property name="toolTip">
-               <string>choose diagram style</string>
-              </property>
-              <property name="text">
-               <string>Impulse</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../obpm.qrc">
-                <normaloff>:/png/png/chart-impulse.png</normaloff>:/png/png/chart-impulse.png</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
+            <property name="text">
+             <string>include Table Overview with Measurements</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../obpm.qrc">
+              <normaloff>:/png/png/table.png</normaloff>:/png/png/table.png</iconset>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

@@ -69,6 +69,8 @@
         <file>png/chg-fix.png</file>
         <file>png/chg-del.png</file>
         <file>png/filter.png</file>
+        <file>png/pages.png</file>
+        <file>png/table.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

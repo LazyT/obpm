@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <online-updater>
-	<release>6</release>
-	<version>1.0.5</version>
-	<date>21.02.2016</date>
+	<release>7</release>
+	<version>1.0.6</version>
+	<date>12.03.2016</date>
 	<changes>
-		<en>1:sqlite import/export;1:user alias;1:auto backup/restore records;1:help system;1:show record count in toolbar</en>
-		<de>1:SQLite Import/Export;1:Nutzer Alias;1:Datensätze automatisch sichern/wiederherstellen;1:Hilfe-System;1:Anzeige Datensatzanzahl in Werkzeugleiste</de>
+		<en>1:show changelog in update notification;1:run maintenancetool on update;1:save/restore window position and size;1:filter records;1:print diagrams on single page, skip table view;3:diagram options in setup</en>
+		<de>1:Änderungen in Aktualisierungsbenachrichtigung anzeigen;1:Wartungsprogramm bei Aktualisierung starten;1:Fensterposition und Größe speichern/wiederherstellen;1:Messwerten filtern;1:Diagramme auf Einzelseite drucken, Tabellenübersicht überspringen;3:Diagrammoptionen in Einstellungen</de>
 	</changes>
 </online-updater>

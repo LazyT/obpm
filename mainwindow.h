@@ -22,6 +22,7 @@
 #include "update.h"
 #include "setup.h"
 #include "help.h"
+#include "sql.h"
 
 #include "qcpdocumentobject.h"
 
@@ -153,6 +154,7 @@ private slots:
 	void on_action_exportToCSV_triggered();
 	void on_action_exportToSQL_triggered();
 	void on_action_exportToPDF_triggered();
+	void on_action_querySQL_triggered();
 	void on_action_User1_toggled(bool);
 	void on_action_User2_toggled(bool);
 	void on_action_PrintPreview_triggered();

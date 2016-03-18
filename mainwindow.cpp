@@ -1270,6 +1270,24 @@ void MainWindow::on_action_resetZoom_triggered()
 	}
 }
 
+void MainWindow::on_action_querySQL_triggered()
+{
+	if(healthdata[0].count() || healthdata[1].count())
+	{
+		sqlDialog *dlg = new sqlDialog(this);
+
+		if(dlg->success)
+		{
+			dlg->show();
+			dlg->activateWindow();
+		}
+	}
+	else
+	{
+		QMessageBox::warning(this, APPNAME, tr("No records to analyze!"));
+	}
+}
+
 void MainWindow::on_action_User1_toggled(bool enabled)
 {
 	if(enabled)

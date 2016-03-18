@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_SQL</class>
+ <widget class="QDialog" name="Dialog_SQL">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>434</width>
+    <height>269</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Data Analyzer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../obpm.qrc">
+    <normaloff>:/png/png/analyze.png</normaloff>:/png/png/analyze.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox_1">
+     <property name="title">
+      <string>Query</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QComboBox" name="comboBox">
+        <property name="toolTip">
+         <string>enter sql query and press return</string>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_1">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../obpm.qrc">:/png/png/unixtime.png</pixmap>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_unixtime">
+          <property name="toolTip">
+           <string>unix timestamp (0...n)</string>
+          </property>
+          <property name="inputMask">
+           <string notr="true"/>
+          </property>
+          <property name="maxLength">
+           <number>10</number>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton_ut2dt">
+          <property name="toolTip">
+           <string>convert unix timestamp to date &amp; time</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../obpm.qrc">
+            <normaloff>:/png/png/right.png</normaloff>:/png/png/right.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton_dt2ut">
+          <property name="toolTip">
+           <string>convert date &amp; time to unix timestamp</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../obpm.qrc">
+            <normaloff>:/png/png/left.png</normaloff>:/png/png/left.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_datetime">
+          <property name="toolTip">
+           <string>date &amp; time (dd.mm.yyyy hh:mm)</string>
+          </property>
+          <property name="inputMask">
+           <string notr="true"/>
+          </property>
+          <property name="maxLength">
+           <number>16</number>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../obpm.qrc">:/png/png/datetime.png</pixmap>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Results</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <row>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string notr="true">2</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string notr="true">3</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string notr="true">4</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string notr="true">5</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>D&amp;T</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/time.png</normaloff>:/png/png/time.png</iconset>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string notr="true">SYS</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/sys.png</normaloff>:/png/png/sys.png</iconset>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string notr="true">DIA</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/dia.png</normaloff>:/png/png/dia.png</iconset>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string notr="true">BPM</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/bpm.png</normaloff>:/png/png/bpm.png</iconset>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="toolTip">
+         <string>change timestamp format</string>
+        </property>
+        <property name="text">
+         <string>convert Timestamps from Unix Time to Date &amp;&amp; Time Format</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../obpm.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -84,11 +84,11 @@
      <height>19</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDatei">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuDaten_importieren">
+    <widget class="QMenu" name="menuImport">
      <property name="title">
       <string>Import Data</string>
      </property>
@@ -99,7 +99,7 @@
      <addaction name="action_importFromUSB"/>
      <addaction name="action_importFromFile"/>
     </widget>
-    <widget class="QMenu" name="menuDaten_exportieren">
+    <widget class="QMenu" name="menuExport">
      <property name="title">
       <string>Export Data</string>
      </property>
@@ -111,8 +111,9 @@
      <addaction name="action_exportToSQL"/>
      <addaction name="action_exportToPDF"/>
     </widget>
-    <addaction name="menuDaten_importieren"/>
-    <addaction name="menuDaten_exportieren"/>
+    <addaction name="menuImport"/>
+    <addaction name="menuExport"/>
+    <addaction name="action_querySQL"/>
     <addaction name="separator"/>
     <addaction name="action_PrintPreview"/>
     <addaction name="action_Print"/>
@@ -121,15 +122,15 @@
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
-   <widget class="QMenu" name="menu_Hilfe">
+   <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
     <addaction name="action_Help"/>
     <addaction name="action_About"/>
    </widget>
-   <addaction name="menuDatei"/>
-   <addaction name="menu_Hilfe"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="contextMenuPolicy">
@@ -154,6 +155,8 @@
    <addaction name="action_exportToPDF"/>
    <addaction name="separator"/>
    <addaction name="action_Print"/>
+   <addaction name="separator"/>
+   <addaction name="action_querySQL"/>
    <addaction name="separator"/>
    <addaction name="action_User1"/>
    <addaction name="action_User2"/>
@@ -453,6 +456,24 @@
    </property>
    <property name="statusTip">
     <string>export data to sql file</string>
+   </property>
+  </action>
+  <action name="action_querySQL">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/analyze.png</normaloff>:/png/png/analyze.png</iconset>
+   </property>
+   <property name="text">
+    <string>Analyze Data</string>
+   </property>
+   <property name="iconText">
+    <string>Analyze Data</string>
+   </property>
+   <property name="toolTip">
+    <string>analyze data</string>
+   </property>
+   <property name="statusTip">
+    <string>analyze data</string>
    </property>
   </action>
  </widget>

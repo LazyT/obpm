@@ -131,6 +131,64 @@
     </message>
 </context>
 <context>
+    <name>Dialog_SQL</name>
+    <message>
+        <location filename="../res/ui/sql.ui" line="24"/>
+        <source>Query</source>
+        <translation>Abfrage</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="30"/>
+        <source>enter sql query and press return</source>
+        <translation>SQL-Abfrage eingeben und Eingabetaste drücken</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="55"/>
+        <source>unix timestamp (0...n)</source>
+        <translation>Unix-Zeitstempel (0...n)</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="71"/>
+        <source>convert unix timestamp to date &amp; time</source>
+        <translation>Unix-Zeitstempel in Datum &amp; Zeit konvertieren</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="85"/>
+        <source>convert date &amp; time to unix timestamp</source>
+        <translation>Datum &amp; Zeit in Unix-Zeitstempel konvertieren</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="168"/>
+        <source>D&amp;T</source>
+        <translation>D&amp;Z</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="231"/>
+        <source>change timestamp format</source>
+        <translation>Format der Zeitstempel ändern</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="234"/>
+        <source>convert Timestamps from Unix Time to Date &amp;&amp; Time Format</source>
+        <translation>Zeitstempel von Unix-Zeit in Datum &amp;&amp; Zeit konvertieren</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="99"/>
+        <source>date &amp; time (dd.mm.yyyy hh:mm)</source>
+        <translation>Datum &amp; Zeit (TT.MM.JJJJ SS:MM)</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="14"/>
+        <source>Data Analyzer</source>
+        <translation>Daten-Analyse</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/sql.ui" line="130"/>
+        <source>Results</source>
+        <translation>Ergebnisse</translation>
+    </message>
+</context>
+<context>
     <name>Dialog_Setup</name>
     <message>
         <location filename="../res/ui/setup.ui" line="14"/>
@@ -138,7 +196,7 @@
         <translation>Konfiguration</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="149"/>
+        <location filename="../res/ui/setup.ui" line="179"/>
         <source>Defaults</source>
         <translation>Standardwerte</translation>
     </message>
@@ -148,24 +206,24 @@
         <translation>Alias</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="47"/>
+        <location filename="../res/ui/setup.ui" line="57"/>
         <source>enter name for user 1</source>
         <translation>Name für Benutzer 1 eingeben</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="60"/>
+        <location filename="../res/ui/setup.ui" line="80"/>
         <source>enter name for user 2</source>
         <translation>Name für Benutzer 2 eingeben</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="187"/>
-        <location filename="../res/ui/setup.ui" line="209"/>
-        <location filename="../res/ui/setup.ui" line="241"/>
+        <location filename="../res/ui/setup.ui" line="217"/>
+        <location filename="../res/ui/setup.ui" line="239"/>
+        <location filename="../res/ui/setup.ui" line="271"/>
         <source>modify medical specifications</source>
         <translation>medizinische Vorgaben ändern</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="112"/>
+        <location filename="../res/ui/setup.ui" line="142"/>
         <source>Update</source>
         <translation>Aktualisierung</translation>
     </message>
@@ -175,77 +233,77 @@
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="76"/>
+        <location filename="../res/ui/setup.ui" line="96"/>
         <source>Database</source>
         <translation>Datenbank</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="82"/>
+        <location filename="../res/ui/setup.ui" line="112"/>
         <source>current database location</source>
         <translation>aktueller Pfad für Datenbank</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="95"/>
+        <location filename="../res/ui/setup.ui" line="125"/>
         <source>choose database location</source>
         <translation>Pfad für Datenbank wählen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="118"/>
+        <location filename="../res/ui/setup.ui" line="148"/>
         <source>online update on/off</source>
         <translation>Online-Aktualisierung ein/aus</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="121"/>
+        <location filename="../res/ui/setup.ui" line="151"/>
         <source>check for Online Updates when Program starts</source>
         <translation>beim Start auf Online-Aktualisierung prüfen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="143"/>
+        <location filename="../res/ui/setup.ui" line="173"/>
         <source>Appearance</source>
         <translation>Darstellung</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="318"/>
+        <location filename="../res/ui/setup.ui" line="348"/>
         <source>Printout</source>
         <translation>Ausdruck</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="344"/>
+        <location filename="../res/ui/setup.ui" line="374"/>
         <source>include Table Overview with Measurements</source>
         <translation>Tabellenübersicht mit Messwerten einbeziehen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="324"/>
+        <location filename="../res/ui/setup.ui" line="354"/>
         <source>single diagram on/off</source>
         <translation>Einzelseiten-Diagramm ein/aus</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="327"/>
+        <location filename="../res/ui/setup.ui" line="357"/>
         <source>Blood Pressure &amp;&amp; Heart Rate on single Page</source>
         <translation>Blutdruck &amp;&amp; Herzfrequenz auf Einzelseite</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="341"/>
+        <location filename="../res/ui/setup.ui" line="371"/>
         <source>table overview on/off</source>
         <translation>Tabellenübersicht ein/aus</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="370"/>
+        <location filename="../res/ui/setup.ui" line="397"/>
         <source>reset settings to defaults</source>
         <translation>auf Standardeinstellungen zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="373"/>
+        <location filename="../res/ui/setup.ui" line="400"/>
         <source>Reset</source>
         <translation>Rücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="384"/>
+        <location filename="../res/ui/setup.ui" line="411"/>
         <source>save settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <location filename="../res/ui/setup.ui" line="387"/>
+        <location filename="../res/ui/setup.ui" line="414"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -404,216 +462,228 @@
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="126"/>
+        <location filename="../res/ui/mainwindow.ui" line="127"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="173"/>
+        <location filename="../res/ui/mainwindow.ui" line="176"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="176"/>
+        <location filename="../res/ui/mainwindow.ui" line="179"/>
         <source>exit program</source>
         <translation>Programm beenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="185"/>
+        <location filename="../res/ui/mainwindow.ui" line="188"/>
         <source>Index</source>
         <translation>Inhalt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="188"/>
+        <location filename="../res/ui/mainwindow.ui" line="191"/>
         <source>show help</source>
         <translation>Hilfe anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="197"/>
+        <location filename="../res/ui/mainwindow.ui" line="200"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="200"/>
+        <location filename="../res/ui/mainwindow.ui" line="203"/>
         <source>show info</source>
         <translation>Info anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="215"/>
+        <location filename="../res/ui/mainwindow.ui" line="218"/>
         <source>Legend</source>
         <translation>Legende</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="218"/>
         <location filename="../res/ui/mainwindow.ui" line="221"/>
+        <location filename="../res/ui/mainwindow.ui" line="224"/>
         <source>show/hide legend</source>
         <translation>Legende ein/ausblenden</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="230"/>
+        <location filename="../res/ui/mainwindow.ui" line="233"/>
         <source>Zoom</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="233"/>
         <location filename="../res/ui/mainwindow.ui" line="236"/>
+        <location filename="../res/ui/mainwindow.ui" line="239"/>
         <source>reset zoom</source>
         <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="245"/>
+        <location filename="../res/ui/mainwindow.ui" line="248"/>
         <source>to CSV</source>
         <translation>als CSV</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="248"/>
         <location filename="../res/ui/mainwindow.ui" line="251"/>
+        <location filename="../res/ui/mainwindow.ui" line="254"/>
         <source>export data to csv file</source>
         <translation>Daten als CSV-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="260"/>
+        <location filename="../res/ui/mainwindow.ui" line="263"/>
         <source>from Device</source>
         <translation>von Gerät</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="419"/>
+        <location filename="../res/ui/mainwindow.ui" line="422"/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="263"/>
         <location filename="../res/ui/mainwindow.ui" line="266"/>
+        <location filename="../res/ui/mainwindow.ui" line="269"/>
         <source>import data from usb device</source>
         <translation>Daten von USB-Gerät importieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="275"/>
+        <location filename="../res/ui/mainwindow.ui" line="278"/>
         <source>from File</source>
         <translation>von Datei</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="278"/>
         <location filename="../res/ui/mainwindow.ui" line="281"/>
+        <location filename="../res/ui/mainwindow.ui" line="284"/>
         <source>import data from file</source>
         <translation>Daten von Datei importieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="290"/>
+        <location filename="../res/ui/mainwindow.ui" line="293"/>
         <source>to PDF</source>
         <translation>als PDF</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="293"/>
         <location filename="../res/ui/mainwindow.ui" line="296"/>
+        <location filename="../res/ui/mainwindow.ui" line="299"/>
         <source>export data to pdf file</source>
         <translation>Daten als PDF-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="305"/>
+        <location filename="../res/ui/mainwindow.ui" line="308"/>
         <source>Print</source>
         <translation>Drucken</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="308"/>
         <location filename="../res/ui/mainwindow.ui" line="311"/>
+        <location filename="../res/ui/mainwindow.ui" line="314"/>
         <source>print data</source>
         <translation>Daten drucken</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="323"/>
+        <location filename="../res/ui/mainwindow.ui" line="326"/>
         <source>Point</source>
         <translation>Punkt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="326"/>
+        <location filename="../res/ui/mainwindow.ui" line="329"/>
         <source>set diagram style to point</source>
         <translation>Diagrammstil Punkt</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="341"/>
+        <location filename="../res/ui/mainwindow.ui" line="344"/>
         <source>Line</source>
         <translation>Linie</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="344"/>
+        <location filename="../res/ui/mainwindow.ui" line="347"/>
         <source>set diagram style to line</source>
         <translation>Diagrammstil Linie</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="356"/>
+        <location filename="../res/ui/mainwindow.ui" line="359"/>
         <source>Step</source>
         <translation>Stufe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="359"/>
+        <location filename="../res/ui/mainwindow.ui" line="362"/>
         <source>set diagram style to step</source>
         <translation>Diagrammstil Stufe</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="371"/>
+        <location filename="../res/ui/mainwindow.ui" line="374"/>
         <source>Impulse</source>
         <translation>Impuls</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="374"/>
+        <location filename="../res/ui/mainwindow.ui" line="377"/>
         <source>set diagram style to impulse</source>
         <translation>Diagrammstil Impulse</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="386"/>
+        <location filename="../res/ui/mainwindow.ui" line="389"/>
         <location filename="../mainwindow.cpp" line="202"/>
         <source>User 1</source>
         <translation>Benutzer 1</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="389"/>
         <location filename="../res/ui/mainwindow.ui" line="392"/>
+        <location filename="../res/ui/mainwindow.ui" line="395"/>
         <source>show user 1</source>
         <translation>Benutzer 1 anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="404"/>
+        <location filename="../res/ui/mainwindow.ui" line="407"/>
         <location filename="../mainwindow.cpp" line="203"/>
         <source>User 2</source>
         <translation>Benutzer 2</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="407"/>
         <location filename="../res/ui/mainwindow.ui" line="410"/>
+        <location filename="../res/ui/mainwindow.ui" line="413"/>
         <source>show user 2</source>
         <translation>Benutzer 2 anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="422"/>
         <location filename="../res/ui/mainwindow.ui" line="425"/>
+        <location filename="../res/ui/mainwindow.ui" line="428"/>
         <source>show print preview</source>
         <translation>Druckvorschau anzeigen</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="434"/>
+        <location filename="../res/ui/mainwindow.ui" line="437"/>
         <source>Setup</source>
         <translation>Konfiguration</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="437"/>
         <location filename="../res/ui/mainwindow.ui" line="440"/>
+        <location filename="../res/ui/mainwindow.ui" line="443"/>
         <source>configure program</source>
         <translation>Programm konfigurieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="449"/>
+        <location filename="../res/ui/mainwindow.ui" line="452"/>
         <source>to SQL</source>
         <translation>als SQL</translation>
     </message>
     <message>
-        <location filename="../res/ui/mainwindow.ui" line="452"/>
         <location filename="../res/ui/mainwindow.ui" line="455"/>
+        <location filename="../res/ui/mainwindow.ui" line="458"/>
         <source>export data to sql file</source>
         <translation>Daten als SQL-Datei exportieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1317"/>
+        <location filename="../res/ui/mainwindow.ui" line="467"/>
+        <location filename="../res/ui/mainwindow.ui" line="470"/>
+        <source>Analyze Data</source>
+        <translation>Daten analysieren</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/mainwindow.ui" line="473"/>
+        <location filename="../res/ui/mainwindow.ui" line="476"/>
+        <source>analyze data</source>
+        <translation>Daten analysieren</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1335"/>
         <source>Pulse: %1 [%2] %3</source>
         <translation>Puls: %1 [%2] %3</translation>
     </message>
@@ -652,7 +722,7 @@ Jetzt mit der Standardanwendung öffnen?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="152"/>
-        <location filename="../mainwindow.cpp" line="1330"/>
+        <location filename="../mainwindow.cpp" line="1348"/>
         <source>Pulse</source>
         <translation>Puls</translation>
     </message>
@@ -930,12 +1000,17 @@ Jetzt mit der Standardanwendung öffnen?</translation>
         <translation>Keine Datensätze zum drucken!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1386"/>
+        <location filename="../mainwindow.cpp" line="1287"/>
+        <source>No records to analyze!</source>
+        <translation>Keine Datensätze zum analysieren!</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1404"/>
         <source>No records found for selected period!</source>
         <translation>Keine Messwerte im gewählten Zeitraum gefunden!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1519"/>
+        <location filename="../mainwindow.cpp" line="1537"/>
         <source>Really exit program?</source>
         <translation>Das Programm wirklich beenden?</translation>
     </message>
@@ -943,7 +1018,7 @@ Jetzt mit der Standardanwendung öffnen?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../mainwindow.h" line="28"/>
+        <location filename="../mainwindow.h" line="29"/>
         <source>Omron Blood Pressure Manager</source>
         <translation>Omron Blutdruck Manager</translation>
     </message>
@@ -1100,6 +1175,33 @@ Bitte den gewünschten Betrag manuell angeben...</translation>
         <location filename="../setup.cpp" line="105"/>
         <source>Abort setup and discard all changes?</source>
         <translation>Die Konfiguration abbrechen und alle Änderungen verwerfen?</translation>
+    </message>
+</context>
+<context>
+    <name>sqlDialog</name>
+    <message>
+        <location filename="../sql.cpp" line="57"/>
+        <source>Could not create database in memory!
+
+%1</source>
+        <translation>Datenbank konnte nicht im Speicher erstellt werden!
+
+%1</translation>
+    </message>
+    <message>
+        <location filename="../sql.cpp" line="136"/>
+        <source>Please enter valid date and time!</source>
+        <translation>Bitte gültiges Datum und Zeit eingeben!</translation>
+    </message>
+    <message>
+        <location filename="../sql.cpp" line="148"/>
+        <source>Please enter unix timestamp!</source>
+        <translation>Bitte einen Unix-Zeitstempel eingeben!</translation>
+    </message>
+    <message>
+        <location filename="../sql.cpp" line="160"/>
+        <source>D&amp;T</source>
+        <translation>D&amp;Z</translation>
     </message>
 </context>
 <context>

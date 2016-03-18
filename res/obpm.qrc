@@ -71,6 +71,13 @@
         <file>png/filter.png</file>
         <file>png/pages.png</file>
         <file>png/table.png</file>
+        <file>png/analyze.png</file>
+        <file>png/database.png</file>
+        <file>png/time.png</file>
+        <file>png/left.png</file>
+        <file>png/right.png</file>
+        <file>png/unixtime.png</file>
+        <file>png/datetime.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

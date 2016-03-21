@@ -14,15 +14,22 @@ sqlDialog::sqlDialog(QWidget *parent) : QDialog(parent)
 	tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	tableWidget->setMinimumHeight(5 * tableWidget->rowHeight(0) + tableWidget->horizontalHeader()->height() + 4);
 
-	lineEdit_unixtime->setValidator(new QRegExpValidator(QRegExp("[0-9]{10}")));
+	lineEdit_unixtime->setValidator(new QRegExpValidator(QRegExp("[0-9]*")));
 	lineEdit_datetime->setValidator(new QRegExpValidator(QRegExp("(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[012])\\.(19[7-9][0-9]|20[0-9][0-9]) ([0-1][0-9]|2[0-3]):([0-5][0-9])")));
 
-	comboBox->addItem(QString("select * from U1 where SYS > %1").arg(((MainWindow*)parent)->cfg.sys));
-	comboBox->addItem(QString("select * from U1 where DIA > %1").arg(((MainWindow*)parent)->cfg.dia));
-	comboBox->addItem(QString("select * from U1 where BPM > %1").arg(((MainWindow*)parent)->cfg.bpm));
-	comboBox->addItem(QString("select * from U1 where UTS > %1").arg(QDateTime::currentDateTime().addDays(-7).toTime_t()));
+	comboBox->addItem(QString("select * from U%1 where SYS > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.sys));
+	comboBox->addItem(QString("select * from U%1 where DIA > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.dia));
+	comboBox->addItem(QString("select * from U%1 where BPM > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.bpm));
 
-	connect(comboBox->lineEdit(), SIGNAL(returnPressed()), this, SLOT(runQuery()));
+	if(((MainWindow*)parent)->filter->isChecked())
+	{
+		comboBox->addItem(QString("select * from U%1 where UTS >= %2 and UTS <= %3").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->rangeStart->dateTime().toTime_t()).arg(((MainWindow*)parent)->rangeStop->dateTime().toTime_t()));
+	}
+	else
+	{
+		comboBox->addItem(QString("select * from U%1 where UTS > %2").arg(1 + ((MainWindow*)parent)->user).arg(QDateTime::currentDateTime().addDays(-7).toTime_t()));
+	}
+
 	connect(lineEdit_unixtime, SIGNAL(returnPressed()), this, SLOT(on_toolButton_ut2dt_clicked()));
 	connect(lineEdit_datetime, SIGNAL(returnPressed()), this, SLOT(on_toolButton_dt2ut_clicked()));
 
@@ -119,14 +126,16 @@ void sqlDialog::runQuery()
 
 		row++;
 	}
+
+	if(!row)
+	{
+		QMessageBox::information(this, APPNAME, tr("No results for this query found!"));
+	}
 }
 
-void sqlDialog::on_comboBox_currentIndexChanged(__attribute__((unused)) int index)
+void sqlDialog::on_comboBox_activated(__attribute__((unused)) int index)
 {
-	if(comboBox->count() > 1)
-	{
-		runQuery();
-	}
+	runQuery();
 }
 
 void sqlDialog::on_toolButton_dt2ut_clicked()

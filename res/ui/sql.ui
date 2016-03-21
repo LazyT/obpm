@@ -17,6 +17,9 @@
    <iconset resource="../obpm.qrc">
     <normaloff>:/png/png/analyze.png</normaloff>:/png/png/analyze.png</iconset>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox_1">

@@ -133,47 +133,47 @@
 <context>
     <name>Dialog_SQL</name>
     <message>
-        <location filename="../res/ui/sql.ui" line="24"/>
+        <location filename="../res/ui/sql.ui" line="27"/>
         <source>Query</source>
         <translation>Abfrage</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="30"/>
+        <location filename="../res/ui/sql.ui" line="33"/>
         <source>enter sql query and press return</source>
         <translation>SQL-Abfrage eingeben und Eingabetaste drücken</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="55"/>
+        <location filename="../res/ui/sql.ui" line="58"/>
         <source>unix timestamp (0...n)</source>
         <translation>Unix-Zeitstempel (0...n)</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="71"/>
+        <location filename="../res/ui/sql.ui" line="74"/>
         <source>convert unix timestamp to date &amp; time</source>
         <translation>Unix-Zeitstempel in Datum &amp; Zeit konvertieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="85"/>
+        <location filename="../res/ui/sql.ui" line="88"/>
         <source>convert date &amp; time to unix timestamp</source>
         <translation>Datum &amp; Zeit in Unix-Zeitstempel konvertieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="168"/>
+        <location filename="../res/ui/sql.ui" line="171"/>
         <source>D&amp;T</source>
         <translation>D&amp;Z</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="231"/>
+        <location filename="../res/ui/sql.ui" line="234"/>
         <source>change timestamp format</source>
         <translation>Format der Zeitstempel ändern</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="234"/>
+        <location filename="../res/ui/sql.ui" line="237"/>
         <source>convert Timestamps from Unix Time to Date &amp;&amp; Time Format</source>
         <translation>Zeitstempel von Unix-Zeit in Datum &amp;&amp; Zeit konvertieren</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="99"/>
+        <location filename="../res/ui/sql.ui" line="102"/>
         <source>date &amp; time (dd.mm.yyyy hh:mm)</source>
         <translation>Datum &amp; Zeit (TT.MM.JJJJ SS:MM)</translation>
     </message>
@@ -183,7 +183,7 @@
         <translation>Daten-Analyse</translation>
     </message>
     <message>
-        <location filename="../res/ui/sql.ui" line="130"/>
+        <location filename="../res/ui/sql.ui" line="133"/>
         <source>Results</source>
         <translation>Ergebnisse</translation>
     </message>
@@ -1180,7 +1180,7 @@ Bitte den gewünschten Betrag manuell angeben...</translation>
 <context>
     <name>sqlDialog</name>
     <message>
-        <location filename="../sql.cpp" line="57"/>
+        <location filename="../sql.cpp" line="64"/>
         <source>Could not create database in memory!
 
 %1</source>
@@ -1189,17 +1189,22 @@ Bitte den gewünschten Betrag manuell angeben...</translation>
 %1</translation>
     </message>
     <message>
-        <location filename="../sql.cpp" line="136"/>
+        <location filename="../sql.cpp" line="132"/>
+        <source>No results for this query found!</source>
+        <translation>Keine Ergebnisse für diese Abfrage gefunden!</translation>
+    </message>
+    <message>
+        <location filename="../sql.cpp" line="145"/>
         <source>Please enter valid date and time!</source>
         <translation>Bitte gültiges Datum und Zeit eingeben!</translation>
     </message>
     <message>
-        <location filename="../sql.cpp" line="148"/>
+        <location filename="../sql.cpp" line="157"/>
         <source>Please enter unix timestamp!</source>
         <translation>Bitte einen Unix-Zeitstempel eingeben!</translation>
     </message>
     <message>
-        <location filename="../sql.cpp" line="160"/>
+        <location filename="../sql.cpp" line="169"/>
         <source>D&amp;T</source>
         <translation>D&amp;Z</translation>
     </message>

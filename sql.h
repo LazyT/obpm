@@ -21,7 +21,7 @@ private:
 private slots:
 
 	void runQuery();
-	void on_comboBox_currentIndexChanged(int);
+	void on_comboBox_activated(int);
 	void on_toolButton_dt2ut_clicked();
 	void on_toolButton_ut2dt_clicked();
 	void on_checkBox_clicked(bool);

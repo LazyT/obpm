@@ -106,20 +106,20 @@ public:
 	void getHealthStats(QVector<HEALTHDATA>, HEALTHSTAT*);
 	void showHelp(QString);
 	CONFIG cfg;
+	uint user;
+	QDateTimeEdit *rangeStart, *rangeStop;
+	QPushButton *filter;
 
 private:
 
 	QTranslator baseTranslator, helpTranslator, appTranslator;
 	QActionGroup *groupUser;
 	QLCDNumber *lcd;
-	QDateTimeEdit *rangeStart, *rangeStop;
-	QPushButton *filter;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
 	HEALTHSTAT healthstat[2], filterstat;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
-	uint user;
 	bool update;
 
 private slots:

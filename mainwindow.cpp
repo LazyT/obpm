@@ -14,6 +14,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	QApplication::setStyle("Fusion");
 
+	QNetworkProxyFactory::setUseSystemConfiguration(true);
+
+	mgr = new QNetworkAccessManager(this);
+
+	connect(mgr, SIGNAL(proxyAuthenticationRequired(const QNetworkProxy&, QAuthenticator*)), SLOT(proxyAuthenticationRequired(const QNetworkProxy&, QAuthenticator*)));
+
 	if(!QLocale::system().name().startsWith("en_"))
 	{
 		if(appTranslator.load("obpm_" + QLocale::system().name(), QApplication::applicationDirPath() + "/lng"))
@@ -186,6 +192,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	}
 }
 
+void MainWindow::proxyAuthenticationRequired(__attribute__ ((unused)) const QNetworkProxy &proxy, QAuthenticator *authenticator)
+{
+	loginDialog(this, authenticator);
+}
+
 void MainWindow::getConfig()
 {
 	QSettings ini(CFG, QSettings::IniFormat);
@@ -246,9 +257,7 @@ void MainWindow::setConfig()
 
 void MainWindow::checkUpdate()
 {
-	QNetworkAccessManager *mgr = new QNetworkAccessManager();
 	QNetworkReply *rep = mgr->get(QNetworkRequest(QUrl("https://lazyt.github.io/obpm/updater/update.xml")));
-	QElapsedTimer timeout;
 	QByteArray raw;
 	QXmlStreamReader xml;
 	QString release, version, date, changelog;
@@ -269,7 +278,7 @@ void MainWindow::checkUpdate()
 
 	if(rep->error())
 	{
-//		QMessageBox::warning(this, APPNAME, tr("Failed to contact online updater!\n\n%1").arg(rep->errorString()));
+		QMessageBox::warning(this, APPNAME, tr("Failed to contact online updater!\n\n%1").arg(rep->errorString()));
 
 		return;
 	}
@@ -320,7 +329,7 @@ void MainWindow::checkUpdate()
 
 	if(xml.hasError())
 	{
-//		QMessageBox::warning(this, APPNAME, tr("Failed to analyze online updater!\n\n%1").arg(xml.errorString()));
+		QMessageBox::warning(this, APPNAME, tr("Failed to analyze online updater!\n\n%1").arg(xml.errorString()));
 
 		return;
 	}

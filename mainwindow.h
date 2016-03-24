@@ -23,6 +23,7 @@
 #include "setup.h"
 #include "help.h"
 #include "sql.h"
+#include "login.h"
 
 #include "qcpdocumentobject.h"
 
@@ -109,6 +110,8 @@ public:
 	uint user;
 	QDateTimeEdit *rangeStart, *rangeStop;
 	QPushButton *filter;
+	QNetworkAccessManager *mgr;
+	QElapsedTimer timeout;
 
 private:
 
@@ -123,6 +126,8 @@ private:
 	bool update;
 
 private slots:
+
+	void proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
 
 	void getConfig();
 	void setConfig();

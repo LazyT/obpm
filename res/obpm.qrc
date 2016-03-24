@@ -78,6 +78,7 @@
         <file>png/right.png</file>
         <file>png/unixtime.png</file>
         <file>png/datetime.png</file>
+        <file>png/login.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

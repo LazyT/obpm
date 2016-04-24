@@ -25,6 +25,10 @@ Print records for your archive or doctor...
 
 ![printouts](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot05.png)
 
+Add manual records...
+
+![add record dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot12.png)
+
 Analyze your records via SQL queries...
 
 ![analyze dialog](https://raw.github.com/LazyT/obpm/gh-pages/screenshots/screenshot11.png)

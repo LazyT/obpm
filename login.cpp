@@ -9,9 +9,9 @@ loginDialog::loginDialog(QWidget *parent, QAuthenticator *auth) : QDialog(parent
 
 	authenticator = auth;
 
-	exec();
 	activateWindow();
 	move(parent->mapToGlobal(parent->rect().center()) - rect().center());
+	exec();
 }
 
 void loginDialog::on_pushButton_login_clicked()

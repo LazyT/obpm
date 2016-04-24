@@ -84,6 +84,9 @@
      <height>19</height>
     </rect>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::PreventContextMenu</enum>
+   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
@@ -98,6 +101,8 @@
      </property>
      <addaction name="action_importFromUSB"/>
      <addaction name="action_importFromFile"/>
+     <addaction name="separator"/>
+     <addaction name="action_addRecord"/>
     </widget>
     <widget class="QMenu" name="menuExport">
      <property name="title">
@@ -149,6 +154,7 @@
    <addaction name="separator"/>
    <addaction name="action_importFromUSB"/>
    <addaction name="action_importFromFile"/>
+   <addaction name="action_addRecord"/>
    <addaction name="separator"/>
    <addaction name="action_exportToCSV"/>
    <addaction name="action_exportToSQL"/>
@@ -474,6 +480,24 @@
    </property>
    <property name="statusTip">
     <string>analyze data</string>
+   </property>
+  </action>
+  <action name="action_addRecord">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/addrecord.png</normaloff>:/png/png/addrecord.png</iconset>
+   </property>
+   <property name="text">
+    <string>manual Input</string>
+   </property>
+   <property name="iconText">
+    <string>manual Input</string>
+   </property>
+   <property name="toolTip">
+    <string>add manual data</string>
+   </property>
+   <property name="statusTip">
+    <string>add manual data</string>
    </property>
   </action>
  </widget>

@@ -23,6 +23,7 @@
 #include "setup.h"
 #include "help.h"
 #include "sql.h"
+#include "record.h"
 #include "login.h"
 
 #include "qcpdocumentobject.h"
@@ -102,32 +103,34 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 public:
 
 	explicit MainWindow(QWidget *parent = 0);
-	QDialog *help;
-	QVector <HEALTHDATA> healthdata[2], filterdata;
 	void getHealthStats(QVector<HEALTHDATA>, HEALTHSTAT*);
 	void showHelp(QString);
+	int validateData(QAction*, bool);
+	void buildGraph(QVector<HEALTHDATA>, HEALTHSTAT);
+	QDialog *help;
+	QVector <HEALTHDATA> healthdata[2], filterdata;
+	HEALTHSTAT healthstat[2], filterstat;
 	CONFIG cfg;
 	uint user;
 	QDateTimeEdit *rangeStart, *rangeStop;
 	QPushButton *filter;
 	QNetworkAccessManager *mgr;
 	QElapsedTimer timeout;
+	QActionGroup *groupUser;
 
 private:
 
 	QTranslator baseTranslator, helpTranslator, appTranslator;
-	QActionGroup *groupUser;
 	QLCDNumber *lcd;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
-	HEALTHSTAT healthstat[2], filterstat;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	bool update;
 
 private slots:
 
-	void proxyAuthenticationRequired(const QNetworkProxy &proxy, QAuthenticator *authenticator);
+	void proxyAuthenticationRequired(const QNetworkProxy&, QAuthenticator*);
 
 	void getConfig();
 	void setConfig();
@@ -144,7 +147,6 @@ private slots:
 	void exportDataToSQL(QString, bool);
 	void exportDataToPDF(QString);
 
-	void buildGraph(QVector<HEALTHDATA>, HEALTHSTAT);
 	void dateChanged();
 	void filterChanged(bool);
 	void xAxisBPChanged(QCPRange);
@@ -159,6 +161,7 @@ private slots:
 	void on_action_exportToCSV_triggered();
 	void on_action_exportToSQL_triggered();
 	void on_action_exportToPDF_triggered();
+	void on_action_addRecord_triggered();
 	void on_action_querySQL_triggered();
 	void on_action_User1_toggled(bool);
 	void on_action_User2_toggled(bool);

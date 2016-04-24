@@ -598,6 +598,61 @@ void MainWindow::createDoc(QPrinter *printer)
 	QFontDatabase::removeApplicationFont(fontid);
 }
 
+int MainWindow::validateData(QAction *active, bool append)
+{
+	int duplicate = 0;
+
+	if(healthdata[0].count())
+	{
+		qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
+
+		for(int i = 0; i < healthdata[0].count() - 1; i++)
+		{
+			if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
+			{
+				duplicate++;
+				healthdata[0].remove(i--);
+			}
+		}
+
+		getHealthStats(healthdata[0], &healthstat[0]);
+	}
+
+	if(healthdata[1].count())
+	{
+		qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
+
+		for(int i = 0; i < healthdata[1].count() - 1; i++)
+		{
+			if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
+			{
+				duplicate++;
+				healthdata[1].remove(i--);
+			}
+		}
+
+		getHealthStats(healthdata[1], &healthstat[1]);
+	}
+
+	if(append)
+	{
+		active->setChecked(true);
+	}
+	else
+	{
+		if(healthdata[0].count())
+		{
+			action_User1->setChecked(true);
+		}
+		else if(healthdata[1].count())
+		{
+			action_User2->setChecked(true);
+		}
+	}
+
+	return duplicate;
+}
+
 void MainWindow::importDataFromUSB(bool append)
 {
 	QString msg(tr("Successfully imported %1 records from USB:\n\n     %2 = %3\n     %4 = %5"));
@@ -624,53 +679,7 @@ void MainWindow::importDataFromUSB(bool append)
 
 		if(dlg->exec() == QDialog::Accepted)
 		{
-			if(healthdata[0].count())
-			{
-				qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-				for(int i = 0; i < healthdata[0].count() - 1; i++)
-				{
-					if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
-					{
-						duplicate++;
-						healthdata[0].remove(i--);
-					}
-				}
-
-				getHealthStats(healthdata[0], &healthstat[0]);
-			}
-
-			if(healthdata[1].count())
-			{
-				qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-				for(int i = 0; i < healthdata[1].count() - 1; i++)
-				{
-					if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
-					{
-						duplicate++;
-						healthdata[1].remove(i--);
-					}
-				}
-
-				getHealthStats(healthdata[1], &healthstat[1]);
-			}
-
-			if(append)
-			{
-				active->setChecked(true);
-			}
-			else
-			{
-				if(healthdata[0].count())
-				{
-					action_User1->setChecked(true);
-				}
-				else if(healthdata[1].count())
-				{
-					action_User2->setChecked(true);
-				}
-			}
+			duplicate = validateData(active, append);
 
 			if(duplicate)
 			{
@@ -755,53 +764,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 
 		file.close();
 
-		if(healthdata[0].count())
-		{
-			qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-			for(int i = 0; i < healthdata[0].count() - 1; i++)
-			{
-				if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
-				{
-					duplicate++;
-					healthdata[0].remove(i--);
-				}
-			}
-
-			getHealthStats(healthdata[0], &healthstat[0]);
-		}
-
-		if(healthdata[1].count())
-		{
-			qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-			for(int i = 0; i < healthdata[1].count() - 1; i++)
-			{
-				if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
-				{
-					duplicate++;
-					healthdata[1].remove(i--);
-				}
-			}
-
-			getHealthStats(healthdata[1], &healthstat[1]);
-		}
-
-		if(append)
-		{
-			active->setChecked(true);
-		}
-		else
-		{
-			if(healthdata[0].count())
-			{
-				action_User1->setChecked(true);
-			}
-			else if(healthdata[1].count())
-			{
-				action_User2->setChecked(true);
-			}
-		}
+		duplicate = validateData(active, append);
 
 		if(!healthdata[0].count() && !healthdata[1].count())
 		{
@@ -892,53 +855,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 
 		db.close();
 
-		if(healthdata[0].count())
-		{
-			qSort(healthdata[0].begin(), healthdata[0].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-			for(int i = 0; i < healthdata[0].count() - 1; i++)
-			{
-				if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
-				{
-					duplicate++;
-					healthdata[0].remove(i--);
-				}
-			}
-
-			getHealthStats(healthdata[0], &healthstat[0]);
-		}
-
-		if(healthdata[1].count())
-		{
-			qSort(healthdata[1].begin(), healthdata[1].end(), [](const HEALTHDATA &a, const HEALTHDATA &b) { return a.time < b.time; });
-
-			for(int i = 0; i < healthdata[1].count() - 1; i++)
-			{
-				if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
-				{
-					duplicate++;
-					healthdata[1].remove(i--);
-				}
-			}
-
-			getHealthStats(healthdata[1], &healthstat[1]);
-		}
-
-		if(append)
-		{
-			active->setChecked(true);
-		}
-		else
-		{
-			if(healthdata[0].count())
-			{
-				action_User1->setChecked(true);
-			}
-			else if(healthdata[1].count())
-			{
-				action_User2->setChecked(true);
-			}
-		}
+		duplicate = validateData(active, append);
 
 		if(!healthdata[0].count() && !healthdata[1].count())
 		{
@@ -1277,6 +1194,12 @@ void MainWindow::on_action_resetZoom_triggered()
 			widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
 		}
 	}
+}
+
+
+void MainWindow::on_action_addRecord_triggered()
+{
+	new recordDialog(this);
 }
 
 void MainWindow::on_action_querySQL_triggered()

@@ -289,6 +289,10 @@
      <property name="text">
       <string>Donate 5€ via PayPal</string>
      </property>
+     <property name="icon">
+      <iconset resource="../obpm.qrc">
+       <normaloff>:/png/png/import_run.png</normaloff>:/png/png/import_run.png</iconset>
+     </property>
     </widget>
    </item>
   </layout>

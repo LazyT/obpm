@@ -5,10 +5,10 @@ QT		+= core gui widgets printsupport network sql help
 
 INCLUDEPATH     += ext/qcp ext/hid
 
-SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp setup.cpp help.cpp sql.cpp login.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
-HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   help.h   sql.h   login.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
+SOURCES		+= mainwindow.cpp usb.cpp about.cpp donation.cpp update.cpp setup.cpp help.cpp sql.cpp record.cpp login.cpp ext/qcp/qcustomplot.cpp ext/qcp/qcpdocumentobject.cpp
+HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   help.h   sql.h   record.h   login.h   ext/qcp/qcustomplot.h   ext/qcp/qcpdocumentobject.h   ext/hid/hidapi.h
 
-FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui res/ui/help.ui res/ui/sql.ui res/ui/login.ui
+FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui res/ui/help.ui res/ui/sql.ui res/ui/login.ui res/ui/record.ui
 RESOURCES	+= res/obpm.qrc
 
 TRANSLATIONS	+= lng/obpm_de.ts

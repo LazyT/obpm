@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <online-updater>
-	<release>7</release>
-	<version>1.0.6</version>
-	<date>12.03.2016</date>
+	<release>8</release>
+	<version>1.0.7</version>
+	<date>01.05.2016</date>
 	<changes>
-		<en>1:show changelog in update notification;1:run maintenancetool on update;1:save/restore window position and size;1:filter records;1:print diagrams on single page, skip table view;3:diagram options in setup</en>
-		<de>1:Änderungen in Aktualisierungsbenachrichtigung anzeigen;1:Wartungsprogramm bei Aktualisierung starten;1:Fensterposition und Größe speichern/wiederherstellen;1:Messwerten filtern;1:Diagramme auf Einzelseite drucken, Tabellenübersicht überspringen;3:Diagrammoptionen in Einstellungen</de>
+		<en>1:data analyzer;1:proxy support;1:manual records</en>
+		<de>1:Daten-Analyse;1:Proxy Unterstützung;1:Manuelle Datensätze</de>
 	</changes>
 </online-updater>

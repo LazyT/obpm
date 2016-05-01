@@ -3,47 +3,6 @@
  <ApplicationVersion>1.0.0</ApplicationVersion>
  <Checksum>true</Checksum>
  <PackageUpdate>
-  <Name>obpm</Name>
-  <DisplayName>Omron Blood Pressure Manager</DisplayName>
-  <DisplayName xml:lang="de_DE">Omron Blutdruck Manager</DisplayName>
-  <Description>Main program.</Description>
-  <Description xml:lang="de_DE">Hauptprogramm.</Description>
-  <Version>1.0.6</Version>
-  <ReleaseDate>2015-07-23</ReleaseDate>
-  <ForcedInstallation>true</ForcedInstallation>
-  <Script>installscript.qs</Script>
-  <UpdateFile CompressedSize="923626" UncompressedSize="1892432" OS="Any"/>
-  <DownloadableArchives>hlp.7z,content.7z</DownloadableArchives>
-  <Translations>de.qm</Translations>
-  <Licenses>
-   <License file="license.txt"/>
-  </Licenses>
-  <SHA1>82ec3ed44cb6268e19eefbc8ecd891346074b0b4</SHA1>
- </PackageUpdate>
- <PackageUpdate>
-  <Name>obpm.lang</Name>
-  <DisplayName>Translations</DisplayName>
-  <DisplayName xml:lang="de_DE">Übersetzungen</DisplayName>
-  <Description>Existing translations for the application.</Description>
-  <Description xml:lang="de_DE">Vorhandene Übersetzungen für die Anwendung.</Description>
-  <SortingPriority>1</SortingPriority>
-  <Version>1.0.6</Version>
-  <ReleaseDate>2015-07-23</ReleaseDate>
-  <UpdateFile CompressedSize="0" UncompressedSize="0" OS="Any"/>
-  <SHA1>acfbc2eec4d7f5f2f0ec628291237528ead15caf</SHA1>
- </PackageUpdate>
- <PackageUpdate>
-  <Name>obpm.lang.de</Name>
-  <DisplayName>DE</DisplayName>
-  <Description>German language.</Description>
-  <Description xml:lang="de_DE">Deutsche Sprache.</Description>
-  <Version>1.0.6</Version>
-  <ReleaseDate>2015-07-23</ReleaseDate>
-  <UpdateFile CompressedSize="392302" UncompressedSize="594331" OS="Any"/>
-  <DownloadableArchives>hlp.7z,lng.7z</DownloadableArchives>
-  <SHA1>e24c5ff70e4781856f4642ca789431d8cb4fd483</SHA1>
- </PackageUpdate>
- <PackageUpdate>
   <Name>obpm.libs</Name>
   <DisplayName>Qt5 Libraries</DisplayName>
   <DisplayName xml:lang="de_DE">Qt5 Bibliotheken</DisplayName>
@@ -53,8 +12,49 @@
   <Default>true</Default>
   <Version>1.0.6</Version>
   <ReleaseDate>2015-07-23</ReleaseDate>
-  <UpdateFile CompressedSize="7422523" UncompressedSize="24316604" OS="Any"/>
+  <UpdateFile OS="Any" CompressedSize="7422523" UncompressedSize="24316604"/>
   <DownloadableArchives>platforms.7z,printsupport.7z,sqldrivers.7z,content.7z</DownloadableArchives>
   <SHA1>c19068dfef954a49512c8164314088253894bf39</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>obpm</Name>
+  <DisplayName>Omron Blood Pressure Manager</DisplayName>
+  <DisplayName xml:lang="de_DE">Omron Blutdruck Manager</DisplayName>
+  <Description>Main program.</Description>
+  <Description xml:lang="de_DE">Hauptprogramm.</Description>
+  <Version>1.0.7</Version>
+  <ReleaseDate>2016-05-01</ReleaseDate>
+  <ForcedInstallation>true</ForcedInstallation>
+  <Script>installscript.qs</Script>
+  <UpdateFile OS="Any" UncompressedSize="2084944" CompressedSize="978210"/>
+  <DownloadableArchives>hlp.7z,content.7z</DownloadableArchives>
+  <Translations>de.qm</Translations>
+  <Licenses>
+   <License file="license.txt"/>
+  </Licenses>
+  <SHA1>7a82ae0ac9f9a0255029beb241d573645c5ecc7d</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>obpm.lang</Name>
+  <DisplayName>Translations</DisplayName>
+  <DisplayName xml:lang="de_DE">Übersetzungen</DisplayName>
+  <Description>Existing translations for the application.</Description>
+  <Description xml:lang="de_DE">Vorhandene Übersetzungen für die Anwendung.</Description>
+  <SortingPriority>1</SortingPriority>
+  <Version>1.0.7</Version>
+  <ReleaseDate>2016-05-01</ReleaseDate>
+  <UpdateFile OS="Any" UncompressedSize="0" CompressedSize="0"/>
+  <SHA1>63d3dc62968cd79fe34b9b5d08f7085c70b72163</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>obpm.lang.de</Name>
+  <DisplayName>DE</DisplayName>
+  <Description>German language.</Description>
+  <Description xml:lang="de_DE">Deutsche Sprache.</Description>
+  <Version>1.0.7</Version>
+  <ReleaseDate>2016-05-01</ReleaseDate>
+  <UpdateFile OS="Any" UncompressedSize="717293" CompressedSize="415760"/>
+  <DownloadableArchives>hlp.7z,lng.7z</DownloadableArchives>
+  <SHA1>88ca66bfb681ab7d1eebbd27f5fb464ff22f0867</SHA1>
  </PackageUpdate>
 </Updates>

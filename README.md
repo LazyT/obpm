@@ -80,9 +80,9 @@ If you get permission denied errors you should create a udev rule:
 
 Download and install the latest version for your operating system:
 
-* [Windows](https://github.com/LazyT/obpm/releases/download/1.0.6/OBPM-1.0.6-win.exe)
-* [Linux](https://github.com/LazyT/obpm/releases/download/1.0.6/OBPM-1.0.6-lin.run)
-* [MacOS](https://github.com/LazyT/obpm/releases/download/1.0.6/OBPM-1.0.6-mac.dmg)
+* [Windows](https://github.com/LazyT/obpm/releases/download/1.0.7/OBPM-1.0.7-win.exe)
+* [Linux](https://github.com/LazyT/obpm/releases/download/1.0.7/OBPM-1.0.7-lin.run)
+* [MacOS](https://github.com/LazyT/obpm/releases/download/1.0.7/OBPM-1.0.7-mac.dmg)
 
 ## Build from Source
 

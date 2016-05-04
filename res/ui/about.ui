@@ -40,7 +40,7 @@
    <item>
     <widget class="QLabel" name="label_Version">
      <property name="text">
-      <string>Version %1 - %2</string>
+      <string>Version %1 - %2 | %3 ( %4 )</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

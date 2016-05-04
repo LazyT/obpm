@@ -9,11 +9,6 @@
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../res/ui/about.ui" line="43"/>
-        <source>Version %1 - %2</source>
-        <translation>Version %1 - %2</translation>
-    </message>
-    <message>
         <location filename="../res/ui/about.ui" line="182"/>
         <source>Update</source>
         <translation>Update</translation>
@@ -32,6 +27,11 @@
         <location filename="../res/ui/about.ui" line="33"/>
         <source>Omron Blood Pressure Manager</source>
         <translation>Omron Blutdruck Manager</translation>
+    </message>
+    <message>
+        <location filename="../res/ui/about.ui" line="43"/>
+        <source>Version %1 - %2 | %3 ( %4 )</source>
+        <translation>Version %1 - %2 | %3 ( %4 )</translation>
     </message>
     <message>
         <location filename="../res/ui/about.ui" line="146"/>
@@ -1128,13 +1128,25 @@ Jetzt mit der Standardanwendung öffnen?</translation>
         <source>Omron Blood Pressure Manager</source>
         <translation>Omron Blutdruck Manager</translation>
     </message>
+    <message>
+        <location filename="../mainwindow.h" line="32"/>
+        <source>LazyT</source>
+        <translatorcomment>hint for translators: please enter YOUR NAME here (will be shown in about dialog)</translatorcomment>
+        <translation>LazyT</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="33"/>
+        <source>English</source>
+        <translatorcomment>hint for translators: please enter YOUR LANGUAGE here (will be shown in about dialog)</translatorcomment>
+        <translation>Deutsch</translation>
+    </message>
 </context>
 <context>
     <name>aboutDialog</name>
     <message>
         <location filename="../about.cpp" line="10"/>
-        <source>Version %1 - %2</source>
-        <translation>Version %1 - %2</translation>
+        <source>Version %1 - %2 | %3 ( %4 )</source>
+        <translation>Version %1 - %2 | %3 ( %4 )</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="14"/>

@@ -7,7 +7,7 @@ aboutDialog::aboutDialog(QWidget *parent) : QDialog(parent)
 	setWindowFlags(Qt::Tool);
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
 
-	label_Version->setText(tr("Version %1 - %2").arg(APPVERS, APPDATE));
+	label_Version->setText(tr("Version %1 - %2 | %3 ( %4 )").arg(APPVERS, APPDATE, APPLANG, APPTRNS));
 	label_Update->setStyleSheet(ICO_ABOUT);
 
 	textEdit->setAlignment(Qt::AlignCenter);

@@ -135,7 +135,7 @@
     <message>
         <location filename="../res/ui/login.ui" line="14"/>
         <source>Proxy Authentication</source>
-        <translation>Proxy d'authentification</translation>
+        <translation>Proxy d&apos;authentification</translation>
     </message>
     <message>
         <location filename="../res/ui/login.ui" line="27"/>
@@ -178,7 +178,7 @@
     <message>
         <location filename="../res/ui/record.ui" line="33"/>
         <source>switch user</source>
-        <translation>changer d'utilisateur</translation>
+        <translation>changer d&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="../res/ui/record.ui" line="73"/>
@@ -226,7 +226,7 @@
     <message>
         <location filename="../res/ui/sql.ui" line="74"/>
         <source>convert unix timestamp to date &amp; time</source>
-        <translation>convertir l'horodatage unix en une date &amp; heure</translation>
+        <translation>convertir l&apos;horodatage unix en une date &amp; heure</translation>
     </message>
     <message>
         <location filename="../res/ui/sql.ui" line="88"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../res/ui/sql.ui" line="234"/>
         <source>change timestamp format</source>
-        <translation>convertir le format d'horodatage</translation>
+        <translation>convertir le format d&apos;horodatage</translation>
     </message>
     <message>
         <location filename="../res/ui/sql.ui" line="237"/>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../res/ui/setup.ui" line="125"/>
         <source>choose database location</source>
-        <translation>choisir l'emplacement de la base de données</translation>
+        <translation>choisir l&apos;emplacement de la base de données</translation>
     </message>
     <message>
         <location filename="../res/ui/setup.ui" line="148"/>
@@ -346,7 +346,7 @@
     <message>
         <location filename="../res/ui/setup.ui" line="374"/>
         <source>include Table Overview with Measurements</source>
-        <translation>Inclure le tableau d'ensemble de mesures</translation>
+        <translation>Inclure le tableau d&apos;ensemble de mesures</translation>
     </message>
     <message>
         <location filename="../res/ui/setup.ui" line="354"/>
@@ -361,12 +361,12 @@
     <message>
         <location filename="../res/ui/setup.ui" line="371"/>
         <source>table overview on/off</source>
-        <translation>vue d'ensemble de la table</translation>
+        <translation>vue d&apos;ensemble de la table</translation>
     </message>
     <message>
         <location filename="../res/ui/setup.ui" line="397"/>
         <source>reset settings to defaults</source>
-        <translation>rétablir les paramètres d'origine</translation>
+        <translation>rétablir les paramètres d&apos;origine</translation>
     </message>
     <message>
         <location filename="../res/ui/setup.ui" line="400"/>
@@ -444,7 +444,7 @@
     <message>
         <location filename="../res/ui/usb.ui" line="174"/>
         <source>start import</source>
-        <translation>lancer l'importation</translation>
+        <translation>lancer l&apos;importation</translation>
     </message>
     <message>
         <location filename="../res/ui/usb.ui" line="177"/>
@@ -459,7 +459,7 @@
     <message>
         <location filename="../res/ui/usb.ui" line="217"/>
         <source>abort import</source>
-        <translation>annuler l'import</translation>
+        <translation>annuler l&apos;import</translation>
     </message>
     <message>
         <location filename="../res/ui/usb.ui" line="220"/>
@@ -560,7 +560,7 @@
     <message>
         <location filename="../res/ui/mainwindow.ui" line="197"/>
         <source>show help</source>
-        <translation>afficher l'aide</translation>
+        <translation>afficher l&apos;aide</translation>
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="206"/>
@@ -619,7 +619,7 @@
         <location filename="../res/ui/mainwindow.ui" line="272"/>
         <location filename="../res/ui/mainwindow.ui" line="275"/>
         <source>import data from usb device</source>
-        <translation>importer des données d'un périphérique usb</translation>
+        <translation>importer des données d&apos;un périphérique usb</translation>
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="284"/>
@@ -722,7 +722,7 @@
         <location filename="../res/ui/mainwindow.ui" line="431"/>
         <location filename="../res/ui/mainwindow.ui" line="434"/>
         <source>show print preview</source>
-        <translation>prévisualiser l'impression</translation>
+        <translation>prévisualiser l&apos;impression</translation>
     </message>
     <message>
         <location filename="../res/ui/mainwindow.ui" line="443"/>
@@ -789,10 +789,10 @@ Ouvrir le fichier avec le programme par défaut?</translation>
         <location filename="../mainwindow.cpp" line="67"/>
         <location filename="../mainwindow.cpp" line="68"/>
         <location filename="../mainwindow.cpp" line="69"/>
-        <location filename="../mainwindow.cpp" line="1117"/>
-        <location filename="../mainwindow.cpp" line="1118"/>
-        <location filename="../mainwindow.cpp" line="1119"/>
-        <location filename="../mainwindow.cpp" line="1120"/>
+        <location filename="../mainwindow.cpp" line="1017"/>
+        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1019"/>
+        <location filename="../mainwindow.cpp" line="1020"/>
         <source>show %1</source>
         <translation>afficher %1</translation>
     </message>
@@ -800,7 +800,7 @@ Ouvrir le fichier avec le programme par défaut?</translation>
         <location filename="../mainwindow.cpp" line="73"/>
         <location filename="../mainwindow.cpp" line="74"/>
         <source>record count</source>
-        <translation>nombre d'enregistrements</translation>
+        <translation>nombre d&apos;enregistrements</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="94"/>
@@ -828,7 +828,7 @@ Ouvrir le fichier avec le programme par défaut?</translation>
         <source>Failed to analyze online updater!
 
 %1</source>
-        <translation>Echec d'analyse de la mise à jour en ligne!
+        <translation>Echec d&apos;analyse de la mise à jour en ligne!
 
 %1</translation>
     </message>
@@ -837,14 +837,14 @@ Ouvrir le fichier avec le programme par défaut?</translation>
         <source>Failed to start the installer!
 
 Please update manually.</source>
-        <translation>Echec du lancement de l'installeur!
+        <translation>Echec du lancement de l&apos;installeur!
 
 Veuillez le lancer manuellement.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="409"/>
         <source>Overview - %1 %2/%3</source>
-        <translation>Vue d'ensemble - %1 %2/%3</translation>
+        <translation>Vue d&apos;ensemble - %1 %2/%3</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="454"/>
@@ -893,7 +893,7 @@ Veuillez le lancer manuellement.</translation>
 
      %2 = %3
      %4 = %5</source>
-        <translation>Importation réussie de 1% des enregistrements via USB:
+        <translation>Importation réussie de %1 des enregistrements via USB:
 
      %2 = %3
      %4 = %5</translation>
@@ -901,14 +901,14 @@ Veuillez le lancer manuellement.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="693"/>
         <source>Import from usb device canceled!</source>
-        <translation>Annulation de l'import via USB!</translation>
+        <translation>Annulation de l&apos;import via USB!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="698"/>
         <source>No supported device found!
 
 Check usb connection and try again...</source>
-        <translation>Aucun périphérique supporté n'a été trouvé!
+        <translation>Aucun périphérique supporté n&apos;a été trouvé!
 
 Vérifiez la connexion USB et relancer...</translation>
     </message>
@@ -918,7 +918,7 @@ Vérifiez la connexion USB et relancer...</translation>
 
      %2 = %3
      %4 = %5</source>
-        <translation>Importation réussie de 1% des enregistrements via SQL:
+        <translation>Importation réussie de %1 des enregistrements via SQL:
 
      %2 = %3
      %4 = %5</translation>
@@ -936,14 +936,14 @@ Open now with default app?</source>
      %2 = %3
      %4 = %5
 
-Ouvrir le fichier avec l'application par défaut?</translation>
+Ouvrir le fichier avec l&apos;application par défaut?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="864"/>
         <source>No valid records in imported SQL found!
 
 Please check table format of file: %1</source>
-        <translation>Aucun enregistrement valide trouvé dans l'import SQL!
+        <translation>Aucun enregistrement valide trouvé dans l&apos;import SQL!
 
 Veuillez vérifier le format de table du fichier: %1</translation>
     </message>
@@ -998,33 +998,33 @@ Veuillez vérifier le format de table du fichier: %1</translation>
         <source>No valid records in imported CSV found!
 
 Please check line format of file: %1</source>
-        <translation>Aucun enregistrement valide trouvé dans l'import CSV!
+        <translation>Aucun enregistrement valide trouvé dans l&apos;import CSV!
 
 Veuillez vérifier le format des lignes du fichier: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="779"/>
         <source>Skipped %1 invalid entries!</source>
-        <translation>%1 d'entrées invalides rejetées!</translation>
+        <translation>%1 d&apos;entrées invalides rejetées!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="686"/>
         <location filename="../mainwindow.cpp" line="785"/>
         <location filename="../mainwindow.cpp" line="873"/>
         <source>Skipped %1 duplicate entries!</source>
-        <translation>%1 d'entrées duppliquées rejetées!</translation>
+        <translation>%1 d&apos;entrées duppliquées rejetées!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="78"/>
         <location filename="../mainwindow.cpp" line="80"/>
         <source>start analysis</source>
-        <translation>démarrer l'analyse</translation>
+        <translation>démarrer l&apos;analyse</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="79"/>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>stop analysis</source>
-        <translation>arrêter l'analyse</translation>
+        <translation>arrêter l&apos;analyse</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="704"/>
@@ -1043,7 +1043,7 @@ Veuillez vérifier le format des lignes du fichier: %1</translation>
         <source>Could not open &quot;%1&quot;!
 
 Reason: %2</source>
-        <translation>Echec d'ouverture &quot;%1&quot;!
+        <translation>Echec d&apos;ouverture &quot;%1&quot;!
 
 Cause: %2</translation>
     </message>
@@ -1070,7 +1070,7 @@ Open now with default app?</source>
      %2 = %3
      %4 = %5
 
-Ouvrir avec l'application par défaut?</translation>
+Ouvrir avec l&apos;application par défaut?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1062"/>
@@ -1145,8 +1145,8 @@ Ouvrir avec l'application par défaut?</translation>
     <name>aboutDialog</name>
     <message>
         <location filename="../about.cpp" line="10"/>
-        <source>Version %1 - %2</source>
-        <translation>Version %1 - %2</translation>
+        <source>Version %1 - %2 | %3 ( %4 )</source>
+        <translation>Version %1 - %2 | %3 ( %4 )</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="14"/>
@@ -1155,7 +1155,7 @@ Ouvrir avec l'application par défaut?</translation>
 A liability for any damages resulting from the use is excluded. Use at your own risk!</source>
         <translation>Ce programme est Freeware et peut être installé et utilisé sans frais pour usage non commercial sur un nombre illimité de serveurs sans autre limitation.
 
-L'auteur décline toute responsabilité sur les dommages causés par l'utilisation du produit. Utiliser à vos risques et périls!</translation>
+L&apos;auteur décline toute responsabilité sur les dommages causés par l&apos;utilisation du produit. Utiliser à vos risques et périls!</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
@@ -1170,7 +1170,7 @@ Would you like to support the further development of this project nevertheless?<
 
 * Le paiement est effectué de façon volontaire sans revendications.
 * Vous ne recevez aucun droit sur le logiciel offert.
-* Ne s'agissant pas d'une donation au sens juridique, aucun certificat ne peut être délivré.
+* Ne s&apos;agissant pas d&apos;une donation au sens juridique, aucun certificat ne peut être délivré.
 
 Souhaitez-vous néanmoins soutenir le développement de ce projet?</translation>
     </message>
@@ -1224,7 +1224,7 @@ Souhaitez-vous néanmoins soutenir le développement de ce projet?</translation>
 If this fails please donate manually with the shown information.</source>
         <translation>Le butineur par défaut sera lancé vers le site de donation.
 
-En cas d'échec, effectuer une procédure manuelle avec les informations présentées.</translation>
+En cas d&apos;échec, effectuer une procédure manuelle avec les informations présentées.</translation>
     </message>
     <message>
         <location filename="../donation.cpp" line="95"/>
@@ -1233,7 +1233,7 @@ En cas d'échec, effectuer une procédure manuelle avec les informations présen
 If this fails please donate manually with the shown information.</source>
         <translation>Le client Bitcoin par défaut sera lancé avec les informations de paiement.
 
-En cas d'échec, effectuer une procédure manuelle avec les informations présentées.</translation>
+En cas d&apos;échec, effectuer une procédure manuelle avec les informations présentées.</translation>
     </message>
     <message>
         <location filename="../donation.cpp" line="105"/>
@@ -1253,7 +1253,7 @@ Banque	: %4</translation>
 Please perform the transfer using this data.</source>
         <translation>Les informations du paiement seront copiées dans le presse-papier.
 
-Merci d'effectuer le transfert avec ces données.</translation>
+Merci d&apos;effectuer le transfert avec ces données.</translation>
     </message>
     <message>
         <location filename="../donation.cpp" line="120"/>
@@ -1265,7 +1265,7 @@ Merci d'effectuer le transfert avec ces données.</translation>
         <source>Current exchange rate could not be determined!
 
 Please specify the desired amount manually...</source>
-        <translation>Le taux de change n'a pu être déterminé!
+        <translation>Le taux de change n&apos;a pu être déterminé!
 
 Merci de saisir manuellement le montant souhaité...</translation>
     </message>
@@ -1277,8 +1277,8 @@ Merci de saisir manuellement le montant souhaité...</translation>
         <source>Manual record for &quot;%1&quot; skipped because already exists!</source>
         <translation>Enregistrement manuel de &quot;%1&quot; omis car il existe déjà!</translation>
     </message>
-          +</context>
-       +<context>
+</context>
+<context>
     <name>setupDialog</name>
     <message>
         <location filename="../setup.cpp" line="34"/>
@@ -1350,7 +1350,7 @@ Merci de saisir manuellement le montant souhaité...</translation>
     <message>
         <location filename="../usb.cpp" line="268"/>
         <source>Really abort import?</source>
-        <translation>Souhaitez-vous vraiment annuler l'import?</translation>
+        <translation>Souhaitez-vous vraiment annuler l&apos;import?</translation>
     </message>
 </context>
 </TS>

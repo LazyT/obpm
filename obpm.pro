@@ -11,7 +11,7 @@ HEADERS		+= mainwindow.h   usb.h   about.h   donation.h   update.h   setup.h   h
 FORMS		+= res/ui/mainwindow.ui res/ui/usb.ui res/ui/about.ui res/ui/donation.ui res/ui/update.ui res/ui/setup.ui res/ui/help.ui res/ui/sql.ui res/ui/login.ui res/ui/record.ui
 RESOURCES	+= res/obpm.qrc
 
-TRANSLATIONS	+= lng/obpm_de.ts
+TRANSLATIONS	+= lng/obpm_de.ts lng/obpm_fr.ts
 
 unix:!macx {
 SOURCES		+= ext/hid/hid-lin.c

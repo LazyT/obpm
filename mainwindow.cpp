@@ -164,6 +164,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(rangeStart, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
 	connect(rangeStop, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
 	connect(filter, SIGNAL(clicked(bool)), this, SLOT(filterChanged(bool)));
+	connect(widget_bp, SIGNAL(mouseDoubleClick(QMouseEvent*)), this, SLOT(mouseDoubleClickEvent(QMouseEvent*)));
+	connect(widget_hr, SIGNAL(mouseDoubleClick(QMouseEvent*)), this, SLOT(mouseDoubleClickEvent(QMouseEvent*)));
 	connect(widget_bp, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_hr, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_bp->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisBPChanged(QCPRange)));
@@ -1380,6 +1382,51 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
 	}
 
 	QMainWindow::keyPressEvent(ke);
+}
+
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *me)
+{
+	if(((QCustomPlot*)sender())->plottableAt(me->pos()))
+	{
+		int index;
+		int x = ((QCustomPlot*)sender())->xAxis->pixelToCoord(me->pos().x() - 5);
+		QCPData sys, dia, bpm;
+
+		if(((QCustomPlot*)sender())->plottableAt(me->pos()))
+		{
+			sys = widget_bp->graph(0)->data()->lowerBound(x).value();
+			dia = widget_bp->graph(1)->data()->lowerBound(x).value();
+			bpm = widget_hr->graph(0)->data()->lowerBound(x).value();
+
+			if(QDateTime::fromTime_t(bpm.key).date().year() == 1970)
+			{
+				sys = widget_bp->graph(0)->data()->last();
+				dia = widget_bp->graph(1)->data()->last();
+				bpm = widget_hr->graph(0)->data()->last();
+			}
+		}
+
+		for(index = 0; index < healthdata[user].count(); index++)
+		{
+			if((uint)bpm.key == healthdata[user].at(index).time)
+			{
+				if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(bpm.key).toString("dddd, dd.MM.yyyy hh:mm")).arg(sys.value).arg(dia.value).arg(bpm.value), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+				{
+					healthdata[user].remove(index);
+
+					if(healthdata[user].count())
+					{
+						getHealthStats(healthdata[user], &healthstat[user]);
+
+					}
+
+					buildGraph(healthdata[user], healthstat[user]);
+				}
+
+				break;
+			}
+		}
+	}
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *me)

@@ -155,6 +155,7 @@ private slots:
 	void xAxisHRChanged(QCPRange);
 
 	void keyPressEvent(QKeyEvent*);
+	void mouseDoubleClickEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void closeEvent(QCloseEvent*);
 

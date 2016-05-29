@@ -1265,7 +1265,7 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 		widget_bp->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
 		widget_bp->yAxis->setRange(stat.dia_min - 10, stat.sys_max + 10);
 		widget_hr->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
-		widget_hr->yAxis->setRange(stat.bpm_min - 5, stat.bpm_max + 5);
+		widget_hr->yAxis->setRange(stat.bpm_min - 5, stat.bpm_max < 100 ? 100 : stat.bpm_max + 5);
 
 		widget_bp->plottable(0)->setName(QString("SYS: %1 [%2] %3").arg(stat.sys_min).arg(stat.sys_mid).arg(stat.sys_max));
 		widget_bp->plottable(1)->setName(QString("DIA: %1 [%2] %3").arg(stat.dia_min).arg(stat.dia_mid).arg(stat.dia_max));

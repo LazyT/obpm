@@ -171,6 +171,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(widget_bp->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisBPChanged(QCPRange)));
 	connect(widget_hr->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisHRChanged(QCPRange)));
 
+	widget_bp->installEventFilter(this);
+	widget_hr->installEventFilter(this);
+
 	dateChanged();
 
 	if(QFile::exists(cfg.database))
@@ -1370,6 +1373,41 @@ void MainWindow::showHelp(QString page)
 	}
 }
 
+bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
+{
+	if(ev->type() == QEvent::ToolTip)
+	{
+		QHelpEvent *he = static_cast<QHelpEvent *>(ev);
+		QCustomPlot *qcp = static_cast<QCustomPlot *>(obj);
+
+		if(qcp->plottableAt(he->pos()))
+		{
+			int x = qcp->xAxis->pixelToCoord(he->pos().x() - 8);
+
+			QCPData sys = widget_bp->graph(0)->data()->lowerBound(x).value();
+			QCPData dia = widget_bp->graph(1)->data()->lowerBound(x).value();
+			QCPData bpm = widget_hr->graph(0)->data()->lowerBound(x).value();
+
+			if(QDateTime::fromTime_t(bpm.key).date().year() == 1970)
+			{
+				sys = widget_bp->graph(0)->data()->last();
+				dia = widget_bp->graph(1)->data()->last();
+				bpm = widget_hr->graph(0)->data()->last();
+			}
+
+			QToolTip::showText(he->globalPos(), QString("%1\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(bpm.key).toString("dddd, dd.MM.yyyy hh:mm")).arg(sys.value).arg(dia.value).arg(bpm.value));
+		}
+		else
+		{
+			QToolTip::hideText();
+		}
+
+		return true;
+	}
+
+	return QMainWindow::eventFilter(obj, ev);
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *ke)
 {
 	if(ke->key() == Qt::Key_F1)
@@ -1431,27 +1469,7 @@ void MainWindow::mouseDoubleClickEvent(QMouseEvent *me)
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 {
-	if(me->button() == Qt::LeftButton && sender())
-	{
-		int x = ((QCustomPlot*)sender())->xAxis->pixelToCoord(me->pos().x() - 5);
-
-		if(((QCustomPlot*)sender())->plottableAt(me->pos()))
-		{
-			QCPData sys = widget_bp->graph(0)->data()->lowerBound(x).value();
-			QCPData dia = widget_bp->graph(1)->data()->lowerBound(x).value();
-			QCPData bpm = widget_hr->graph(0)->data()->lowerBound(x).value();
-
-			if(QDateTime::fromTime_t(bpm.key).date().year() == 1970)
-			{
-				sys = widget_bp->graph(0)->data()->last();
-				dia = widget_bp->graph(1)->data()->last();
-				bpm = widget_hr->graph(0)->data()->last();
-			}
-
-			QToolTip::showText(me->globalPos(), QString("%1\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(bpm.key).toString("dddd, dd.MM.yyyy hh:mm")).arg(sys.value).arg(dia.value).arg(bpm.value));
-		}
-	}
-	else if(me->button() == Qt::MiddleButton)
+	if(me->button() == Qt::MiddleButton)
 	{
 		on_action_resetZoom_triggered();
 	}

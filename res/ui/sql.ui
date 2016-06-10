@@ -226,6 +226,21 @@
            <normaloff>:/png/png/bpm.png</normaloff>:/png/png/bpm.png</iconset>
          </property>
         </column>
+        <column>
+         <property name="text">
+          <string notr="true">MSG</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/notes.png</normaloff>:/png/png/notes.png</iconset>
+         </property>
+        </column>
        </widget>
       </item>
       <item>

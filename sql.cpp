@@ -46,17 +46,17 @@ bool sqlDialog::createDB()
 	{
 		QSqlQuery query(ramdb);
 
-		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
-		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
+		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
 
 		for(int i = 0; i < ((MainWindow*)parent())->healthdata[0].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4)").arg(((MainWindow*)parent())->healthdata[0].at(i).time).arg(((MainWindow*)parent())->healthdata[0].at(i).sys).arg(((MainWindow*)parent())->healthdata[0].at(i).dia).arg(((MainWindow*)parent())->healthdata[0].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5')").arg(((MainWindow*)parent())->healthdata[0].at(i).time).arg(((MainWindow*)parent())->healthdata[0].at(i).sys).arg(((MainWindow*)parent())->healthdata[0].at(i).dia).arg(((MainWindow*)parent())->healthdata[0].at(i).bpm).arg(((MainWindow*)parent())->healthdata[0].at(i).msg));
 		}
 
 		for(int i = 0; i < ((MainWindow*)parent())->healthdata[1].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4)").arg(((MainWindow*)parent())->healthdata[1].at(i).time).arg(((MainWindow*)parent())->healthdata[1].at(i).sys).arg(((MainWindow*)parent())->healthdata[1].at(i).dia).arg(((MainWindow*)parent())->healthdata[1].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5')").arg(((MainWindow*)parent())->healthdata[1].at(i).time).arg(((MainWindow*)parent())->healthdata[1].at(i).sys).arg(((MainWindow*)parent())->healthdata[1].at(i).dia).arg(((MainWindow*)parent())->healthdata[1].at(i).bpm).arg(((MainWindow*)parent())->healthdata[1].at(i).msg));
 		}
 	}
 	else
@@ -122,6 +122,14 @@ void sqlDialog::runQuery()
 			twi->setData(Qt::DisplayRole, query.value("bpm").toInt());
 			twi->setTextAlignment(Qt::AlignCenter);
 			tableWidget->setItem(row, 3, twi);
+		}
+
+		if(query.record().contains("msg"))
+		{
+			twi = new QTableWidgetItem();
+			twi->setData(Qt::DisplayRole, query.value("msg").toString());
+			twi->setTextAlignment(Qt::AlignCenter);
+			tableWidget->setItem(row, 4, twi);
 		}
 
 		row++;

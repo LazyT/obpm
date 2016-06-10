@@ -84,6 +84,7 @@ struct HEALTHDATA{
 	uint sys;
 	uint dia;
 	uint bpm;
+	QString msg;
 };
 
 struct HEALTHSTAT{
@@ -155,6 +156,8 @@ private slots:
 	void xAxisHRChanged(QCPRange);
 
 	bool eventFilter(QObject*, QEvent*);
+
+	int indexFromTime(QObject*, QPoint);
 
 	void keyPressEvent(QKeyEvent*);
 	void mouseDoubleClickEvent(QMouseEvent*);

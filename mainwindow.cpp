@@ -742,7 +742,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 			{
 				values.append(line.split(';'));
 
-				if(values.count() == 6)
+				if(values.count() >= 6)
 				{
 					user = values.at(0).toUInt() - 1;
 
@@ -756,6 +756,11 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 					set.sys = values.at(3).toUInt();
 					set.dia = values.at(4).toUInt();
 					set.bpm = values.at(5).toUInt();
+
+					if(values.count() > 6)
+					{
+						set.msg = values.at(6);
+					}
 
 					healthdata[user].append(set);
 				}
@@ -832,7 +837,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 	{
 		QSqlQuery query(db);
 
-		if(query.exec("SELECT * FROM U1") && query.record().count() == 4)
+		if(query.exec("SELECT * FROM U1") && query.record().count() >= 4)
 		{
 			while(query.next())
 			{
@@ -840,12 +845,17 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				set.sys = query.value("sys").toInt();
 				set.dia = query.value("dia").toInt();
 				set.bpm = query.value("bpm").toInt();
+
+				if(query.record().count() > 4)
+				{
+					set.msg = query.value("msg").toString();
+				}
 
 				healthdata[0].append(set);
 			}
 		}
 
-		if(query.exec("SELECT * FROM U2") && query.record().count() == 4)
+		if(query.exec("SELECT * FROM U2") && query.record().count() >= 4)
 		{
 			while(query.next())
 			{
@@ -853,6 +863,11 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				set.sys = query.value("sys").toInt();
 				set.dia = query.value("dia").toInt();
 				set.bpm = query.value("bpm").toInt();
+
+				if(query.record().count() > 4)
+				{
+					set.msg = query.value("msg").toString();
+				}
 
 				healthdata[1].append(set);
 			}
@@ -896,7 +911,8 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 void MainWindow::exportDataToCSV(QString filename)
 {
 	QFile file(filename);
-	QString header("user;date;time;sys;dia;pulse\n");
+	QString header("user;date;time;sys;dia;bpm;comment\n");
+	QString record;
 
 	if(file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
@@ -904,12 +920,16 @@ void MainWindow::exportDataToCSV(QString filename)
 
 		for(int i = 0; i < healthdata[0].count(); i++)
 		{
-			file.write(QString("1;%1;%2;%3;%4\n").arg(QDateTime::fromTime_t(healthdata[0].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia, 3, 10, QChar('0')).arg(healthdata[0].at(i).bpm, 3, 10, QChar('0')).toUtf8(), 28 + 1);
+			record = QString("1;%1;%2;%3;%4;%5\n").arg(QDateTime::fromTime_t(healthdata[0].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia, 3, 10, QChar('0')).arg(healthdata[0].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[0].at(i).msg);
+
+			file.write(record.toUtf8(), record.toUtf8().length());
 		}
 
 		for(int i = 0; i < healthdata[1].count(); i++)
 		{
-			file.write(QString("2;%1;%2;%3;%4\n").arg(QDateTime::fromTime_t(healthdata[1].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia, 3, 10, QChar('0')).arg(healthdata[1].at(i).bpm, 3, 10, QChar('0')).toUtf8(), 28 + 1);
+			record = QString("2;%1;%2;%3;%4;%5\n").arg(QDateTime::fromTime_t(healthdata[1].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia, 3, 10, QChar('0')).arg(healthdata[1].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[1].at(i).msg);
+
+			file.write(record.toUtf8(), record.toUtf8().length());
 		}
 
 		file.close();
@@ -946,17 +966,17 @@ void MainWindow::exportDataToSQL(QString filename, bool showmsg)
 			query.exec("DROP TABLE 'U2'");
 		}
 
-		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
-		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER)");
+		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
 
 		for(int i = 0; i < healthdata[0].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4)").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5')").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm).arg(healthdata[0].at(i).msg));
 		}
 
 		for(int i = 0; i < healthdata[1].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4)").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm));
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5')").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm).arg(healthdata[1].at(i).msg));
 		}
 
 		db.commit();
@@ -1361,6 +1381,28 @@ void MainWindow::xAxisHRChanged(QCPRange range)
 	widget_bp->replot();
 }
 
+int MainWindow::indexFromTime(QObject *src, QPoint pos)
+{
+	int index = -1;
+
+	if(((QCustomPlot*)src)->plottableAt(pos))
+	{
+		QCPData data = widget_hr->graph(0)->data()->lowerBound(((QCustomPlot*)src)->xAxis->pixelToCoord(pos.x() - 8)).value();
+
+		for(int scan = 0; scan < healthdata[user].count(); scan++)
+		{
+			if((uint)data.key == healthdata[user].at(scan).time)
+			{
+				index = scan;
+
+				break;
+			}
+		}
+	}
+
+	return index;
+}
+
 void MainWindow::showHelp(QString page)
 {
 	if(help)
@@ -1377,25 +1419,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
 {
 	if(ev->type() == QEvent::ToolTip)
 	{
-		QHelpEvent *he = static_cast<QHelpEvent *>(ev);
-		QCustomPlot *qcp = static_cast<QCustomPlot *>(obj);
+		int record = indexFromTime(obj, ((QHelpEvent*)ev)->pos());
 
-		if(qcp->plottableAt(he->pos()))
+		if(record >= 0)
 		{
-			int x = qcp->xAxis->pixelToCoord(he->pos().x() - 8);
-
-			QCPData sys = widget_bp->graph(0)->data()->lowerBound(x).value();
-			QCPData dia = widget_bp->graph(1)->data()->lowerBound(x).value();
-			QCPData bpm = widget_hr->graph(0)->data()->lowerBound(x).value();
-
-			if(QDateTime::fromTime_t(bpm.key).date().year() == 1970)
-			{
-				sys = widget_bp->graph(0)->data()->last();
-				dia = widget_bp->graph(1)->data()->last();
-				bpm = widget_hr->graph(0)->data()->last();
-			}
-
-			QToolTip::showText(he->globalPos(), QString("%1\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(bpm.key).toString("dddd, dd.MM.yyyy hh:mm")).arg(sys.value).arg(dia.value).arg(bpm.value));
+			QToolTip::showText(((QHelpEvent*)ev)->globalPos(), healthdata[user].at(record).msg.isEmpty() ? QString("%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm) : QString("%1\n\nSYS %2 / DIA %3 / BPM %4\n\n%5").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm).arg(healthdata[user].at(record).msg));
 		}
 		else
 		{
@@ -1424,52 +1452,44 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
 
 void MainWindow::mouseDoubleClickEvent(QMouseEvent *me)
 {
-	if(((QCustomPlot*)sender())->plottableAt(me->pos()))
+	int record = indexFromTime(sender(), me->pos());
+
+	if(record >= 0)
 	{
-		int index;
-		int x = ((QCustomPlot*)sender())->xAxis->pixelToCoord(me->pos().x() - 5);
-		QCPData sys, dia, bpm;
-
-		if(((QCustomPlot*)sender())->plottableAt(me->pos()))
+		if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 		{
-			sys = widget_bp->graph(0)->data()->lowerBound(x).value();
-			dia = widget_bp->graph(1)->data()->lowerBound(x).value();
-			bpm = widget_hr->graph(0)->data()->lowerBound(x).value();
+			healthdata[user].remove(record);
 
-			if(QDateTime::fromTime_t(bpm.key).date().year() == 1970)
+			if(healthdata[user].count())
 			{
-				sys = widget_bp->graph(0)->data()->last();
-				dia = widget_bp->graph(1)->data()->last();
-				bpm = widget_hr->graph(0)->data()->last();
+				getHealthStats(healthdata[user], &healthstat[user]);
+
 			}
-		}
 
-		for(index = 0; index < healthdata[user].count(); index++)
-		{
-			if((uint)bpm.key == healthdata[user].at(index).time)
-			{
-				if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(bpm.key).toString("dddd, dd.MM.yyyy hh:mm")).arg(sys.value).arg(dia.value).arg(bpm.value), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
-				{
-					healthdata[user].remove(index);
-
-					if(healthdata[user].count())
-					{
-						getHealthStats(healthdata[user], &healthstat[user]);
-
-					}
-
-					buildGraph(healthdata[user], healthstat[user]);
-				}
-
-				break;
-			}
+			buildGraph(healthdata[user], healthstat[user]);
 		}
 	}
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 {
-	if(me->button() == Qt::MiddleButton)
+	if(me->button() == Qt::LeftButton && me->modifiers() == Qt::ControlModifier)
+	{
+		int record = indexFromTime(sender(), me->pos());
+
+		if(record >= 0)
+		{
+			bool rc;
+
+			QString msg = QInputDialog::getText(this, APPNAME, tr("Please enter comment for this record:"), QLineEdit::Normal, healthdata[user].at(record).msg, &rc);
+
+			if(rc)
+			{
+				healthdata[user][record].msg = msg;
+			}
+		}
+	}
+	else if(me->button() == Qt::MiddleButton)
 	{
 		on_action_resetZoom_triggered();
 	}

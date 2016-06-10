@@ -34,6 +34,7 @@ void recordDialog::on_toolButton_add_clicked()
 	set.sys = spinBox_sys->value();
 	set.dia = spinBox_dia->value();
 	set.bpm = spinBox_bpm->value();
+	set.msg = lineEdit_comment->text();
 
 	((MainWindow*)parent())->healthdata[toolButton_user->isChecked()].append(set);
 

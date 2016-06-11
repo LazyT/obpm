@@ -645,7 +645,7 @@ int MainWindow::validateData(QAction *active, bool append)
 	}
 	else
 	{
-		if(healthdata[0].count())
+		if(healthdata[0].count() || !healthdata[1].count())
 		{
 			action_User1->setChecked(true);
 		}
@@ -1463,7 +1463,6 @@ void MainWindow::mouseDoubleClickEvent(QMouseEvent *me)
 			if(healthdata[user].count())
 			{
 				getHealthStats(healthdata[user], &healthstat[user]);
-
 			}
 
 			buildGraph(healthdata[user], healthstat[user]);
@@ -1564,6 +1563,10 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 		if(healthdata[0].count() || healthdata[1].count())
 		{
 			exportDataToSQL(cfg.database, false);
+		}
+		else if(db.isValid())
+		{
+			QFile::remove(cfg.database);
 		}
 
 		ce->accept();

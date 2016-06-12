@@ -503,6 +503,36 @@
     <string>add manual data</string>
    </property>
   </action>
+  <action name="action_deleteRecord">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/delete.png</normaloff>:/png/png/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>delete selected record</string>
+   </property>
+   <property name="statusTip">
+    <string>delete selected record</string>
+   </property>
+  </action>
+  <action name="action_commentRecord">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/notes.png</normaloff>:/png/png/notes.png</iconset>
+   </property>
+   <property name="text">
+    <string>Comment</string>
+   </property>
+   <property name="toolTip">
+    <string>comment selected record</string>
+   </property>
+   <property name="statusTip">
+    <string>comment selected record</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

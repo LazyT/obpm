@@ -82,6 +82,7 @@
         <file>png/datetime.png</file>
         <file>png/login.png</file>
         <file>png/notes.png</file>
+        <file>png/delete.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

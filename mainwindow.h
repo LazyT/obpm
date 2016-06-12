@@ -160,7 +160,6 @@ private slots:
 	int indexFromTime(QObject*, QPoint);
 
 	void keyPressEvent(QKeyEvent*);
-	void mouseDoubleClickEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void closeEvent(QCloseEvent*);
 

@@ -164,8 +164,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(rangeStart, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
 	connect(rangeStop, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(dateChanged()));
 	connect(filter, SIGNAL(clicked(bool)), this, SLOT(filterChanged(bool)));
-	connect(widget_bp, SIGNAL(mouseDoubleClick(QMouseEvent*)), this, SLOT(mouseDoubleClickEvent(QMouseEvent*)));
-	connect(widget_hr, SIGNAL(mouseDoubleClick(QMouseEvent*)), this, SLOT(mouseDoubleClickEvent(QMouseEvent*)));
 	connect(widget_bp, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_hr, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_bp->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisBPChanged(QCPRange)));
@@ -1450,100 +1448,107 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
 	QMainWindow::keyPressEvent(ke);
 }
 
-void MainWindow::mouseDoubleClickEvent(QMouseEvent *me)
-{
-	int record = indexFromTime(sender(), me->pos());
-
-	if(record >= 0)
-	{
-		if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
-		{
-			healthdata[user].remove(record);
-
-			if(healthdata[user].count())
-			{
-				getHealthStats(healthdata[user], &healthstat[user]);
-			}
-
-			buildGraph(healthdata[user], healthstat[user]);
-		}
-	}
-}
-
 void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 {
-	if(me->button() == Qt::LeftButton && me->modifiers() == Qt::ControlModifier)
-	{
-		int record = indexFromTime(sender(), me->pos());
-
-		if(record >= 0)
-		{
-			bool rc;
-
-			QString msg = QInputDialog::getText(this, APPNAME, tr("Please enter comment for this record:"), QLineEdit::Normal, healthdata[user].at(record).msg, &rc);
-
-			if(rc)
-			{
-				healthdata[user][record].msg = msg;
-			}
-		}
-	}
-	else if(me->button() == Qt::MiddleButton)
+	if(me->button() == Qt::MiddleButton)
 	{
 		on_action_resetZoom_triggered();
 	}
 	else if(me->button() == Qt::RightButton)
 	{
 		QMenu menu;
-		QActionGroup *group = new QActionGroup(this);
+		QAction* selectedItem;
 
-		menu.addAction(action_showHideLegend);
-		menu.addSeparator();
-		menu.addAction(action_stylePoint);
-		menu.addAction(action_styleLine);
-		menu.addAction(action_styleStep);
-		menu.addAction(action_styleImpulse);
-		menu.addSeparator();
-		menu.addAction(action_resetZoom);
+		int record = indexFromTime(sender(), me->pos());
 
-		action_showHideLegend->setChecked(cfg.legend);
-
-		group->addAction(action_stylePoint)->setChecked(cfg.style == QCPGraph::lsNone ? true : false);
-		group->addAction(action_styleLine)->setChecked(cfg.style == QCPGraph::lsLine ? true : false);
-		group->addAction(action_styleStep)->setChecked(cfg.style == QCPGraph::lsStepCenter ? true : false);
-		group->addAction(action_styleImpulse)->setChecked(cfg.style == QCPGraph::lsImpulse ? true : false);
-
-		QAction* selectedItem = menu.exec(me->globalPos());
-
-		if(selectedItem)
+		if(record >= 0)
 		{
-			if(selectedItem->objectName() == "action_stylePoint")
-			{
-				cfg.style = QCPGraph::lsNone;
-			}
-			else if(selectedItem->objectName() == "action_styleLine")
-			{
-				cfg.style = QCPGraph::lsLine;
-			}
-			else if(selectedItem->objectName() == "action_styleStep")
-			{
-				cfg.style = QCPGraph::lsStepCenter;
-			}
-			else if(selectedItem->objectName() == "action_styleImpulse")
-			{
-				cfg.style = QCPGraph::lsImpulse;
-			}
-			else
-			{
-				return;
-			}
+			menu.addAction(action_deleteRecord);
+			menu.addAction(action_commentRecord);
 
-			widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
-			widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
-			widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+			selectedItem = menu.exec(me->globalPos());
 
-			widget_bp->replot();
-			widget_hr->replot();
+			if(selectedItem)
+			{
+				if(selectedItem->objectName() == "action_deleteRecord")
+				{
+					if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+					{
+						healthdata[user].remove(record);
+
+						if(healthdata[user].count())
+						{
+							getHealthStats(healthdata[user], &healthstat[user]);
+						}
+
+						buildGraph(healthdata[user], healthstat[user]);
+					}
+				}
+				else if(selectedItem->objectName() == "action_commentRecord")
+				{
+					bool rc;
+
+					QString msg = QInputDialog::getText(this, APPNAME, tr("Please enter comment for this record:"), QLineEdit::Normal, healthdata[user].at(record).msg, &rc);
+
+					if(rc)
+					{
+						healthdata[user][record].msg = msg;
+					}
+				}
+			}
+		}
+		else
+		{
+			QActionGroup *group = new QActionGroup(this);
+
+			menu.addAction(action_showHideLegend);
+			menu.addSeparator();
+			menu.addAction(action_stylePoint);
+			menu.addAction(action_styleLine);
+			menu.addAction(action_styleStep);
+			menu.addAction(action_styleImpulse);
+			menu.addSeparator();
+			menu.addAction(action_resetZoom);
+
+			action_showHideLegend->setChecked(cfg.legend);
+
+			group->addAction(action_stylePoint)->setChecked(cfg.style == QCPGraph::lsNone ? true : false);
+			group->addAction(action_styleLine)->setChecked(cfg.style == QCPGraph::lsLine ? true : false);
+			group->addAction(action_styleStep)->setChecked(cfg.style == QCPGraph::lsStepCenter ? true : false);
+			group->addAction(action_styleImpulse)->setChecked(cfg.style == QCPGraph::lsImpulse ? true : false);
+
+			selectedItem = menu.exec(me->globalPos());
+
+			if(selectedItem)
+			{
+				if(selectedItem->objectName() == "action_stylePoint")
+				{
+					cfg.style = QCPGraph::lsNone;
+				}
+				else if(selectedItem->objectName() == "action_styleLine")
+				{
+					cfg.style = QCPGraph::lsLine;
+				}
+				else if(selectedItem->objectName() == "action_styleStep")
+				{
+					cfg.style = QCPGraph::lsStepCenter;
+				}
+				else if(selectedItem->objectName() == "action_styleImpulse")
+				{
+					cfg.style = QCPGraph::lsImpulse;
+				}
+				else
+				{
+					return;
+				}
+
+				widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+				widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+				widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+
+				widget_bp->replot();
+				widget_hr->replot();
+			}
 		}
 	}
 }

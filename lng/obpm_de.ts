@@ -1158,7 +1158,7 @@ SYS %2 / DIA %3 / BPM %4</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1491"/>
         <source>Please enter comment for this record:</source>
-        <translation>Bitte Kommentar für diesen Messwert eingeben:</translation>
+        <translation>Bitte Kommentar für diesen Datensatz eingeben:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1558"/>

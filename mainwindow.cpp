@@ -1454,7 +1454,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 	{
 		on_action_resetZoom_triggered();
 	}
-	else if(me->button() == Qt::RightButton)
+	else if(me->button() == Qt::RightButton && sender())
 	{
 		QMenu menu;
 		QAction* selectedItem;

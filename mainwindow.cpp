@@ -136,6 +136,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_bp->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	widget_bp->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
+	widget_bp->xAxis->setAutoTicks(false);
+	widget_bp->xAxis->setAutoSubTicks(false);
 	widget_bp->yAxis->setRange(cfg.dia - 15, cfg.sys + 15);
 	widget_bp->yAxis->setAutoTickStep(false);
 	widget_bp->yAxis->setTickStep(10);
@@ -152,6 +154,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_hr->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	widget_hr->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
+	widget_hr->xAxis->setAutoTicks(false);
+	widget_hr->xAxis->setAutoSubTicks(false);
 	widget_hr->yAxis->setRange(cfg.bpm - 20, cfg.bpm);
 	widget_hr->yAxis->setAutoTickStep(false);
 	widget_hr->yAxis->setTickStep(5);
@@ -168,6 +172,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(widget_hr, SIGNAL(mouseRelease(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
 	connect(widget_bp->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisBPChanged(QCPRange)));
 	connect(widget_hr->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisHRChanged(QCPRange)));
+	connect(widget_bp->xAxis, SIGNAL(ticksRequest()), this, SLOT(plotAxisTicks()));
+	connect(widget_hr->xAxis, SIGNAL(ticksRequest()), this, SLOT(plotAxisTicks()));
 
 	widget_bp->installEventFilter(this);
 	widget_hr->installEventFilter(this);
@@ -193,6 +199,38 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 		move(cfg.pmain);
 		resize(cfg.smain);
 	}
+}
+
+void MainWindow::plotAxisTicks()
+{
+	QCPAxis *axis = (QCPAxis*)sender();
+	QVector <double> ticks;
+	int label = widget_bp->width() / (widget_bp->fontMetrics().width("00.00.00") + 20);
+	int times [] = { 60, 120, 300, 600, 900, 1800, 3600, 7200, 10800, 21600, 43200, 86400, 172800, 259200, 604800, 1209600, 1814400, 2419200 }; // 1m, 2m, 5m, 10m, 15m, 30m, 1h, 2h, 3h, 6h, 12h, 1d, 2d, 3d, 1w, 2w, 3w, 4w
+	int subticks [] = { 0, 1, 4, 4, 2, 5, 3, 1, 2, 1, 3, 7, 1, 2, 6, 1, 2, 3 };
+	quint64 min = axis->range().lower;
+	quint64 max = axis->range().upper;
+	quint64 range = max - min;
+	quint64 steps = range / label;
+	quint64 align = 1;
+	int i = 0;
+
+	while(i < (int)(sizeof(times) / sizeof(int)) && align < steps)
+	{
+		align = times[i++];
+	}
+
+	axis->setSubTickCount(subticks[i - 1]);
+
+	for(i = 1; i <= label; i++)
+	{
+		quint64 tick = min + (range * i / label);
+		tick -= tick % align;
+
+		ticks.append(tick);
+	}
+
+	axis->setTickVector(ticks);
 }
 
 void MainWindow::proxyAuthenticationRequired(__attribute__ ((unused)) const QNetworkProxy &proxy, QAuthenticator *authenticator)

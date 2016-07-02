@@ -49,7 +49,7 @@
 	#define TABLE_CORR 0
 #endif
 
-#define tdiff 3600
+#define TDIFF 0.015
 
 #define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
 #define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm.sql"
@@ -130,6 +130,8 @@ private:
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	bool update;
+	int offsetUTC;
+	int tdiff;
 
 private slots:
 

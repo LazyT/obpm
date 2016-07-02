@@ -53,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	help = NULL;
 	user = 0;
 	update = false;
+	offsetUTC = QDateTime::currentDateTime().offsetFromUtc();
+	tdiff = 0;
 
 	QMenu *menu = new QMenu(this);
 	menu->addAction(action_PrintPreview);
@@ -135,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_bp->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	widget_bp->xAxis->setDateTimeSpec(Qt::UTC);
 	widget_bp->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
 	widget_bp->xAxis->setAutoTicks(false);
 	widget_bp->xAxis->setAutoSubTicks(false);
@@ -153,6 +156,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_hr->graph(0)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/bpm.png")));
 	widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 	widget_hr->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	widget_hr->xAxis->setDateTimeSpec(Qt::UTC);
 	widget_hr->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
 	widget_hr->xAxis->setAutoTicks(false);
 	widget_hr->xAxis->setAutoSubTicks(false);
@@ -1231,20 +1235,24 @@ void MainWindow::on_action_resetZoom_triggered()
 {
 	if(filter->isChecked())
 	{
-		rangeStart->setDate(QDateTime::fromTime_t(filterdata.first().time - tdiff).date());
-		rangeStop->setDate(QDateTime::fromTime_t(filterdata.last().time + tdiff).date());
+		rangeStart->setDate(QDateTime::fromTime_t(filterdata.first().time).date());
+		rangeStop->setDate(QDateTime::fromTime_t(filterdata.last().time).date());
 
-		widget_bp->xAxis->setRange(filterdata.first().time - tdiff, filterdata.last().time + tdiff);
+		tdiff = (filterdata.last().time - filterdata.first().time) * TDIFF;
+
+		widget_bp->xAxis->setRange(filterdata.first().time + offsetUTC - tdiff, filterdata.last().time + offsetUTC + tdiff);
 		widget_bp->replot();
 	}
 	else
 	{
 		if(healthdata[user].count())
 		{
-			rangeStart->setDate(QDateTime::fromTime_t(healthdata[user].first().time - tdiff).date());
-			rangeStop->setDate(QDateTime::fromTime_t(healthdata[user].last().time + tdiff).date());
+			rangeStart->setDate(QDateTime::fromTime_t(healthdata[user].first().time).date());
+			rangeStop->setDate(QDateTime::fromTime_t(healthdata[user].last().time).date());
 
-			widget_bp->xAxis->setRange(healthdata[user].first().time - tdiff, healthdata[user].last().time + tdiff);
+			tdiff = (healthdata[user].last().time - healthdata[user].first().time) * TDIFF;
+
+			widget_bp->xAxis->setRange(healthdata[user].first().time + offsetUTC - tdiff, healthdata[user].last().time + offsetUTC + tdiff);
 			widget_bp->replot();
 		}
 		else
@@ -1252,11 +1260,10 @@ void MainWindow::on_action_resetZoom_triggered()
 			rangeStart->setDate(QDateTime::currentDateTime().date());
 			rangeStop->setDate(QDateTime::currentDateTime().date());
 
-			widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+			widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t() + offsetUTC, rangeStop->dateTime().toTime_t() + offsetUTC);
 		}
 	}
 }
-
 
 void MainWindow::on_action_addRecord_triggered()
 {
@@ -1318,9 +1325,11 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 		rangeStart->setDateTime(QDateTime(QDateTime::fromTime_t(data.first().time).date(), QTime(0, 0, 0, 0)));
 		rangeStop->setDateTime(QDateTime(QDateTime::fromTime_t(data.last().time).date(), QTime(23, 59, 59, 999)));
 
-		widget_bp->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
+		tdiff = (data.last().time - data.first().time) * TDIFF;
+
+		widget_bp->xAxis->setRange(data.first().time + offsetUTC - tdiff, data.last().time + offsetUTC + tdiff);
 		widget_bp->yAxis->setRange(stat.dia_min - 10, stat.sys_max + 10);
-		widget_hr->xAxis->setRange(data.first().time - tdiff, data.last().time + tdiff);
+		widget_hr->xAxis->setRange(data.first().time + offsetUTC - tdiff, data.last().time + offsetUTC + tdiff);
 		widget_hr->yAxis->setRange(stat.bpm_min - 5, stat.bpm_max < 100 ? 100 : stat.bpm_max + 5);
 
 		widget_bp->plottable(0)->setName(QString("SYS: %1 [%2] %3").arg(stat.sys_min).arg(stat.sys_mid).arg(stat.sys_max));
@@ -1329,9 +1338,9 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 
 		for(int i = 0; i < data.count(); i++)
 		{
-			widget_bp->graph(0)->addData(data.at(i).time, data.at(i).sys);
-			widget_bp->graph(1)->addData(data.at(i).time, data.at(i).dia);
-			widget_hr->graph(0)->addData(data.at(i).time, data.at(i).bpm);
+			widget_bp->graph(0)->addData(data.at(i).time + offsetUTC, data.at(i).sys);
+			widget_bp->graph(1)->addData(data.at(i).time + offsetUTC, data.at(i).dia);
+			widget_hr->graph(0)->addData(data.at(i).time + offsetUTC, data.at(i).bpm);
 		}
 	}
 	else
@@ -1347,7 +1356,7 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 		rangeStart->setDateTime(QDateTime(QDateTime::currentDateTime().date(), QTime(0, 0, 0, 0)));
 		rangeStop->setDateTime(QDateTime(QDateTime::currentDateTime().date(), QTime(23, 59, 59, 999)));
 
-		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t() + offsetUTC, rangeStop->dateTime().toTime_t() + offsetUTC);
 	}
 
 	widget_bp->replot();
@@ -1365,7 +1374,7 @@ void MainWindow::dateChanged()
 	}
 	else
 	{
-		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t(), rangeStop->dateTime().toTime_t());
+		widget_bp->xAxis->setRange(rangeStart->dateTime().toTime_t() + offsetUTC, rangeStop->dateTime().toTime_t() + offsetUTC);
 		widget_bp->replot();
 	}
 }
@@ -1427,7 +1436,7 @@ int MainWindow::indexFromTime(QObject *src, QPoint pos)
 
 		for(int scan = 0; scan < healthdata[user].count(); scan++)
 		{
-			if((uint)data.key == healthdata[user].at(scan).time)
+			if((uint)data.key == healthdata[user].at(scan).time + offsetUTC)
 			{
 				index = scan;
 

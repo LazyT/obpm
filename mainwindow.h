@@ -31,9 +31,9 @@
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
 #define APPTRNS QObject::tr("LazyT")
 #define APPLANG QObject::tr("English")
-#define APPVERS "1.0.7"
-#define APPDATE "01.05.2016"
-#define APPRELS "8"
+#define APPVERS "1.0.8"
+#define APPDATE "02.07.2016"
+#define APPRELS "9"
 
 #define SYS_NORM 135
 #define DIA_NORM 85

@@ -3,36 +3,22 @@
  <ApplicationVersion>1.0.0</ApplicationVersion>
  <Checksum>true</Checksum>
  <PackageUpdate>
-  <Name>obpm.libs</Name>
-  <DisplayName>Qt5 Libraries</DisplayName>
-  <DisplayName xml:lang="de_DE">Qt5 Bibliotheken</DisplayName>
-  <Description>Required Qt5 libraries.</Description>
-  <Description xml:lang="de_DE">Erforderliche Qt5 Bibliotheken.</Description>
-  <SortingPriority>2</SortingPriority>
-  <Default>true</Default>
-  <Version>1.0.6</Version>
-  <ReleaseDate>2015-07-23</ReleaseDate>
-  <UpdateFile UncompressedSize="56093628" CompressedSize="15477649" OS="Any"/>
-  <DownloadableArchives>platforms.7z,platformthemes.7z,printsupport.7z,sqldrivers.7z,content.7z</DownloadableArchives>
-  <SHA1>38f33f4cd90155bb2ac11b74661197b8560b3d70</SHA1>
- </PackageUpdate>
- <PackageUpdate>
   <Name>obpm</Name>
   <DisplayName>Omron Blood Pressure Manager</DisplayName>
   <DisplayName xml:lang="de_DE">Omron Blutdruck Manager</DisplayName>
   <Description>Main program.</Description>
   <Description xml:lang="de_DE">Hauptprogramm.</Description>
-  <Version>1.0.7</Version>
-  <ReleaseDate>2016-05-01</ReleaseDate>
+  <Version>1.0.8</Version>
+  <ReleaseDate>2016-07-02</ReleaseDate>
   <ForcedInstallation>true</ForcedInstallation>
   <Script>installscript.qs</Script>
-  <UpdateFile UncompressedSize="1876761" CompressedSize="958126" OS="Any"/>
+  <UpdateFile UncompressedSize="1798625" OS="Any" CompressedSize="968670"/>
   <DownloadableArchives>hlp.7z,content.7z</DownloadableArchives>
   <Translations>de.qm</Translations>
   <Licenses>
    <License file="license.txt"/>
   </Licenses>
-  <SHA1>116a4305ea7bc39e41bad62da3d5bef1085a8e88</SHA1>
+  <SHA1>01b58c9d29bd6281ca47b32f47ac4a3b3fc62a89</SHA1>
  </PackageUpdate>
  <PackageUpdate>
   <Name>obpm.lang</Name>
@@ -41,20 +27,45 @@
   <Description>Existing translations for the application.</Description>
   <Description xml:lang="de_DE">Vorhandene Übersetzungen für die Anwendung.</Description>
   <SortingPriority>1</SortingPriority>
-  <Version>1.0.7</Version>
-  <ReleaseDate>2016-05-01</ReleaseDate>
-  <UpdateFile UncompressedSize="0" CompressedSize="0" OS="Any"/>
-  <SHA1>dea908a8cdb8ae8ad5cb7a807a1ba48dc2b4c458</SHA1>
+  <Version>0.0.0</Version>
+  <ReleaseDate>2016-07-02</ReleaseDate>
+  <UpdateFile UncompressedSize="0" OS="Any" CompressedSize="0"/>
+  <SHA1>6ea6d8eb4fb08712dafc8d31334ac9d4a0ef254b</SHA1>
  </PackageUpdate>
  <PackageUpdate>
   <Name>obpm.lang.de</Name>
   <DisplayName>DE</DisplayName>
   <Description>German language.</Description>
   <Description xml:lang="de_DE">Deutsche Sprache.</Description>
-  <Version>1.0.7</Version>
-  <ReleaseDate>2016-05-01</ReleaseDate>
-  <UpdateFile UncompressedSize="717293" CompressedSize="415726" OS="Any"/>
+  <Version>1.0.8</Version>
+  <ReleaseDate>2016-07-02</ReleaseDate>
+  <UpdateFile UncompressedSize="637385" OS="Any" CompressedSize="429011"/>
   <DownloadableArchives>hlp.7z,lng.7z</DownloadableArchives>
-  <SHA1>796953b04eb842dfb934e929bc70beb49b7c2740</SHA1>
+  <SHA1>db8e9f9addef256cf278ac0d07bf8dc25b69a4df</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>obpm.lang.fr</Name>
+  <DisplayName>FR</DisplayName>
+  <Description>French language.</Description>
+  <Description xml:lang="de_DE">Französische Sprache.</Description>
+  <Version>1.0.8</Version>
+  <ReleaseDate>2016-07-02</ReleaseDate>
+  <UpdateFile UncompressedSize="205950" OS="Any" CompressedSize="46241"/>
+  <DownloadableArchives>hlp.7z,lng.7z</DownloadableArchives>
+  <SHA1>48775a950e6fb5642755cf8b08ea6116e1bea4c1</SHA1>
+ </PackageUpdate>
+ <PackageUpdate>
+  <Name>obpm.libs</Name>
+  <DisplayName>Qt5 Libraries</DisplayName>
+  <DisplayName xml:lang="de_DE">Qt5 Bibliotheken</DisplayName>
+  <Description>Required Qt5 libraries.</Description>
+  <Description xml:lang="de_DE">Erforderliche Qt5 Bibliotheken.</Description>
+  <SortingPriority>2</SortingPriority>
+  <Default>true</Default>
+  <Version>1.0.8</Version>
+  <ReleaseDate>2016-07-02</ReleaseDate>
+  <UpdateFile UncompressedSize="55684828" OS="Any" CompressedSize="15424081"/>
+  <DownloadableArchives>platforms.7z,platformthemes.7z,printsupport.7z,sqldrivers.7z,content.7z</DownloadableArchives>
+  <SHA1>b63e991355f85519c8998ffab328bc31fe393fcd</SHA1>
  </PackageUpdate>
 </Updates>

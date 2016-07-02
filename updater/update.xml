@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <online-updater>
-	<release>8</release>
-	<version>1.0.7</version>
-	<date>01.05.2016</date>
+	<release>9</release>
+	<version>1.0.8</version>
+	<date>02.07.2016</date>
 	<changes>
-		<en>1:data analyzer;1:proxy support;1:manual records</en>
-		<de>1:Daten-Analyse;1:Proxy Unterstützung;1:Manuelle Datensätze</de>
+		<en>1:delete/comment records;1:improve alignment of time axis;1:show translator info;2:use real tooltips;2:layout alignment when bpm less than 100;2:possible crashes;2:delete empty db on exit</en>
+		<de>1:Datensätze löschen/kommentieren;1:Ausrichtung der Zeitachse verbessern;1:Übersetzer Info anzeigen;2:richtige Tooltips verwenden;2:Layout Ausrichtung wenn BPM kleiner 100;2:mögliche Abstürze;2:leere DB beim beenden löschen</de>
 	</changes>
 </online-updater>

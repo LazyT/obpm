@@ -137,7 +137,13 @@ void sqlDialog::runQuery()
 
 	if(!row)
 	{
+		groupBox_results->setTitle(tr("Results"));
+
 		QMessageBox::information(this, APPNAME, tr("No results for this query found!"));
+	}
+	else
+	{
+		groupBox_results->setTitle(tr("Results [ %1 ]").arg(row));
 	}
 }
 

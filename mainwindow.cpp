@@ -426,11 +426,11 @@ void MainWindow::getHealthStats(QVector <HEALTHDATA> data, HEALTHSTAT *stat)
 	stat->bpm_max = cpy.last().bpm;
 }
 
-void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm)
+void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm, int *comments)
 {
 	QTextTable *table, *tables[tablecount];
 	QTextTableFormat tfmt;
-	QTextCharFormat cfmt_table, cfmt_red, cfmt_blk;
+	QTextCharFormat cfmt_table, cfmt_red, cfmt_blu, cfmt_blk;
 	QTextBlockFormat bfmt_table;
 	QVector<QTextLength> constraints;
 	int page = index / (tablecount * tablerows);
@@ -445,6 +445,9 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 	cfmt_red.setForeground(QColor("red"));
 	cfmt_red.setFontWeight(QFont::Bold);
 	cfmt_red.setFontPointSize(11);
+	cfmt_blu.setForeground(QColor("blue"));
+	cfmt_blu.setFontWeight(QFont::Bold);
+	cfmt_blu.setFontPointSize(11);
 	cfmt_blk.setFontPointSize(11);
 	bfmt_table.setAlignment(Qt::AlignHCenter);
 	cursor.insertBlock(bfmt_pbrk);
@@ -510,10 +513,15 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 			pdlg->setLabelText(tr("Record %1 of %2").arg(1 + i + page * tablecount * tablerows).arg(exportdata.count()));
 			pdlg->setValue(i + page * tablecount * tablerows);
 
+			if(!exportdata.at(i + page * tablecount * tablerows).msg.isEmpty())
+			{
+				(*comments)++;
+			}
+
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 0).firstCursorPosition().setBlockFormat(bfmt_table);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 0).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("ddd dd.MM.yy"), cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().setBlockFormat(bfmt_table);
-			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("hh:mm"), cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 1).firstCursorPosition().insertText(QDateTime::fromTime_t(exportdata.at(i + page * tablecount * tablerows).time).toString("hh:mm"), exportdata.at(i + page * tablecount * tablerows).msg.isEmpty() ? cfmt_blk : cfmt_blu);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().setBlockFormat(bfmt_table);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).sys, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).sys > cfg.sys ? cfmt_red : cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().setBlockFormat(bfmt_table);
@@ -528,13 +536,14 @@ void MainWindow::createDoc(QPrinter *printer)
 {
 	QTextDocument *doc = new QTextDocument();
 	QTextCursor cursor(doc);
-	QTextBlockFormat bfmt_cntr, bfmt_pbrk;
+	QTextBlockFormat bfmt_cntr, bfmt_left, bfmt_pbrk;
 	QTextCharFormat cfmt_bold, cfmt_norm;
 	int fontid = QFontDatabase::addApplicationFont(":/ttf/ttf/larabie.ttf");
 	int width = QApplication::desktop()->logicalDpiX() * printer->pageRect(QPrinter::Inch).width();
 	int height = QApplication::desktop()->logicalDpiY() * printer->pageRect(QPrinter::Inch).height() - 100;		// fixme: subtract real header height
 	int tablecount = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLES : TABLES - 1;		// fixme: calculate based on paper format
 	int tablerows = printer->pageLayout().orientation() == QPageLayout::Landscape ? TABLE_ROWS : TABLE_ROWS + 11;
+	int comment = 0, comments = 0;
 
 	pdlg = cfg.psd ? new QProgressDialog(tr("Diagram"), tr("Cancel"), 0, 1, this, Qt::Tool) : new QProgressDialog(tr("Diagram %1/2").arg(1), tr("Cancel"), 0, 2, this, Qt::Tool);
 	pdlg->setWindowTitle(tr("Creating Document"));
@@ -549,6 +558,7 @@ void MainWindow::createDoc(QPrinter *printer)
 	doc->setDefaultFont(QFont(QFontDatabase::applicationFontFamilies(fontid).at(0)));
 
 	bfmt_cntr.setAlignment(Qt::AlignHCenter);
+	bfmt_left.setAlignment(Qt::AlignLeft);
 	bfmt_pbrk.setPageBreakPolicy(QTextFormat::PageBreak_AlwaysBefore);
 	cfmt_bold.setFontWeight(QFont::Bold);
 	cfmt_bold.setFontPointSize(18);
@@ -620,7 +630,7 @@ void MainWindow::createDoc(QPrinter *printer)
 
 		for(int i = 0; i < exportdata.count(); i += tablecount * tablerows)
 		{
-			createDocTablePage(tablecount, tablerows, i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm);
+			createDocTablePage(tablecount, tablerows, i, cursor, bfmt_pbrk, bfmt_cntr, cfmt_bold, cfmt_norm, &comments);
 
 			if(pdlg->wasCanceled())
 			{
@@ -628,6 +638,34 @@ void MainWindow::createDoc(QPrinter *printer)
 				printer->setFromTo(1, cfg.psd ? 1 : 2);
 
 				break;
+			}
+		}
+
+		if(comments)
+		{
+			bfmt_cntr.setBackground(QColor("lightGray"));
+			cursor.insertBlock(bfmt_cntr);
+			cursor.setCharFormat(cfmt_bold);
+			cursor.insertText(tr("Comments - %1").arg(user ? cfg.alias2 : cfg.alias1) + "\n");
+			cursor.setCharFormat(cfmt_norm);
+			cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
+			bfmt_cntr.setBackground(QColor("transparent"));
+			cursor.insertBlock(bfmt_left);
+			cursor.insertText("\n");
+
+			pdlg->setMaximum(comments);
+
+			for(int i = 0; i < exportdata.count(); i++)
+			{
+				if(!exportdata.at(i).msg.isEmpty())
+				{
+					comment++;
+
+					pdlg->setLabelText(tr("Comment %1 of %2").arg(comment).arg(comments));
+					pdlg->setValue(comment);
+
+					cursor.insertText(QDateTime::fromTime_t(exportdata.at(i).time).toString("ddd dd.MM.yy hh:mm : ") + exportdata.at(i).msg + "\n");
+				}
 			}
 		}
 	}

@@ -143,7 +143,7 @@ private slots:
 	void checkUpdate();
 
 	void createDoc(QPrinter*);
-	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat);
+	void createDocTablePage(int, int, int, QTextCursor, QTextBlockFormat, QTextBlockFormat, QTextCharFormat, QTextCharFormat, int*);
 
 	void importDataFromUSB(bool);
 	void importDataFromCSV(QString, bool);

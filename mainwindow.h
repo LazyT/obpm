@@ -51,8 +51,9 @@
 
 #define TDIFF 0.015
 
-#define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
-#define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm.sql"
+#define CFG QDir::homePath() + "/.obpm/obpm.cfg"
+#define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/obpm.sql"
+#define EXP QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
 
 #ifdef Q_OS_LINUX
 	#define UPD '"' + QCoreApplication::applicationDirPath() + "/maintenancetool" + '"'
@@ -75,6 +76,7 @@ struct CONFIG
 	uint bpm;
 	QString alias1, alias2;
 	QString database;
+	QString exports;
 	QPoint pmain, phelp;
 	QSize smain, shelp;
 };

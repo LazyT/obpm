@@ -258,6 +258,7 @@ void MainWindow::getConfig()
 	cfg.alias1 = ini.value("Alias1", tr("User 1")).toString();
 	cfg.alias2 = ini.value("Alias2", tr("User 2")).toString();
 	cfg.database = ini.value("Database", DB).toString();
+	cfg.exports = ini.value("Exports", EXP).toString();
 
 	ini.beginGroup("MainWindow");
 	cfg.pmain = ini.value("Position", QPoint(0, 0)).toPoint();
@@ -286,6 +287,7 @@ void MainWindow::setConfig()
 	ini.setValue("Alias1", cfg.alias1);
 	ini.setValue("Alias2", cfg.alias2);
 	ini.setValue("Database", cfg.database);
+	ini.setValue("Exports", cfg.exports);
 
 	ini.beginGroup("MainWindow");
 	ini.setValue("Position", cfg.pmain);
@@ -1143,7 +1145,7 @@ void MainWindow::on_action_importFromUSB_triggered()
 
 void MainWindow::on_action_importFromFile_triggered()
 {
-	QString filename = QFileDialog::getOpenFileName(this, tr("Import from CSV or SQL File"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator(), tr("CSV File (*.csv);;SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
+	QString filename = QFileDialog::getOpenFileName(this, tr("Import from CSV or SQL File"), cfg.exports, tr("CSV File (*.csv);;SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
 
 	if(!filename.isEmpty())
 	{
@@ -1162,10 +1164,12 @@ void MainWindow::on_action_exportToCSV_triggered()
 {
 	if(healthdata[0].count() || healthdata[1].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV File (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to CSV"), cfg.exports + QString("/obpm-%1.csv").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("CSV File (*.csv)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
+			cfg.exports = QFileInfo(filename).path();
+
 			exportDataToCSV(filename);
 		}
 	}
@@ -1179,10 +1183,12 @@ void MainWindow::on_action_exportToSQL_triggered()
 {
 	if(healthdata[0].count() || healthdata[1].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to SQL"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1.sql").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to SQL"), cfg.exports + QString("/obpm-%1.sql").arg(QDateTime::currentDateTime().date().toString("yyyyMMdd")), tr("SQL File (*.sql)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
+			cfg.exports = QFileInfo(filename).path();
+
 			exportDataToSQL(filename, true);
 		}
 	}
@@ -1196,10 +1202,12 @@ void MainWindow::on_action_exportToPDF_triggered()
 {
 	if(healthdata[user].count())
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + QString("obpm-%1-%2-%3.pdf").arg(user ? cfg.alias2 : cfg.alias1).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF File (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
+		QString filename = QFileDialog::getSaveFileName(this, tr("Export to PDF"), cfg.exports + QString("/obpm-%1-%2-%3.pdf").arg(user ? cfg.alias2 : cfg.alias1).arg(rangeStart->dateTime().toString("yyyyMMdd"), rangeStop->dateTime().toString("yyyyMMdd")), tr("PDF File (*.pdf)"), 0, QFileDialog::DontUseNativeDialog);
 
 		if(!filename.isEmpty())
 		{
+			cfg.exports = QFileInfo(filename).path();
+
 			exportDataToPDF(filename);
 		}
 	}

@@ -35,7 +35,7 @@ void setupDialog::on_toolButton_db_clicked()
 
 	if(!dirname.isEmpty())
 	{
-		lineEdit_db->setText(dirname + QDir::separator() + "obpm.sql");
+		lineEdit_db->setText(dirname + "/obpm.sql");
 	}
 }
 

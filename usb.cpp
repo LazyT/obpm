@@ -82,7 +82,7 @@ bool usbDialog::readRawData()
 		return false;
 	}
 
-	dumpfile.setFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "import.log");
+	dumpfile.setFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/import.log");
 	dumpfile.remove();
 
 	if(!sendCMD(cmd_init))

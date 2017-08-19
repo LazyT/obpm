@@ -52,6 +52,7 @@
 #define TDIFF 0.015
 
 #define CFG QDir::homePath() + "/.obpm/obpm.cfg"
+#define BL QDir::homePath() + "/.obpm/blacklist"
 #define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/obpm.sql"
 #define EXP QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
 
@@ -129,6 +130,7 @@ private:
 	QLCDNumber *lcd;
 	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
+	QList <uint> blacklist;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	bool update;
@@ -141,6 +143,9 @@ private slots:
 
 	void getConfig();
 	void setConfig();
+
+	void getBlacklist();
+	void setBlacklist();
 
 	void checkUpdate();
 

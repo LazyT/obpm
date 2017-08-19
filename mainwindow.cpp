@@ -50,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	getConfig();
 
+	getBlacklist();
+
 	help = NULL;
 	user = 0;
 	update = false;
@@ -300,6 +302,48 @@ void MainWindow::setConfig()
 	ini.endGroup();
 
 	ini.sync();
+}
+
+void MainWindow::getBlacklist()
+{
+	QFile file(BL);
+
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		while(!file.atEnd())
+		{
+			QString line = file.readLine();
+
+			if(!line.isEmpty())
+			{
+				uint value = line.toInt();
+
+				if(value)
+				{
+					blacklist.append(value);
+				}
+			}
+		}
+
+		file.close();
+	}
+}
+
+void MainWindow::setBlacklist()
+{
+	QFile file(BL);
+
+	if(blacklist.count() && file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		qSort(blacklist);
+
+		for(int i = 0; i < blacklist.count(); i++)
+		{
+			file.write(QString::number(blacklist.at(i)).toUtf8() + '\n');
+		}
+
+		file.close();
+	}
 }
 
 void MainWindow::checkUpdate()
@@ -693,7 +737,11 @@ int MainWindow::validateData(QAction *active, bool append)
 
 		for(int i = 0; i < healthdata[0].count() - 1; i++)
 		{
-			if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
+			if(blacklist.contains(healthdata[0].at(i).time))
+			{
+				healthdata[0].remove(i--);
+			}
+			else if(healthdata[0].at(i).time == healthdata[0].at(i + 1).time)
 			{
 				duplicate++;
 				healthdata[0].remove(i--);
@@ -709,7 +757,11 @@ int MainWindow::validateData(QAction *active, bool append)
 
 		for(int i = 0; i < healthdata[1].count() - 1; i++)
 		{
-			if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
+			if(blacklist.contains(healthdata[1].at(i).time))
+			{
+				healthdata[1].remove(i--);
+			}
+			else if(healthdata[1].at(i).time == healthdata[1].at(i + 1).time)
 			{
 				duplicate++;
 				healthdata[1].remove(i--);
@@ -1567,6 +1619,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 				{
 					if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 					{
+						blacklist.append(healthdata[user].at(record).time);
+
 						healthdata[user].remove(record);
 
 						if(healthdata[user].count())
@@ -1657,6 +1711,8 @@ void MainWindow::closeEvent(QCloseEvent *ce)
 		}
 
 		setConfig();
+
+		setBlacklist();
 
 		if(healthdata[0].count() || healthdata[1].count())
 		{

@@ -81,7 +81,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>19</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="contextMenuPolicy">
@@ -531,6 +531,36 @@
    </property>
    <property name="statusTip">
     <string>comment selected record</string>
+   </property>
+  </action>
+  <action name="action_setStart">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/from.png</normaloff>:/png/png/from.png</iconset>
+   </property>
+   <property name="text">
+    <string>From</string>
+   </property>
+   <property name="toolTip">
+    <string>start analysis</string>
+   </property>
+   <property name="statusTip">
+    <string>start analysis</string>
+   </property>
+  </action>
+  <action name="action_setStop">
+   <property name="icon">
+    <iconset resource="../obpm.qrc">
+     <normaloff>:/png/png/to.png</normaloff>:/png/png/to.png</iconset>
+   </property>
+   <property name="text">
+    <string>To</string>
+   </property>
+   <property name="toolTip">
+    <string>stop analysis</string>
+   </property>
+   <property name="statusTip">
+    <string>stop analysis</string>
    </property>
   </action>
  </widget>

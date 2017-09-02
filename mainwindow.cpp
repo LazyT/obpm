@@ -1610,6 +1610,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 		{
 			menu.addAction(action_deleteRecord);
 			menu.addAction(action_commentRecord);
+			menu.addSeparator();
+			menu.addAction(action_setStart);
+			menu.addAction(action_setStop);
 
 			selectedItem = menu.exec(me->globalPos());
 
@@ -1641,6 +1644,14 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 					{
 						healthdata[user][record].msg = msg;
 					}
+				}
+				else if(selectedItem->objectName() == "action_setStart")
+				{
+					rangeStart->setDate(QDateTime::fromTime_t(healthdata[user].at(record).time).date());
+				}
+				else if(selectedItem->objectName() == "action_setStop")
+				{
+					rangeStop->setDate(QDateTime::fromTime_t(healthdata[user].at(record).time).date());
 				}
 			}
 		}

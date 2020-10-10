@@ -1,4 +1,4 @@
-#include "sql.h"
+﻿#include "sql.h"
 
 sqlDialog::sqlDialog(QWidget *parent) : QDialog(parent)
 {
@@ -20,6 +20,7 @@ sqlDialog::sqlDialog(QWidget *parent) : QDialog(parent)
 	comboBox->addItem(QString("select * from U%1 where SYS > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.sys));
 	comboBox->addItem(QString("select * from U%1 where DIA > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.dia));
 	comboBox->addItem(QString("select * from U%1 where BPM > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.bpm));
+	comboBox->addItem(QString("select * from U%1 where IHB > %2").arg(1 + ((MainWindow*)parent)->user).arg(((MainWindow*)parent)->cfg.ihb));
 
 	if(((MainWindow*)parent)->filter->isChecked())
 	{
@@ -39,24 +40,27 @@ sqlDialog::sqlDialog(QWidget *parent) : QDialog(parent)
 bool sqlDialog::createDB()
 {
 	ramdb = QSqlDatabase::addDatabase("QSQLITE", "RAMDB");
-
-	ramdb.setDatabaseName(":memory:");
+//
+//    ramdb.setConnectOptions("QSQLITE_OPEN_URI;QSQLITE_ENABLE_SHARED_CACHE");
+//    ramdb.setDatabaseName("file::memory:");
+//
+    ramdb.setDatabaseName(":memory:");
 
 	if(ramdb.open())
 	{
 		QSqlQuery query(ramdb);
 
-		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
-		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'ihb' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'ihb' INTEGER, 'msg' TEXT)");
 
 		for(int i = 0; i < ((MainWindow*)parent())->healthdata[0].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5')").arg(((MainWindow*)parent())->healthdata[0].at(i).time).arg(((MainWindow*)parent())->healthdata[0].at(i).sys).arg(((MainWindow*)parent())->healthdata[0].at(i).dia).arg(((MainWindow*)parent())->healthdata[0].at(i).bpm).arg(((MainWindow*)parent())->healthdata[0].at(i).msg));
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5', '%6')").arg(((MainWindow*)parent())->healthdata[0].at(i).time).arg(((MainWindow*)parent())->healthdata[0].at(i).sys).arg(((MainWindow*)parent())->healthdata[0].at(i).dia).arg(((MainWindow*)parent())->healthdata[0].at(i).bpm).arg(((MainWindow*)parent())->healthdata[0].at(i).ihb).arg(((MainWindow*)parent())->healthdata[0].at(i).msg));
 		}
 
 		for(int i = 0; i < ((MainWindow*)parent())->healthdata[1].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5')").arg(((MainWindow*)parent())->healthdata[1].at(i).time).arg(((MainWindow*)parent())->healthdata[1].at(i).sys).arg(((MainWindow*)parent())->healthdata[1].at(i).dia).arg(((MainWindow*)parent())->healthdata[1].at(i).bpm).arg(((MainWindow*)parent())->healthdata[1].at(i).msg));
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5', '%6')").arg(((MainWindow*)parent())->healthdata[1].at(i).time).arg(((MainWindow*)parent())->healthdata[1].at(i).sys).arg(((MainWindow*)parent())->healthdata[1].at(i).dia).arg(((MainWindow*)parent())->healthdata[1].at(i).bpm).arg(((MainWindow*)parent())->healthdata[1].at(i).ihb).arg(((MainWindow*)parent())->healthdata[1].at(i).msg));
 		}
 	}
 	else
@@ -124,12 +128,20 @@ void sqlDialog::runQuery()
 			tableWidget->setItem(row, 3, twi);
 		}
 
+		if(query.record().contains("ihb"))
+		{
+			twi = new QTableWidgetItem();
+			twi->setData(Qt::DisplayRole, query.value("ihb").toInt());
+			twi->setTextAlignment(Qt::AlignCenter);
+			tableWidget->setItem(row, 4, twi);
+		}
+
 		if(query.record().contains("msg"))
 		{
 			twi = new QTableWidgetItem();
 			twi->setData(Qt::DisplayRole, query.value("msg").toString());
 			twi->setTextAlignment(Qt::AlignCenter);
-			tableWidget->setItem(row, 4, twi);
+			tableWidget->setItem(row, 5, twi);
 		}
 
 		row++;
@@ -196,6 +208,8 @@ void sqlDialog::keyPressEvent(QKeyEvent *ke)
 
 	QDialog::keyPressEvent(ke);
 }
+
+
 
 void sqlDialog::reject()
 {

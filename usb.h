@@ -1,6 +1,8 @@
 #ifndef USBDIALOG_H
 #define USBDIALOG_H
 
+class mainwindow;
+
 #include "ui_usb.h"
 #include "mainwindow.h"
 #include "hidapi.h"

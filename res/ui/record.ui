@@ -155,6 +155,28 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox_ihb">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>enter IHB</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::PlusMinus</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>

@@ -58,7 +58,7 @@ void aboutDialog::keyPressEvent(QKeyEvent *ke)
 {
 	if(ke->key() == Qt::Key_F1)
 	{
-		((MainWindow*)parent())->showHelp("01.04");
+		((MainWindow*)parent())->showHelp("02.01");
 	}
 
 	QDialog::keyPressEvent(ke);

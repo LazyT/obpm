@@ -1,6 +1,8 @@
 #ifndef DONATIONDIALOG_H
 #define DONATIONDIALOG_H
 
+class mainwindow;
+
 #include "ui_donation.h"
 #include "mainwindow.h"
 

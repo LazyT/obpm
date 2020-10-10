@@ -1,6 +1,8 @@
 #ifndef HELPDIALOG_H
 #define HELPDIALOG_H
 
+class mainwindow;
+
 #include "ui_help.h"
 #include "mainwindow.h"
 

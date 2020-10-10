@@ -1,6 +1,8 @@
 #ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
 
+class mainwindow;
+
 #include "ui_login.h"
 #include "mainwindow.h"
 

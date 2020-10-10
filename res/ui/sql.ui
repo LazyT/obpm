@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Dialog_SQL</class>
  <widget class="QDialog" name="Dialog_SQL">
@@ -224,6 +224,21 @@
          <property name="icon">
           <iconset resource="../obpm.qrc">
            <normaloff>:/png/png/bpm.png</normaloff>:/png/png/bpm.png</iconset>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string notr="true">IHB</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../obpm.qrc">
+           <normaloff>:/png/png/ihb.png</normaloff>:/png/png/ihb.png</iconset>
          </property>
         </column>
         <column>

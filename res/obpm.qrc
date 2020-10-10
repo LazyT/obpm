@@ -6,6 +6,7 @@
         <file>png/sys.png</file>
         <file>png/dia.png</file>
         <file>png/bpm.png</file>
+        <file>png/heart1.png</file>
         <file>png/legend.png</file>
         <file>png/zoom.png</file>
         <file>png/exit.png</file>
@@ -83,6 +84,8 @@
         <file>png/login.png</file>
         <file>png/notes.png</file>
         <file>png/delete.png</file>
+        <file>png/from.png</file>
+        <file>png/to.png</file>
     </qresource>
     <qresource prefix="/ttf">
         <file>ttf/larabie.ttf</file>

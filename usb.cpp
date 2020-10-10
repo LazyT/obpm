@@ -82,7 +82,7 @@ bool usbDialog::readRawData()
 		return false;
 	}
 
-	dumpfile.setFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "import.log");
+	dumpfile.setFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/import.log");
 	dumpfile.remove();
 
 	if(!sendCMD(cmd_init))
@@ -234,6 +234,7 @@ void usbDialog::on_pushButton_import_clicked()
 		set.sys = payload[i + 1] + 25;
 		set.dia = payload[i];
 		set.bpm = payload[i + 3];
+        set.ihb = (payload[i+4]>>6) & 0x01;
 
 		((MainWindow*)parent())->healthdata[0].append(set);
 	}
@@ -244,6 +245,7 @@ void usbDialog::on_pushButton_import_clicked()
 		set.sys = payload[i + 1 + 14*mem] + 25;
 		set.dia = payload[i + 14*mem];
 		set.bpm = payload[i + 3 + 14*mem];
+        set.ihb = (payload[i+4 + 14*mem]>>6) && 0x01;
 
 		((MainWindow*)parent())->healthdata[1].append(set);
 	}

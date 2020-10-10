@@ -2,7 +2,7 @@
 
 setupDialog::setupDialog(QWidget *parent, struct CONFIG *config) : QDialog(parent)
 {
-	setupUi(this);
+    setupUi(this);
 
 	setWindowFlags(Qt::Tool);
 	layout()->setSizeConstraint(QLayout::SetFixedSize);
@@ -22,6 +22,7 @@ setupDialog::setupDialog(QWidget *parent, struct CONFIG *config) : QDialog(paren
 
 	checkBox_psd->setChecked(cfg->psd);
 	checkBox_pot->setChecked(cfg->pot);
+	checkBox_ihb->setChecked(cfg->ihbp);
 
 	show();
 	activateWindow();
@@ -35,7 +36,7 @@ void setupDialog::on_toolButton_db_clicked()
 
 	if(!dirname.isEmpty())
 	{
-		lineEdit_db->setText(dirname + QDir::separator() + "obpm.sql");
+		lineEdit_db->setText(dirname + "/obpm.sql");
 	}
 }
 
@@ -54,6 +55,7 @@ void setupDialog::on_pushButton_reset_clicked()
 
 	checkBox_psd->setChecked(true);
 	checkBox_pot->setChecked(false);
+	checkBox_ihb->setChecked(true);
 }
 
 void setupDialog::on_pushButton_save_clicked()
@@ -71,6 +73,7 @@ void setupDialog::on_pushButton_save_clicked()
 
 	cfg->psd = checkBox_psd->isChecked();
 	cfg->pot = checkBox_pot->isChecked();
+	cfg->ihbp = checkBox_ihb->isChecked();
 
 	done(QDialog::Accepted);
 }
@@ -88,6 +91,58 @@ void setupDialog::on_horizontalSlider_dia_valueChanged(int value)
 void setupDialog::on_horizontalSlider_bpm_valueChanged(int value)
 {
 	label_bpm->setText(QString("%1").arg(value));
+}
+
+void setupDialog::on_deluser2_clicked()
+{
+    if(QMessageBox::question(this, APPNAME, tr("Do you want to continue?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+    {
+      ramdb = QSqlDatabase::addDatabase("QSQLITE", "RAMDB");
+      ramdb.setDatabaseName(":memory:");
+
+      if(ramdb.open())
+      {
+          QSqlQuery query(ramdb);
+          query.exec("DROP TABLE IF EXISTS 'U2'");
+          ramdb.commit();
+          ramdb.close();
+
+          ((MainWindow*)parent())->healthdata[1].clear();
+          (((MainWindow*)parent())->buildGraph)((((MainWindow*)parent())->healthdata[1]),(((MainWindow*)parent())->healthstat[1]));
+          QMessageBox::information(this, APPNAME, tr("User2 gone!!"));
+      }
+      else
+      {
+          QMessageBox::warning((QWidget*)parent(), APPNAME, tr("Database problem, try to export and import again!\n\n%1").arg(ramdb.lastError().driverText()));
+      }
+    }
+    done(QDialog::Rejected);
+}
+
+void setupDialog::on_deluser1_clicked()
+{
+    if(QMessageBox::question(this, APPNAME, tr("Do you want to continue?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+    {
+      ramdb = QSqlDatabase::addDatabase("QSQLITE", "RAMDB");
+      ramdb.setDatabaseName(":memory:");
+
+      if(ramdb.open())
+      {
+          QSqlQuery query(ramdb);
+          query.exec("DROP TABLE IF EXISTS 'U1'");
+          ramdb.commit();
+          ramdb.close();
+
+          ((MainWindow*)parent())->healthdata[0].clear();
+          (((MainWindow*)parent())->buildGraph)((((MainWindow*)parent())->healthdata[0]),(((MainWindow*)parent())->healthstat[0]));
+          QMessageBox::information(this, APPNAME, tr("User1 gone!!"));
+      }
+      else
+      {
+          QMessageBox::warning((QWidget*)parent(), APPNAME, tr("Database problem, try to export and import again!\n\n%1").arg(ramdb.lastError().driverText()));
+      }
+    }
+    done(QDialog::Rejected);
 }
 
 void setupDialog::keyPressEvent(QKeyEvent *ke)

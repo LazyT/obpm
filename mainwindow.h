@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -7,14 +7,19 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
-#include <QHelpEngine>
-#include <QHelpContentWidget>
-#include <QHelpIndexWidget>
-#include <QHelpSearchQuery>
-#include <QHelpSearchQueryWidget>
-#include <QHelpSearchResultWidget>
+#include <QtHelp/QHelpEngine>
+#include <QtHelp/QHelpEngineCore>
+#include <QtHelp/QHelpSearchEngine>
+#include <QtHelp/QHelpContentWidget>
+#include <QtHelp/QHelpIndexWidget>
+#include <QtHelp/QHelpSearchQuery>
+#include <QtHelp/QHelpSearchQueryWidget>
+#include <QtHelp/QHelpSearchResultWidget>
+#include <QtWidgets>
 
 #include "ui_mainwindow.h"
+
+class usb;
 
 #include "usb.h"
 #include "about.h"
@@ -31,18 +36,19 @@
 #define APPNAME QObject::tr("Omron Blood Pressure Manager")
 #define APPTRNS QObject::tr("LazyT")
 #define APPLANG QObject::tr("English")
-#define APPVERS "1.0.8"
-#define APPDATE "02.07.2016"
-#define APPRELS "9"
+#define APPVERS "2.0.2"
+#define APPDATE "21.09.2020"
+#define APPRELS "1"
 
 #define SYS_NORM 135
 #define DIA_NORM 85
 #define BPM_NORM 80
+#define IHB_NORM 0
 
 #define TABLES 3
 #define TABLE_HEAD 1
 #define TABLE_ROWS 20
-#define TABLE_COLS 5
+#define TABLE_COLS 6
 #ifdef Q_OS_OSX
 	#define TABLE_CORR 2
 #else
@@ -51,8 +57,10 @@
 
 #define TDIFF 0.015
 
-#define CFG QDir::homePath() + QDir::separator() + ".obpm" + QDir::separator() + "obpm.cfg"
-#define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QDir::separator() + "obpm.sql"
+#define CFG QDir::homePath() + "/.obpm/obpm.cfg"
+#define BL QDir::homePath() + "/.obpm/blacklist"
+#define DB QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/obpm.sql"
+#define EXP QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
 
 #ifdef Q_OS_LINUX
 	#define UPD '"' + QCoreApplication::applicationDirPath() + "/maintenancetool" + '"'
@@ -69,12 +77,15 @@ struct CONFIG
 	bool legend;
 	bool psd;
 	bool pot;
+    bool ihbp;
 	uint style;
 	uint sys;
 	uint dia;
 	uint bpm;
+    uint ihb;
 	QString alias1, alias2;
 	QString database;
+	QString exports;
 	QPoint pmain, phelp;
 	QSize smain, shelp;
 };
@@ -84,6 +95,7 @@ struct HEALTHDATA{
 	uint sys;
 	uint dia;
 	uint bpm;
+    uint ihb;
 	QString msg;
 };
 
@@ -97,6 +109,7 @@ struct HEALTHSTAT{
 	uint bpm_min;
 	uint bpm_mid;
 	uint bpm_max;
+    uint ihb;
 };
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
@@ -125,8 +138,10 @@ private:
 
 	QTranslator baseTranslator, helpTranslator, appTranslator;
 	QLCDNumber *lcd;
-	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
+	QCPItemStraightLine *line_sys, *line_dia, *line_bpm, *line_ihb;
+//	QCPItemStraightLine *line_sys, *line_dia, *line_bpm;
 	QVector <HEALTHDATA> exportdata;
+	QList <uint> blacklist;
 	QProgressDialog *pdlg;
 	QSqlDatabase db;
 	bool update;
@@ -139,6 +154,9 @@ private slots:
 
 	void getConfig();
 	void setConfig();
+
+	void getBlacklist();
+	void setBlacklist();
 
 	void checkUpdate();
 

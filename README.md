@@ -14,6 +14,9 @@ The current version supports the following features:
 * online update notification
 * multi language (English and German at the moment, translators welcome)
 * cross platform (same look & feel on Windows, Linux, MacOS)
+* implementation of 'irregular hearbeats'
+* user data removal
+
 
 ## Screenshots
 

@@ -1,8 +1,12 @@
 #ifndef SQLDIALOG_H
 #define SQLDIALOG_H
 
+class MainWindow;
+
 #include "ui_sql.h"
 #include "mainwindow.h"
+#include "ui_setup.h"
+
 
 class sqlDialog : public QDialog, private Ui::Dialog_SQL
 {
@@ -12,10 +16,9 @@ public:
 
 	sqlDialog(QWidget *parent);
 	bool success;
+    QSqlDatabase ramdb;
 
 private:
-
-	QSqlDatabase ramdb;
 	bool createDB();
 
 private slots:

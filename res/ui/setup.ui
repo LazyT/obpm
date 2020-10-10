@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Dialog_Setup</class>
  <widget class="QDialog" name="Dialog_Setup">
@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>329</height>
+    <width>426</width>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -379,8 +379,81 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_ihb">
+            <property name="toolTip">
+             <string>Irregular beat  on/off</string>
+            </property>
+            <property name="text">
+             <string>Include irregular heart beat in graph</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../obpm.qrc">
+              <normaloff>:/png/png/heart1.png</normaloff>:/png/png/heart1.png</iconset>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="icon">
+       <iconset resource="../obpm.qrc">
+        <normaloff>:/png/png/work.png</normaloff>:/png/png/work.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Delete User Data</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Take care!! &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;You are about to delete the &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;database table for a dedicated user.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;All user info will be lost !!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="deluser1">
+           <property name="text">
+            <string>Delete User 1 data </string>
+           </property>
+           <property name="icon">
+            <iconset resource="../obpm.qrc">
+             <normaloff>:/png/png/user1.png</normaloff>:/png/png/user1.png</iconset>
+           </property>
+           <property name="autoDefault">
+            <bool>true</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="deluser2">
+           <property name="text">
+            <string>Delete User 2 data</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../obpm.qrc">
+             <normaloff>:/png/png/user2.png</normaloff>:/png/png/user2.png</iconset>
+           </property>
+           <property name="autoDefault">
+            <bool>true</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

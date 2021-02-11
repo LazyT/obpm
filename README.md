@@ -1,5 +1,7 @@
 # **Omron Blood Pressure Manager**
 
+ATTENTION: This project is not maintained anymore. Please use the successor [UBPM](https://codeberg.org/LazyT/ubpm)!
+
 ## Description
 
 Tired of Omrons original software because it's only available for Windows and requires an internet connection for uploading your private health data into the cloud? Then try OBPM for free and use it on Windows, Linux and MacOS!

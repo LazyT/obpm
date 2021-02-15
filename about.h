@@ -1,6 +1,8 @@
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 
+class mainwindow;
+
 #include "ui_about.h"
 #include "mainwindow.h"
 

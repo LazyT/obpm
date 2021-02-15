@@ -111,24 +111,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	line_sys = new QCPItemStraightLine(widget_bp);
 	line_dia = new QCPItemStraightLine(widget_bp);
 	line_bpm = new QCPItemStraightLine(widget_hr);
+	line_ihb = new QCPItemStraightLine(widget_hr);
 	line_sys->setPen(QPen(Qt::green));
 	line_dia->setPen(QPen(Qt::green));
 	line_bpm->setPen(QPen(Qt::green));
+	line_ihb->setPen(QPen(Qt::green));
 	line_sys->point1->setTypeX(QCPItemPosition::ptAbsolute);
 	line_sys->point2->setTypeX(QCPItemPosition::ptAbsolute);
 	line_dia->point1->setTypeX(QCPItemPosition::ptAbsolute);
 	line_dia->point2->setTypeX(QCPItemPosition::ptAbsolute);
 	line_bpm->point1->setTypeX(QCPItemPosition::ptAbsolute);
 	line_bpm->point2->setTypeX(QCPItemPosition::ptAbsolute);
+	line_ihb->point1->setTypeX(QCPItemPosition::ptAbsolute);
+	line_ihb->point2->setTypeX(QCPItemPosition::ptAbsolute);
 	line_sys->point1->setCoords(0, cfg.sys);
 	line_sys->point2->setCoords(1, cfg.sys);
 	line_dia->point1->setCoords(0, cfg.dia);
 	line_dia->point2->setCoords(1, cfg.dia);
 	line_bpm->point1->setCoords(0, cfg.bpm);
 	line_bpm->point2->setCoords(1, cfg.bpm);
+	line_ihb->point1->setCoords(0, cfg.ihb);
+	line_ihb->point2->setCoords(1, cfg.ihb);
 	widget_bp->addItem(line_sys);
 	widget_bp->addItem(line_dia);
 	widget_hr->addItem(line_bpm);
+	widget_hr->addItem(line_ihb);
 
 	widget_bp->addGraph();
 	widget_bp->addGraph();
@@ -157,6 +164,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_hr->graph(0)->setPen(QPen(Qt::red));
 	widget_hr->graph(0)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/bpm.png")));
 	widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+	widget_hr->plottable(0)->setName(tr("Pulse"));
+        if (cfg.ihbp)
+        {
+		widget_hr->addGraph();
+		widget_hr->graph(1)->setPen(QPen(Qt::blue));
+		widget_hr->graph(1)->setScatterStyle(QCPScatterStyle(QPixmap(":/png/png/heart1.png")));
+		widget_hr->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+		widget_hr->plottable(1)->setName(tr("Irregular"));
+	}
 	widget_hr->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	widget_hr->xAxis->setDateTimeSpec(Qt::UTC);
 	widget_hr->xAxis->setDateTimeFormat("hh:mm\ndd.MM.yy");
@@ -164,8 +180,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	widget_hr->xAxis->setAutoSubTicks(false);
 	widget_hr->yAxis->setRange(cfg.bpm - 20, cfg.bpm);
 	widget_hr->yAxis->setAutoTickStep(false);
-	widget_hr->yAxis->setTickStep(5);
-	widget_hr->plottable(0)->setName(tr("Pulse"));
+	widget_hr->yAxis->setTickStep(10);
 	widget_hr->legend->setVisible(cfg.legend);
 	widget_hr->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	widget_hr->axisRect(0)->setRangeDrag(Qt::Horizontal);
@@ -198,7 +213,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 	if(cfg.smain.width() == -1 || cfg.smain.height() == -1)
 	{
-		move(QApplication::desktop()->screen()->rect().center() - rect().center());
+        move(QApplication::desktop()->screen()->rect().center() - rect().center());
 	}
 	else
 	{
@@ -251,12 +266,14 @@ void MainWindow::getConfig()
 	cfg.hem7322u = ini.value("HEM7322U", false).toBool();
 	cfg.update = ini.value("Update", true).toBool();
 	cfg.legend = ini.value("Legend", true).toBool();
+	cfg.ihbp = ini.value("PrintIrregularBeat", true).toBool();
 	cfg.psd = ini.value("PrintSingleDiagram", true).toBool();
 	cfg.pot = ini.value("PrintOverviewTable", false).toBool();
 	cfg.style = ini.value("Style", QCPGraph::lsLine).toInt();
 	cfg.sys = ini.value("SYS", SYS_NORM).toInt();
 	cfg.dia = ini.value("DIA", DIA_NORM).toInt();
 	cfg.bpm = ini.value("BPM", BPM_NORM).toInt();
+	cfg.ihb = ini.value("IHB", IHB_NORM).toInt();
 	cfg.alias1 = ini.value("Alias1", tr("User 1")).toString();
 	cfg.alias2 = ini.value("Alias2", tr("User 2")).toString();
 	cfg.database = ini.value("Database", DB).toString();
@@ -280,12 +297,14 @@ void MainWindow::setConfig()
 	ini.setValue("HEM7322U", cfg.hem7322u);
 	ini.setValue("Update", cfg.update);
 	ini.setValue("Legend", cfg.legend);
+	ini.setValue("PrintIrregularBeat", cfg.ihbp);
 	ini.setValue("PrintSingleDiagram", cfg.psd);
 	ini.setValue("PrintOverviewTable", cfg.pot);
 	ini.setValue("Style", cfg.style);
 	ini.setValue("SYS", cfg.sys);
 	ini.setValue("DIA", cfg.dia);
 	ini.setValue("BPM", cfg.bpm);
+	ini.setValue("IHB", cfg.ihb);
 	ini.setValue("Alias1", cfg.alias1);
 	ini.setValue("Alias2", cfg.alias2);
 	ini.setValue("Database", cfg.database);
@@ -470,6 +489,7 @@ void MainWindow::getHealthStats(QVector <HEALTHDATA> data, HEALTHSTAT *stat)
 	stat->bpm_min = cpy.first().bpm;
 	stat->bpm_mid = cpy.at(cpy.count() / 2).bpm;
 	stat->bpm_max = cpy.last().bpm;
+
 }
 
 void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QTextCursor cursor, QTextBlockFormat bfmt_pbrk, QTextBlockFormat bfmt_cntr, QTextCharFormat cfmt_bold, QTextCharFormat cfmt_norm, int *comments)
@@ -517,6 +537,7 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
+	constraints.append(QTextLength(QTextLength::FixedLength, 40 - 5*TABLE_CORR));
 	tfmt.setColumnWidthConstraints(constraints);
 
 	for(int i = 0; i < tablecount; i++)
@@ -533,6 +554,8 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 		tables[i]->cellAt(0, 3).firstCursorPosition().insertText("DIA", cfmt_table);
 		tables[i]->cellAt(0, 4).firstCursorPosition().setBlockFormat(bfmt_table);
 		tables[i]->cellAt(0, 4).firstCursorPosition().insertText("BPM", cfmt_table);
+		tables[i]->cellAt(0, 5).firstCursorPosition().setBlockFormat(bfmt_table);
+		tables[i]->cellAt(0, 5).firstCursorPosition().insertText("IHB", cfmt_table);
 	}
 
 	for(int i = 0; i < tablecount * tablerows; i++)
@@ -553,6 +576,7 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 2).firstCursorPosition().insertText(" ", cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(" ", cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(" ", cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 5).firstCursorPosition().insertText(" ", cfmt_blk);
 		}
 		else
 		{
@@ -574,6 +598,8 @@ void MainWindow::createDocTablePage(int tablecount, int tablerows, int index, QT
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 3).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).dia, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).dia > cfg.dia ? cfmt_red : cfmt_blk);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().setBlockFormat(bfmt_table);
 			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 4).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).bpm, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).bpm > cfg.bpm ? cfmt_red : cfmt_blk);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 5).firstCursorPosition().setBlockFormat(bfmt_table);
+			tables[i / tablerows]->cellAt(TABLE_HEAD + i % tablerows, 5).firstCursorPosition().insertText(QString("%1").arg(exportdata.at(i + page * tablecount * tablerows).ihb, 3, 10, QChar('0')), exportdata.at(i + page * tablecount * tablerows).ihb > cfg.ihb ? cfmt_red : cfmt_blk);
 		}
 	}
 }
@@ -607,9 +633,9 @@ void MainWindow::createDoc(QPrinter *printer)
 	bfmt_left.setAlignment(Qt::AlignLeft);
 	bfmt_pbrk.setPageBreakPolicy(QTextFormat::PageBreak_AlwaysBefore);
 	cfmt_bold.setFontWeight(QFont::Bold);
-	cfmt_bold.setFontPointSize(18);
+	cfmt_bold.setFontPointSize(12);
 	cfmt_norm.setFontWeight(QFont::Normal);
-	cfmt_norm.setFontPointSize(12);
+	cfmt_norm.setFontPointSize(8);
 
 	doc->documentLayout()->registerHandler(QCPDocumentObject::PlotTextFormat, new QCPDocumentObject(this));
 
@@ -623,7 +649,7 @@ void MainWindow::createDoc(QPrinter *printer)
 		cursor.insertText(QString("%1 - %2").arg(rangeStart->dateTime().toString("dd.MM.yyyy")).arg(rangeStop->dateTime().toString("dd.MM.yyyy")));
 		bfmt_cntr.setBackground(QColor("transparent"));
 		cursor.insertBlock(bfmt_cntr);
-		cursor.insertText("\n");
+//		cursor.insertText("\n");
 
 		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_bp, width, height/2));
 		cursor.insertText(QString(QChar::ObjectReplacementCharacter), QCPDocumentObject::generatePlotFormat(widget_hr, width, height/2));
@@ -874,7 +900,7 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 			{
 				values.append(line.split(';'));
 
-				if(values.count() >= 6)
+				if(values.count() >= 7)
 				{
 					user = values.at(0).toUInt() - 1;
 
@@ -888,10 +914,11 @@ void MainWindow::importDataFromCSV(QString filename, bool append)
 					set.sys = values.at(3).toUInt();
 					set.dia = values.at(4).toUInt();
 					set.bpm = values.at(5).toUInt();
+					set.ihb = values.at(6).toUInt();
 
-					if(values.count() > 6)
+					if(values.count() > 7)
 					{
-						set.msg = values.at(6);
+						set.msg = values.at(7);
 					}
 
 					healthdata[user].append(set);
@@ -969,7 +996,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 	{
 		QSqlQuery query(db);
 
-		if(query.exec("SELECT * FROM U1") && query.record().count() >= 4)
+		if(query.exec("SELECT * FROM U1") && query.record().count() >= 5)
 		{
 			while(query.next())
 			{
@@ -977,8 +1004,9 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				set.sys = query.value("sys").toInt();
 				set.dia = query.value("dia").toInt();
 				set.bpm = query.value("bpm").toInt();
+				set.ihb = query.value("ihb").toInt();
 
-				if(query.record().count() > 4)
+				if(query.record().count() > 5)
 				{
 					set.msg = query.value("msg").toString();
 				}
@@ -987,7 +1015,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 			}
 		}
 
-		if(query.exec("SELECT * FROM U2") && query.record().count() >= 4)
+		if(query.exec("SELECT * FROM U2") && query.record().count() >= 5)
 		{
 			while(query.next())
 			{
@@ -995,8 +1023,9 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 				set.sys = query.value("sys").toInt();
 				set.dia = query.value("dia").toInt();
 				set.bpm = query.value("bpm").toInt();
+				set.ihb = query.value("ihb").toInt();
 
-				if(query.record().count() > 4)
+				if(query.record().count() > 5)
 				{
 					set.msg = query.value("msg").toString();
 				}
@@ -1043,7 +1072,7 @@ void MainWindow::importDataFromSQL(QString filename, bool append, bool showmsg)
 void MainWindow::exportDataToCSV(QString filename)
 {
 	QFile file(filename);
-	QString header("user;date;time;sys;dia;bpm;comment\n");
+	QString header("user;date;time;sys;dia;bpm;ihb;comment\n");
 	QString record;
 
 	if(file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -1052,14 +1081,14 @@ void MainWindow::exportDataToCSV(QString filename)
 
 		for(int i = 0; i < healthdata[0].count(); i++)
 		{
-			record = QString("1;%1;%2;%3;%4;%5\n").arg(QDateTime::fromTime_t(healthdata[0].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia, 3, 10, QChar('0')).arg(healthdata[0].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[0].at(i).msg);
+			record = QString("1;%1;%2;%3;%4;%5;%6\n").arg(QDateTime::fromTime_t(healthdata[0].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia, 3, 10, QChar('0')).arg(healthdata[0].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[0].at(i).ihb, 3, 10, QChar('0')).arg(healthdata[0].at(i).msg);
 
 			file.write(record.toUtf8(), record.toUtf8().length());
 		}
 
 		for(int i = 0; i < healthdata[1].count(); i++)
 		{
-			record = QString("2;%1;%2;%3;%4;%5\n").arg(QDateTime::fromTime_t(healthdata[1].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia, 3, 10, QChar('0')).arg(healthdata[1].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[1].at(i).msg);
+			record = QString("2;%1;%2;%3;%4;%5;%6\n").arg(QDateTime::fromTime_t(healthdata[1].at(i).time).toString("dd.MM.yy;hh:mm")).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia, 3, 10, QChar('0')).arg(healthdata[1].at(i).bpm, 3, 10, QChar('0')).arg(healthdata[1].at(i).ihb, 3, 10, QChar('0')).arg(healthdata[1].at(i).msg);
 
 			file.write(record.toUtf8(), record.toUtf8().length());
 		}
@@ -1098,17 +1127,17 @@ void MainWindow::exportDataToSQL(QString filename, bool showmsg)
 			query.exec("DROP TABLE 'U2'");
 		}
 
-		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
-		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U1' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'ihb' INTEGER, 'msg' TEXT)");
+		query.exec("CREATE TABLE 'U2' ('uts' INTEGER, 'sys' INTEGER, 'dia' INTEGER, 'bpm' INTEGER, 'ihb' INTEGER, 'msg' TEXT)");
 
 		for(int i = 0; i < healthdata[0].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5')").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm).arg(healthdata[0].at(i).msg));
+			query.exec(QString("INSERT INTO 'U1' VALUES (%1, %2, %3, %4, '%5', '%6')").arg(healthdata[0].at(i).time).arg(healthdata[0].at(i).sys).arg(healthdata[0].at(i).dia).arg(healthdata[0].at(i).bpm).arg(healthdata[0].at(i).ihb).arg(healthdata[0].at(i).msg));
 		}
 
 		for(int i = 0; i < healthdata[1].count(); i++)
 		{
-			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5')").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm).arg(healthdata[1].at(i).msg));
+			query.exec(QString("INSERT INTO 'U2' VALUES (%1, %2, %3, %4, '%5', '%6')").arg(healthdata[1].at(i).time).arg(healthdata[1].at(i).sys).arg(healthdata[1].at(i).dia).arg(healthdata[1].at(i).bpm).arg(healthdata[1].at(i).ihb).arg(healthdata[1].at(i).msg));
 		}
 
 		db.commit();
@@ -1160,10 +1189,13 @@ void MainWindow::on_action_Setup_triggered()
 		line_dia->point2->setCoords(1, cfg.dia);
 		line_bpm->point1->setCoords(0, cfg.bpm);
 		line_bpm->point2->setCoords(1, cfg.bpm);
+		line_ihb->point1->setCoords(0, cfg.ihb);
+		line_ihb->point2->setCoords(1, cfg.ihb);
 
 		widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 		widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 		widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+		widget_hr->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 
 		widget_bp->legend->setVisible(cfg.legend);
 		widget_hr->legend->setVisible(cfg.legend);
@@ -1415,6 +1447,7 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 	widget_bp->graph(0)->clearData();
 	widget_bp->graph(1)->clearData();
 	widget_hr->graph(0)->clearData();
+	widget_hr->graph(1)->clearData();
 
 	if(data.count())
 	{
@@ -1433,12 +1466,19 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 		widget_bp->plottable(0)->setName(QString("SYS: %1 [%2] %3").arg(stat.sys_min).arg(stat.sys_mid).arg(stat.sys_max));
 		widget_bp->plottable(1)->setName(QString("DIA: %1 [%2] %3").arg(stat.dia_min).arg(stat.dia_mid).arg(stat.dia_max));
 		widget_hr->plottable(0)->setName(QString(tr("Pulse: %1 [%2] %3")).arg(stat.bpm_min).arg(stat.bpm_mid).arg(stat.bpm_max));
-
+ 		if(cfg.ihbp)
+		{
+			widget_hr->plottable(1)->setName(QString(tr("Irregular beat")));
+		}
 		for(int i = 0; i < data.count(); i++)
 		{
 			widget_bp->graph(0)->addData(data.at(i).time + offsetUTC, data.at(i).sys);
 			widget_bp->graph(1)->addData(data.at(i).time + offsetUTC, data.at(i).dia);
 			widget_hr->graph(0)->addData(data.at(i).time + offsetUTC, data.at(i).bpm);
+                        if (data.at(i).ihb > 0 && cfg.ihbp)
+                        { 
+    		        	widget_hr->graph(1)->addData(data.at(i).time + offsetUTC, data.at(i).ihb + stat.bpm_min - 5);
+                        }
 		}
 	}
 	else
@@ -1446,7 +1486,10 @@ void MainWindow::buildGraph(QVector <HEALTHDATA> data, HEALTHSTAT stat)
 		widget_bp->plottable(0)->setName("SYS");
 		widget_bp->plottable(1)->setName("DIA");
 		widget_hr->plottable(0)->setName(tr("Pulse"));
-
+		if(cfg.ihbp)
+		{
+			widget_hr->plottable(1)->setName(tr("Irregular beat"));
+		}
 		rangeStart->clearMinimumDateTime();
 		rangeStart->clearMaximumDateTime();
 		rangeStop->clearMinimumDateTime();
@@ -1566,7 +1609,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
 
 		if(record >= 0)
 		{
-			QToolTip::showText(((QHelpEvent*)ev)->globalPos(), healthdata[user].at(record).msg.isEmpty() ? QString("%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm) : QString("%1\n\nSYS %2 / DIA %3 / BPM %4\n\n%5").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm).arg(healthdata[user].at(record).msg));
+			QToolTip::showText(((QHelpEvent*)ev)->globalPos(), healthdata[user].at(record).msg.isEmpty() ? QString("%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm) : QString("%1\n\nSYS %2 / DIA %3 / BPM %4 \n\n%5").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm).arg(healthdata[user].at(record).msg));
 		}
 		else
 		{
@@ -1620,7 +1663,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 			{
 				if(selectedItem->objectName() == "action_deleteRecord")
 				{
-					if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+					if(QMessageBox::question(this, APPNAME, tr("Really delete this record?\n\n%1\n\nSYS %2 / DIA %3 / BPM %4 /IHB %5").arg(QDateTime::fromTime_t(healthdata[user].at(record).time).toString("dddd, dd.MM.yyyy hh:mm")).arg(healthdata[user].at(record).sys).arg(healthdata[user].at(record).dia).arg(healthdata[user].at(record).bpm).arg(healthdata[user].at(record).ihb), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
 					{
 						blacklist.append(healthdata[user].at(record).time);
 
@@ -1703,6 +1746,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *me)
 				widget_bp->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 				widget_bp->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 				widget_hr->graph(0)->setLineStyle((QCPGraph::LineStyle)cfg.style);
+//				widget_hr->graph(1)->setLineStyle((QCPGraph::LineStyle)cfg.style);
 
 				widget_bp->replot();
 				widget_hr->replot();

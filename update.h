@@ -1,6 +1,8 @@
 #ifndef UPDATEDIALOG_H
 #define UPDATEDIALOG_H
 
+class mainwindow;
+
 #include "ui_update.h"
 #include "mainwindow.h"
 

@@ -1,6 +1,8 @@
 #ifndef RECORDDIALOG_H
 #define RECORDDIALOG_H
 
+class mainwindow;
+
 #include "ui_record.h"
 #include "mainwindow.h"
 

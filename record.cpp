@@ -11,6 +11,7 @@ recordDialog::recordDialog(QWidget *parent) : QDialog(parent)
 	spinBox_sys->setValue(((MainWindow*)parent)->cfg.sys);
 	spinBox_dia->setValue(((MainWindow*)parent)->cfg.dia);
 	spinBox_bpm->setValue(((MainWindow*)parent)->cfg.bpm);
+	spinBox_ihb->setValue(((MainWindow*)parent)->cfg.ihb);
 
 	show();
 	activateWindow();
@@ -34,6 +35,7 @@ void recordDialog::on_toolButton_add_clicked()
 	set.sys = spinBox_sys->value();
 	set.dia = spinBox_dia->value();
 	set.bpm = spinBox_bpm->value();
+	set.ihb = spinBox_ihb->value();
 	set.msg = lineEdit_comment->text();
 
 	((MainWindow*)parent())->healthdata[toolButton_user->isChecked()].append(set);

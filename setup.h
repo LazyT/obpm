@@ -1,6 +1,8 @@
 #ifndef SETUPDIALOG_H
 #define SETUPDIALOG_H
 
+class mainwindow;
+
 #include "ui_setup.h"
 #include "mainwindow.h"
 
@@ -11,10 +13,15 @@ class setupDialog : public QDialog, private Ui::Dialog_Setup
 public:
 
 	setupDialog(QWidget *parent, struct CONFIG*);
+    QSqlDatabase db, ramdb;
 
 private:
 
 	CONFIG *cfg;
+
+public slots:
+    void on_deluser1_clicked();
+    void on_deluser2_clicked();
 
 private slots:
 

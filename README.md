@@ -88,7 +88,7 @@ Download and install the latest version for your operating system:
 
 ## Build from Source
 
-If the installer binaries doesn't work for you build it yourself:
+If the installer binaries don't work for you, build it yourself:
 
 1) checkout the source code
 
@@ -107,7 +107,8 @@ GUI fans just install the [Qt-Environment](http://www.qt.io/download-open-source
 ***Hints for compiling:***
 
  - Qt5.4 or greater required
- - libudev-dev on Linux required
+ - qttools5-dev required on Linux
+ - libudev-dev required on Linux
 
 ## Credits
 
